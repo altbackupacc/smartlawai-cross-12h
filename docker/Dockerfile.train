@@ -1,5 +1,12 @@
 # Training image for Vertex AI Custom Jobs (gcloud/train_l4.sh, gcloud/train_a100.sh).
-FROM pytorch/pytorch:2.4.0-cuda12.4-cudnn9-runtime
+#
+# PyTorch pinned to 2.5.1: pyproject.toml's `transformers>=4.40` is an open lower
+# bound, so pip installs whatever is newest at build time -- which, as of this image,
+# requires torch>=2.5 and silently disables its own PyTorch integration otherwise,
+# producing a confusing "NameError: name 'torch' is not defined" deep in an unrelated
+# import rather than a clear version-mismatch error (CLAUDE.md I8: pin once it works,
+# because this stack breaks constantly on unpinned installs).
+FROM pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
 
 WORKDIR /app
 

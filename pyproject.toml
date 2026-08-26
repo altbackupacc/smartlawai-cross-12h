@@ -19,7 +19,10 @@ dependencies = [
 [project.optional-dependencies]
 # heavy ML deps kept separate so the local smoke test installs fast
 ml = [
-  "torch>=2.2",
+  # torch>=2.5: current transformers releases require it and silently disable their
+  # own PyTorch integration otherwise (NameError deep in an unrelated import, not a
+  # clear version error) -- see docker/Dockerfile.train's base-image comment.
+  "torch>=2.5",
   "transformers>=4.40",
   "sentence-transformers>=3.0",
   "spacy>=3.7",
