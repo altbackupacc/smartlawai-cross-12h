@@ -21,6 +21,11 @@ RUN pip install --no-cache-dir -e ".[ml,train]"
 # checkpointing.py's cloud sync isn't in any current extras group -- installed explicitly:
 RUN pip install --no-cache-dir huggingface_hub "google-cloud-storage>=2.16"
 
+# Placed after the pip install layer (not before, unlike src/) since nothing during
+# install reads it, and this way editing data/ doesn't invalidate the expensive
+# dependency-install cache.
+COPY data/ ./data/
+
 ENV PYTHONPATH=/app/src:/app
 
 # gcloud/train_l4.sh and train_a100.sh pass the target module as the first --args
