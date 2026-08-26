@@ -21,6 +21,7 @@ REPO="smartlaw"
 IMAGE="${REGION}-docker.pkg.dev/${PROJECT}/${REPO}/train:latest"
 HF_TOKEN="${HF_TOKEN:?set HF_TOKEN}"
 GCS_BUCKET="${GCS_BUCKET:?set GCS_BUCKET}"
+HF_HUB_ORG="${HF_HUB_ORG:-smartlawai}"
 
 TASK="${TASK:?set TASK (encoder|qlora)}"
 ENTRYPOINT="${ENTRYPOINT:?set ENTRYPOINT, e.g. train.qlora.train_qlora}"
@@ -57,9 +58,12 @@ if [[ -n "${EXTRA_ARGS:-}" ]]; then
 fi
 
 # gcloud's --worker-pool-spec flag shorthand has no env-vars key -- HF_TOKEN/GCS_BUCKET/
-# RUN_ID need to reach the container's environment (checkpointing.py's HF Hub push
-# relies on HF_TOKEN being set, not just passed as a CLI arg), so the job is submitted
-# via a generated --config YAML instead, which supports containerSpec.env directly.
+# HF_HUB_ORG/RUN_ID need to reach the container's environment (checkpointing.py's HF
+# Hub push relies on HF_TOKEN being set, not just passed as a CLI arg; HF_HUB_ORG
+# defaulting silently to "smartlawai" when unset here caused a real 403 -- your local
+# .env having the right value does nothing unless it's also forwarded into the job),
+# so the job is submitted via a generated --config YAML instead, which supports
+# containerSpec.env directly.
 CONFIG_FILE="$(mktemp)"
 trap 'rm -f "$CONFIG_FILE"' EXIT
 
@@ -81,6 +85,8 @@ trap 'rm -f "$CONFIG_FILE"' EXIT
   echo "          value: \"${HF_TOKEN}\""
   echo "        - name: GCS_BUCKET"
   echo "          value: \"${GCS_BUCKET}\""
+  echo "        - name: HF_HUB_ORG"
+  echo "          value: \"${HF_HUB_ORG}\""
   echo "        - name: RUN_ID"
   echo "          value: \"${JOB_NAME}\""
 } > "$CONFIG_FILE"
