@@ -1,0 +1,13 @@
+# Builds docker/Dockerfile.train on Cloud Build's infrastructure instead of the
+# local machine — avoids Cloud Shell's 5GB home-directory quota, which a multi-GB
+# CUDA/PyTorch base image will blow through. Submit with:
+#   gcloud builds submit --config=docker/cloudbuild.train.yaml \
+#     --substitutions=_IMAGE="${REGION}-docker.pkg.dev/${GCP_PROJECT}/smartlaw/train:latest" .
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-f', 'docker/Dockerfile.train', '-t', '${_IMAGE}', '.']
+images:
+  - '${_IMAGE}'
+options:
+  machineType: 'E2_HIGHCPU_8'
+timeout: '1800s'

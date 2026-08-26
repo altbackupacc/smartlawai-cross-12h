@@ -1,0 +1,22 @@
+# Training image for Vertex AI Custom Jobs (gcloud/train_l4.sh, gcloud/train_a100.sh).
+# NOTE: this assumes the full repo layout from CLAUDE.md #3 (pyproject.toml, src/,
+# train/) -- it will not build successfully until that layout exists in this repo
+# (the v1 zip has the equivalent pieces under different paths; see the earlier
+# recommendation to import it). Draft only -- build and push it yourself.
+FROM pytorch/pytorch:2.4.0-cuda12.4-cudnn9-runtime
+
+WORKDIR /app
+
+COPY pyproject.toml ./
+RUN pip install --no-cache-dir -e ".[ml,train]"
+# checkpointing.py's cloud sync isn't in any current extras group -- installed explicitly:
+RUN pip install --no-cache-dir huggingface_hub "google-cloud-storage>=2.16"
+
+COPY src/ ./src/
+COPY train/ ./train/
+ENV PYTHONPATH=/app/src:/app
+
+# gcloud/train_l4.sh and train_a100.sh pass the target module as the first --args
+# entry, e.g. "train.qlora.train_qlora,--seed=42,...", so this becomes:
+#   python -m train.qlora.train_qlora --seed=42 --arm=C --device=cuda ...
+ENTRYPOINT ["python", "-m"]

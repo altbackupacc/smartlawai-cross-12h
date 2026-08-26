@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.smartlaw_local/
+*.duckdb
+*.bin
+*.idmap
+ckpt-*/
+mistral-*-lora/
+.ipynb_checkpoints/
+node_modules/
+dist/
+.pytest_cache/
+.ruff_cache/
