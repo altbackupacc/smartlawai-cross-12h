@@ -1,0 +1,33 @@
+name: Mirror to backup repo (delayed)
+
+# Deliberately lagged, not instant: mirrors kramjiy/smartlawai -> kramjiy/smartlawai-backup
+# every 6 hours. The point of the delay is to survive a bad `git push --force` or an
+# accidental branch/history rewrite on the primary repo -- an instant mirror (or OneDrive,
+# which already syncs this folder continuously) would propagate that damage just as
+# instantly. This gives up to a 6-hour window to notice and pause the workflow before
+# the backup converges to match the bad state too.
+#
+# One-time setup before this can run:
+#   1. Create an empty private repo: kramjiy/smartlawai-backup (no README/gitignore).
+#   2. Create a fine-grained PAT scoped ONLY to smartlawai-backup, Contents: Read and write.
+#   3. Add it as a repository secret here, named BACKUP_REPO_TOKEN
+#      (Settings -> Secrets and variables -> Actions -> New repository secret).
+# The built-in GITHUB_TOKEN (no setup needed) is used to read this repo.
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch: {}   # lets you trigger an out-of-band sync manually from the Actions tab
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mirror-clone this repo, mirror-push to the backup repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BACKUP_REPO_TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
+        run: |
+          git clone --mirror "https://x-access-token:${GITHUB_TOKEN}@github.com/kramjiy/smartlawai.git" source-mirror
+          cd source-mirror
+          git push --mirror "https://x-access-token:${BACKUP_REPO_TOKEN}@github.com/kramjiy/smartlawai-backup.git"
