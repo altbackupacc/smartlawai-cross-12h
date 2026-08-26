@@ -48,6 +48,9 @@ else
   echo "Unknown TASK: ${TASK} (expected encoder|qlora)" >&2
   exit 1
 fi
+# One-off flag overrides not worth hardcoding here, e.g.
+# EXTRA_ARGS="--save-steps=2,--epochs=1" for a smoke test:
+[[ -n "${EXTRA_ARGS:-}" ]] && ARGS="${ARGS},${EXTRA_ARGS}"
 
 gcloud ai custom-jobs create \
   --project="$PROJECT" \
