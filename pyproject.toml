@@ -23,9 +23,13 @@ ml = [
   # own PyTorch integration otherwise (NameError deep in an unrelated import, not a
   # clear version error) -- see docker/Dockerfile.train's base-image comment.
   "torch>=2.5",
-  "transformers>=4.40",
-  "sentence-transformers>=3.0",
-  "spacy>=3.7",
+  # Upper-bounded, not just floored: an unbounded transformers>=4.40 pulled 5.16.1 at
+  # build time, which (paired with an equally-unbounded trl) broke SFTTrainer's
+  # constructor signature. <4.50 keeps it in the generation train_qlora.py and
+  # finetune_inlegalbert.py were actually written against and tested with.
+  "transformers>=4.40,<4.50",
+  "sentence-transformers>=3.0,<4.0",
+  "spacy>=3.7,<3.9",
 ]
 api = [
   "fastapi>=0.110",
@@ -41,11 +45,15 @@ gcloud = [
   "alembic>=1.13",
 ]
 train = [
-  "peft>=0.11",
-  "trl>=0.9",
-  "bitsandbytes>=0.43",
-  "accelerate>=0.30",
-  "datasets>=2.19",
+  "peft>=0.11,<0.14",
+  # trl<0.12: SFTTrainer(dataset_text_field=..., max_seq_length=..., tokenizer=...)
+  # is that generation's API -- 1.10.0 (an unbounded floor grabbed it) moved those
+  # into a separate SFTConfig object instead, breaking train_qlora.py's constructor
+  # call outright ("unexpected keyword argument 'dataset_text_field'").
+  "trl>=0.9,<0.12",
+  "bitsandbytes>=0.43,<0.45",
+  "accelerate>=0.30,<0.35",
+  "datasets>=2.19,<3.0",
 ]
 dev = ["pytest>=8.0", "ruff>=0.4"]
 
