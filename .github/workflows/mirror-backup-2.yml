@@ -1,0 +1,32 @@
+name: Mirror to backup-2 repo (24h delayed)
+
+# Same pattern as mirror-backup.yml, but a longer lag: once a day instead of every
+# 6 hours. This is a second, independent recovery point further back in time -- if
+# something bad isn't noticed within the 6-hour backup's window (mirror-backup.yml
+# already converged to the bad state by then), this is the next chance to recover
+# from a still-good snapshot.
+#
+# One-time setup before this can run:
+#   1. Create an empty private repo: kramjiy/smartlawai-backup-2 (no README/gitignore).
+#   2. Create a fine-grained PAT scoped ONLY to smartlawai-backup-2, Contents: Read and write.
+#   3. Add it as a repository secret here, named BACKUP_REPO_TOKEN_2
+#      (Settings -> Secrets and variables -> Actions -> New repository secret).
+# The built-in GITHUB_TOKEN (no setup needed) is used to read this repo.
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # once daily, midnight UTC
+  workflow_dispatch: {}    # lets you trigger an out-of-band sync manually from the Actions tab
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mirror-clone this repo, mirror-push to backup-2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BACKUP_REPO_TOKEN_2: ${{ secrets.BACKUP_REPO_TOKEN_2 }}
+        run: |
+          git clone --mirror "https://x-access-token:${GITHUB_TOKEN}@github.com/kramjiy/smartlawai.git" source-mirror
+          cd source-mirror
+          git push --mirror "https://x-access-token:${BACKUP_REPO_TOKEN_2}@github.com/kramjiy/smartlawai-backup-2.git"
