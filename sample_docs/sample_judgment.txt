@@ -1,0 +1,24 @@
+IN THE HIGH COURT OF KARNATAKA AT BENGALURU
+
+Writ Petition No. 12345 of 2024
+
+Between:
+ABC Pvt Ltd ... Petitioner
+And
+State of Karnataka ... Respondent
+
+1. The petitioner challenges the order dated 01.01.2024 passed by the authority.
+
+2. WHEREAS the parties had entered into a service agreement on 15.06.2023, the
+agreement contained an arbitration clause referring disputes to arbitration under
+the Arbitration and Conciliation Act, 1996, seated at Bengaluru.
+
+3. The jurisdiction clause provided that only the courts at Bengaluru shall have
+jurisdiction over any dispute arising out of the agreement.
+
+4. The respondent contended that liquidated damages of Rs. 5,00,000 were payable
+under Section 74 of the Indian Contract Act, 1872 for delay in performance.
+
+5. NOW THEREFORE, having heard the parties, this Court holds that the arbitration
+clause is valid and the dispute shall be referred to arbitration. The petition is
+disposed of accordingly.
