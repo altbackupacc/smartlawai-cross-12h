@@ -13,7 +13,7 @@
 #   gcloud config set project <PROJECT_ID>
 #
 # Usage:
-#   SEED=42 ./gcloud/train_a100.sh
+#   DATA=data/qlora/smoke_test.jsonl SEED=42 ./gcloud/train_a100.sh
 set -euo pipefail
 
 PROJECT="${GCP_PROJECT:?set GCP_PROJECT}"
@@ -26,6 +26,7 @@ GCS_BUCKET="${GCS_BUCKET:?set GCS_BUCKET}"
 ENTRYPOINT="${ENTRYPOINT:-train.qlora.train_qlora}"
 ARM="${ARM:-L}"
 SEED="${SEED:?set SEED}"
+DATA="${DATA:-}"
 JOB_NAME="smartlaw-qlora-${ARM}-seed${SEED}-$(date +%Y%m%dT%H%M%S)"
 
 if [[ "$ARM" != "L" ]]; then
@@ -33,12 +34,16 @@ if [[ "$ARM" != "L" ]]; then
   exit 1
 fi
 
+ARGS="${ENTRYPOINT}"
+[[ -n "$DATA" ]] && ARGS="${ARGS},${DATA}"
+ARGS="${ARGS},--seed=${SEED},--arm=${ARM},--device=cuda,--gcs-bucket=${GCS_BUCKET},--run-id=${JOB_NAME}"
+
 gcloud ai custom-jobs create \
   --project="$PROJECT" \
   --region="$REGION" \
   --display-name="$JOB_NAME" \
   --worker-pool-spec="machine-type=a2-highgpu-1g,replica-count=1,accelerator-type=NVIDIA_TESLA_A100,accelerator-count=1,container-image-uri=${IMAGE}" \
-  --args="${ENTRYPOINT},--seed=${SEED},--arm=${ARM},--device=cuda,--gcs-bucket=${GCS_BUCKET},--run-id=${JOB_NAME}" \
+  --args="${ARGS}" \
   --env-vars="HF_TOKEN=${HF_TOKEN},GCS_BUCKET=${GCS_BUCKET},RUN_ID=${JOB_NAME}"
 # Dockerfile.train's ENTRYPOINT is ["python", "-m"], so --args becomes
 # `python -m ${ENTRYPOINT} --seed=... --arm=... --device=cuda ...` — no dispatcher needed.
