@@ -29,6 +29,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BACKUP_REPO_TOKEN_1: ${{ secrets.BACKUP_REPO_TOKEN_1 }}
         run: |
+          # Strip any stray whitespace/newline a manual copy-paste into the secret
+          # may have introduced -- a trailing \n here breaks the URL below outright.
+          TOKEN="$(printf '%s' "$BACKUP_REPO_TOKEN_1" | tr -d '\n\r ')"
           git clone --mirror "https://x-access-token:${GITHUB_TOKEN}@github.com/kramjiy/smartlawai.git" source-mirror
           cd source-mirror
-          git push --mirror "https://x-access-token:${BACKUP_REPO_TOKEN_1}@github.com/kramjiy/smartlawai-backup-1.git"
+          git push --mirror "https://x-access-token:${TOKEN}@github.com/kramjiy/smartlawai-backup-1.git"
