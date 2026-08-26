@@ -12,7 +12,7 @@ name: Mirror to backup repo (delayed)
 #   2. Create a fine-grained PAT scoped ONLY to smartlawai-backup-1, Contents: Read and write.
 #   3. Add it as a repository secret ON THIS REPO (kramjiy/smartlawai, NOT smartlawai-backup-1
 #      -- the workflow runs here, so this is the only place it can read the secret from),
-#      named BACKUP_REPO_TOKEN (Settings -> Secrets and variables -> Actions -> New repository secret).
+#      named BACKUP_REPO_TOKEN_1 (Settings -> Secrets and variables -> Actions -> New repository secret).
 # The built-in GITHUB_TOKEN (no setup needed) is used to read this repo.
 
 on:
@@ -27,8 +27,8 @@ jobs:
       - name: Mirror-clone this repo, mirror-push to the backup repo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BACKUP_REPO_TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
+          BACKUP_REPO_TOKEN_1: ${{ secrets.BACKUP_REPO_TOKEN_1 }}
         run: |
           git clone --mirror "https://x-access-token:${GITHUB_TOKEN}@github.com/kramjiy/smartlawai.git" source-mirror
           cd source-mirror
-          git push --mirror "https://x-access-token:${BACKUP_REPO_TOKEN}@github.com/kramjiy/smartlawai-backup-1.git"
+          git push --mirror "https://x-access-token:${BACKUP_REPO_TOKEN_1}@github.com/kramjiy/smartlawai-backup-1.git"
