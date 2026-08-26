@@ -34,22 +34,48 @@ if [[ "$ARM" != "L" ]]; then
   exit 1
 fi
 
-ARGS="${ENTRYPOINT}"
-[[ -n "$DATA" ]] && ARGS="${ARGS},${DATA}"
-ARGS="${ARGS},--seed=${SEED},--arm=${ARM},--device=cuda,--gcs-bucket=${GCS_BUCKET},--run-id=${JOB_NAME}"
+ARGV=("$ENTRYPOINT")
+[[ -n "$DATA" ]] && ARGV+=("$DATA")
+ARGV+=("--seed=${SEED}" "--arm=${ARM}" "--device=cuda" "--gcs-bucket=${GCS_BUCKET}" "--run-id=${JOB_NAME}")
 # One-off flag overrides not worth hardcoding here, e.g.
-# EXTRA_ARGS="--save-steps=2,--epochs=1" for a smoke test:
-[[ -n "${EXTRA_ARGS:-}" ]] && ARGS="${ARGS},${EXTRA_ARGS}"
+# EXTRA_ARGS="--save-steps=1 --epochs=1" (space-separated -- this is a bash array):
+if [[ -n "${EXTRA_ARGS:-}" ]]; then
+  # shellcheck disable=SC2206
+  ARGV+=($EXTRA_ARGS)
+fi
+
+# See train_l4.sh for why this uses --config instead of --worker-pool-spec/--env-vars:
+# the latter flag doesn't exist, and env vars are needed for HF_TOKEN specifically.
+CONFIG_FILE="$(mktemp)"
+trap 'rm -f "$CONFIG_FILE"' EXIT
+
+{
+  echo "workerPoolSpecs:"
+  echo "  - machineSpec:"
+  echo "      machineType: a2-highgpu-1g"
+  echo "      acceleratorType: NVIDIA_TESLA_A100"
+  echo "      acceleratorCount: 1"
+  echo "    replicaCount: 1"
+  echo "    containerSpec:"
+  echo "      imageUri: \"${IMAGE}\""
+  echo "      args:"
+  for a in "${ARGV[@]}"; do
+    printf '        - "%s"\n' "$a"
+  done
+  echo "      env:"
+  echo "        - name: HF_TOKEN"
+  echo "          value: \"${HF_TOKEN}\""
+  echo "        - name: GCS_BUCKET"
+  echo "          value: \"${GCS_BUCKET}\""
+  echo "        - name: RUN_ID"
+  echo "          value: \"${JOB_NAME}\""
+} > "$CONFIG_FILE"
 
 gcloud ai custom-jobs create \
   --project="$PROJECT" \
   --region="$REGION" \
   --display-name="$JOB_NAME" \
-  --worker-pool-spec="machine-type=a2-highgpu-1g,replica-count=1,accelerator-type=NVIDIA_TESLA_A100,accelerator-count=1,container-image-uri=${IMAGE}" \
-  --args="${ARGS}" \
-  --env-vars="HF_TOKEN=${HF_TOKEN},GCS_BUCKET=${GCS_BUCKET},RUN_ID=${JOB_NAME}"
-# Dockerfile.train's ENTRYPOINT is ["python", "-m"], so --args becomes
-# `python -m ${ENTRYPOINT} --seed=... --arm=... --device=cuda ...` — no dispatcher needed.
+  --config="$CONFIG_FILE"
 
 echo "Submitted: ${JOB_NAME}"
 echo "Track it:  gcloud ai custom-jobs list --region=${REGION} --filter=displayName=${JOB_NAME}"

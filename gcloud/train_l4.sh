@@ -37,30 +37,59 @@ fi
 
 # train_qlora.py and finetune_inlegalbert.py take different flags (--arm vs --task) --
 # build the arg list per task rather than assuming one shape fits both.
+ARGV=("$ENTRYPOINT")
 if [[ "$TASK" == "qlora" ]]; then
-  ARGS="${ENTRYPOINT}"
-  [[ -n "$DATA" ]] && ARGS="${ARGS},${DATA}"
-  ARGS="${ARGS},--seed=${SEED},--arm=${ARM},--device=cuda,--gcs-bucket=${GCS_BUCKET},--run-id=${JOB_NAME}"
+  [[ -n "$DATA" ]] && ARGV+=("$DATA")
+  ARGV+=("--seed=${SEED}" "--arm=${ARM}" "--device=cuda" "--gcs-bucket=${GCS_BUCKET}" "--run-id=${JOB_NAME}")
 elif [[ "$TASK" == "encoder" ]]; then
   : "${DATA:?set DATA for encoder jobs, e.g. DATA=data/encoders/doc_cls.jsonl}"
-  ARGS="${ENTRYPOINT},${DATA},--task=${ENCODER_TASK},--seed=${SEED},--device=cuda,--gcs-bucket=${GCS_BUCKET},--run-id=${JOB_NAME}"
+  ARGV+=("$DATA" "--task=${ENCODER_TASK}" "--seed=${SEED}" "--device=cuda" "--gcs-bucket=${GCS_BUCKET}" "--run-id=${JOB_NAME}")
 else
   echo "Unknown TASK: ${TASK} (expected encoder|qlora)" >&2
   exit 1
 fi
 # One-off flag overrides not worth hardcoding here, e.g.
-# EXTRA_ARGS="--save-steps=2,--epochs=1" for a smoke test:
-[[ -n "${EXTRA_ARGS:-}" ]] && ARGS="${ARGS},${EXTRA_ARGS}"
+# EXTRA_ARGS="--save-steps=1 --epochs=1" for a smoke test (space-separated -- this is
+# a bash array, not the comma-joined string the old --worker-pool-spec form used):
+if [[ -n "${EXTRA_ARGS:-}" ]]; then
+  # shellcheck disable=SC2206
+  ARGV+=($EXTRA_ARGS)
+fi
+
+# gcloud's --worker-pool-spec flag shorthand has no env-vars key -- HF_TOKEN/GCS_BUCKET/
+# RUN_ID need to reach the container's environment (checkpointing.py's HF Hub push
+# relies on HF_TOKEN being set, not just passed as a CLI arg), so the job is submitted
+# via a generated --config YAML instead, which supports containerSpec.env directly.
+CONFIG_FILE="$(mktemp)"
+trap 'rm -f "$CONFIG_FILE"' EXIT
+
+{
+  echo "workerPoolSpecs:"
+  echo "  - machineSpec:"
+  echo "      machineType: g2-standard-8"
+  echo "      acceleratorType: NVIDIA_L4"
+  echo "      acceleratorCount: 1"
+  echo "    replicaCount: 1"
+  echo "    containerSpec:"
+  echo "      imageUri: \"${IMAGE}\""
+  echo "      args:"
+  for a in "${ARGV[@]}"; do
+    printf '        - "%s"\n' "$a"
+  done
+  echo "      env:"
+  echo "        - name: HF_TOKEN"
+  echo "          value: \"${HF_TOKEN}\""
+  echo "        - name: GCS_BUCKET"
+  echo "          value: \"${GCS_BUCKET}\""
+  echo "        - name: RUN_ID"
+  echo "          value: \"${JOB_NAME}\""
+} > "$CONFIG_FILE"
 
 gcloud ai custom-jobs create \
   --project="$PROJECT" \
   --region="$REGION" \
   --display-name="$JOB_NAME" \
-  --worker-pool-spec="machine-type=g2-standard-8,replica-count=1,accelerator-type=NVIDIA_L4,accelerator-count=1,container-image-uri=${IMAGE}" \
-  --args="${ARGS}" \
-  --env-vars="HF_TOKEN=${HF_TOKEN},GCS_BUCKET=${GCS_BUCKET},RUN_ID=${JOB_NAME}"
-# Dockerfile.train's ENTRYPOINT is ["python", "-m"], so --args becomes
-# `python -m ${ENTRYPOINT} [DATA] --seed=... --device=cuda ...` — no dispatcher needed.
+  --config="$CONFIG_FILE"
 
 echo "Submitted: ${JOB_NAME}"
 echo "Track it:  gcloud ai custom-jobs list --region=${REGION} --filter=displayName=${JOB_NAME}"
