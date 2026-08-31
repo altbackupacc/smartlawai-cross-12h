@@ -11,6 +11,8 @@ from typing import Optional
 import faiss
 import numpy as np
 
+from smartlawai.scope import Scope
+
 
 # --------------------------------------------------------------------------- #
 # Data transfer objects
@@ -27,6 +29,7 @@ class Document:
     ocr_applied: bool = False
     raw_text: str = ""
     session_id: Optional[str] = None
+    owner_id: str = ""
 
 
 @dataclass
@@ -40,6 +43,7 @@ class Chunk:
     parent_chunk_id: Optional[str] = None
     embedding: Optional[list[float]] = None
     bm25_indexed: bool = False
+    owner_id: str = ""
 
 
 @dataclass
@@ -150,6 +154,13 @@ class BackendInterface(ABC):
 
     @abstractmethod
     def fetch_chunks_by_ids(self, chunk_ids: list[str]) -> list[Chunk]: ...
+
+    def fetch_chunks_scoped(self, scope: Scope) -> list[Chunk]:
+        """The ONLY retrieval path serving code may call (I1). Concrete, not
+        abstract: base default raises so each backend opts in explicitly without
+        being forced to implement it just to remain instantiable."""
+        raise NotImplementedError(
+            f"{type(self).__name__} does not implement fetch_chunks_scoped (I1)")
 
     @abstractmethod
     def list_doc_ids(self) -> list[str]: ...

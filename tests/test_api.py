@@ -20,6 +20,7 @@ def client():
     os.environ["SMARTLAW_BACKEND"] = "local"
 
     from fastapi.testclient import TestClient
+
     from api.main import app
     yield TestClient(app)
 
@@ -78,10 +79,20 @@ def test_clauses_missing_doc(client):
 
 
 def test_ask_empty_question(client):
-    """Ask with an empty question should still return 200 (or 500 if no RAG docs)."""
-    r = client.post("/ask", json={"question": "", "session_id": "test"})
-    # Might be 200 with empty answer or 500 if RAG is uninitialized — both are valid
-    assert r.status_code in (200, 500)
+    """Ask with an empty question against an empty scope should still return
+    200 (Pipeline.ask refuses cleanly rather than erroring)."""
+    r = client.post("/ask", json={
+        "question": "", "session_id": "test",
+        "scope": {"doc_ids": ["doc-nonexistent"], "owner_id": "test"}})
+    assert r.status_code == 200
+    assert r.json()["decision"] == "REFUSE"
+
+
+def test_ask_without_scope_is_rejected(client):
+    """I1 enforced at the HTTP boundary too: omitting scope entirely must 422,
+    never silently search everything."""
+    r = client.post("/ask", json={"question": "anything", "session_id": "test"})
+    assert r.status_code == 422
 
 
 def test_endpoint_methods(client):

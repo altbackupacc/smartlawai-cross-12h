@@ -14,7 +14,7 @@ submit a training job until the eval harness can measure it.
 
 ## PROGRESS
 
-- [ ] **M0** Skeleton — end-to-end with stubs, no GPU
+- [x] **M0** Skeleton — end-to-end with stubs, no GPU
 - [ ] **M1** Data foundation — IN-Abs, section pairs, frozen splits
 - [ ] **M2** Real retrieval (GCP L4)
 - [ ] **M3** Structured generation (GCP L4 endpoint)

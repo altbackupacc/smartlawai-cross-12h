@@ -7,6 +7,7 @@ import json
 import uuid
 
 from smartlawai.adapters.base import AuditEvent, BackendInterface
+from smartlawai.config import RERANK_FLOOR
 from smartlawai.core.bm25 import BM25Retriever
 from smartlawai.core.faithfulness import FaithfulnessEvaluator
 from smartlawai.core.inlegalbert import InLegalBERTEncoder
@@ -14,7 +15,6 @@ from smartlawai.core.mistral_client import MODEL, complete
 from smartlawai.core.rerank import Reranker
 
 RRF_K = 60
-RERANK_FLOOR = -10.0  # cross-encoder logits; below -> out-of-scope
 DISCLAIMER = ("\n\n---\n*This is AI-generated legal information, not legal advice. "
               "Consult an advocate enrolled under the Advocates Act, 1961.*")
 
