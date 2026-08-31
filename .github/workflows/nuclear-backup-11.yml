@@ -1,0 +1,17 @@
+name: Nuclear Mirror to Backup 11
+on:
+  workflow_dispatch: {}
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Push mirror
+        env:
+          MY_SECRET_TOKEN: ${{ secrets.NUCLEAR_TOKEN }}
+        run: |
+          TOKEN="$(printf '%s' "$MY_SECRET_TOKEN" | tr -d '\n\r ')"
+          git push --mirror "https://x-access-token:${TOKEN}@github.com/kramjiy/smartlawai-backup-11.git"
