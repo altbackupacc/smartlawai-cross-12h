@@ -17,7 +17,7 @@ jobs:
 
       - name: Push mirror to destination account
         env:
-          MY_SECRET_TOKEN: ${{ secrets.CROSS_ACCOUNT_TOKEN }}
+          MY_SECRET_TOKEN: ${{ secrets.CROSS_ACOUNT_TOKEN }}
         run: |
           TOKEN="$(printf '%s' "$MY_SECRET_TOKEN" | tr -d '\n\r ')"
-          git push --mirror "https://x-access-token:${TOKEN}@github.com/DestinationUsername/cross-backup-24h.git"
+          git push --mirror "https://x-access-token:${TOKEN}@github.com/altbackupacc/cross-backup-24h.git"
