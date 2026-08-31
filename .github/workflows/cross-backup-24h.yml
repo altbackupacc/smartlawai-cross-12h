@@ -1,0 +1,23 @@
+name: Cross-Account Mirror (24h)
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # Runs once daily
+  workflow_dispatch: {}
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Push mirror to destination account
+        env:
+          MY_SECRET_TOKEN: ${{ secrets.CROSS_ACCOUNT_TOKEN }}
+        run: |
+          TOKEN="$(printf '%s' "$MY_SECRET_TOKEN" | tr -d '\n\r ')"
+          git push --mirror "https://x-access-token:${TOKEN}@github.com/DestinationUsername/cross-backup-24h.git"
