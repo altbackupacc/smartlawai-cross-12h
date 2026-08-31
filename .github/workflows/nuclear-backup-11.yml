@@ -1,6 +1,10 @@
 name: Nuclear Mirror to Backup 11
+
 on:
-  workflow_dispatch: {}
+  schedule:
+    - cron: '0 */12 * * *'   # Runs automatically every 12 hours
+  workflow_dispatch: {}      # Allows manual triggering from the Actions tab
+
 jobs:
   mirror:
     runs-on: ubuntu-latest
@@ -9,11 +13,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false    # <--- THIS IS THE MAGIC FIX
+          persist-credentials: false    # Prevents GitHub from overriding your PAT
 
       - name: Push mirror
         env:
           MY_SECRET_TOKEN: ${{ secrets.NUCLEAR_TOKEN }}
         run: |
+          # Strip any stray whitespace/newline from the secret
           TOKEN="$(printf '%s' "$MY_SECRET_TOKEN" | tr -d '\n\r ')"
           git push --mirror "https://x-access-token:${TOKEN}@github.com/kramjiy/smartlawai-backup-11.git"
