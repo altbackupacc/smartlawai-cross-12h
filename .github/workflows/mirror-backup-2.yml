@@ -8,10 +8,16 @@ name: Mirror to backup-2 repo (24h delayed)
 #
 # One-time setup before this can run:
 #   1. Create an empty private repo: kramjiy/smartlawai-backup-2 (no README/gitignore).
-#   2. Create a fine-grained PAT scoped ONLY to smartlawai-backup-2, Contents: Read and write.
+#   2. Create a fine-grained PAT scoped ONLY to smartlawai-backup-2, Contents + Workflows: Read and write.
 #   3. Add it as a repository secret here, named BACKUP_REPO_TOKEN_2
 #      (Settings -> Secrets and variables -> Actions -> New repository secret).
-# The built-in GITHUB_TOKEN (no setup needed) is used to read this repo.
+#
+# Uses actions/checkout to read this repo instead of a manually-constructed
+# `git clone` with GITHUB_TOKEN spliced into the URL -- that approach consistently
+# failed with "Repository not found" despite correct Actions/Workflow permissions
+# settings, for reasons never conclusively identified. actions/checkout is GitHub's
+# own maintained mechanism for exactly this and handles auth internally, removing
+# the failure point rather than continuing to guess at its cause.
 
 on:
   schedule:
@@ -22,14 +28,16 @@ jobs:
   mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: Mirror-clone this repo, mirror-push to backup-2
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push mirror to backup-2 repo
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BACKUP_REPO_TOKEN_2: ${{ secrets.BACKUP_REPO_TOKEN_2 }}
         run: |
           # Strip any stray whitespace/newline a manual copy-paste into the secret
           # may have introduced -- a trailing \n here breaks the URL below outright.
           TOKEN="$(printf '%s' "$BACKUP_REPO_TOKEN_2" | tr -d '\n\r ')"
-          git clone --mirror "https://x-access-token:${GITHUB_TOKEN}@github.com/kramjiy/smartlawai.git" source-mirror
-          cd source-mirror
           git push --mirror "https://x-access-token:${TOKEN}@github.com/kramjiy/smartlawai-backup-2.git"
