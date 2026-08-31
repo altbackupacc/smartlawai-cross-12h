@@ -81,6 +81,7 @@ def ingest_file(
     doc_type: str,
     source: str,
     session_id: str | None = None,
+    owner_id: str = "",
 ) -> IngestResult:
     res = extract_text(path)
     backend.store_ingestion(IngestionRecord(
@@ -93,5 +94,5 @@ def ingest_file(
             doc_id=res.doc_id, filename=os.path.basename(path), doc_type=doc_type,
             language=res.lang_detected, source=source, storage_uri="",
             num_pages=res.num_pages, ocr_applied=(res.ocr_status == "OCR_OK"),
-            raw_text=res.text, session_id=session_id))
+            raw_text=res.text, session_id=session_id, owner_id=owner_id))
     return res

@@ -23,11 +23,11 @@ from pydantic import BaseModel
 
 from smartlawai.adapters.base import AuditEvent
 from smartlawai.adapters.factory import get_backend
-from smartlawai.core.chunking import chunk_document
-from smartlawai.core.ocr import ingest_file
-from smartlawai.core.preprocess import preprocess_doc
-from smartlawai.guardrails.disclaimer import BCI_DISCLAIMER, attach as attach_disclaimer
+from smartlawai.guardrails.disclaimer import BCI_DISCLAIMER
+from smartlawai.guardrails.disclaimer import attach as attach_disclaimer
 from smartlawai.guardrails.pii import redact
+from smartlawai.pipeline import Pipeline
+from smartlawai.scope import Scope
 
 log = logging.getLogger("smartlawai.api")
 
@@ -36,15 +36,21 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"],
                    allow_headers=["*"])
 be = get_backend()
 _extractor = None
-_rag = None
+_pipeline = None
 
 
 # --------------------------------------------------------------------------- #
 # Helpers
 # --------------------------------------------------------------------------- #
+class ScopeBody(BaseModel):
+    doc_ids: list[str]
+    owner_id: str = "anon"
+
+
 class AskBody(BaseModel):
     question: str
-    session_id: str = "anon"
+    scope: ScopeBody  # required -- I1 enforced at the HTTP boundary too
+    session_id: str = "anon"  # unrelated to retrieval scope; used only for audit logging
 
 
 def _audit(session_id: str, event_type: str, endpoint: str,
@@ -79,21 +85,24 @@ def create_session():
 
 @app.post("/upload")
 async def upload(file: UploadFile = File(...), doc_type: str = "JUDGMENT",
-                 session_id: str = "anon"):
+                 session_id: str = "anon", owner_id: str = "anon"):
+    global _pipeline
     suffix = os.path.splitext(file.filename or "")[1]
     path = None
     try:
         with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
             tmp.write(await file.read())
             path = tmp.name
-        res = ingest_file(path, be, doc_type=doc_type, source="upload")
-        if res.ocr_status != "OCR_FAIL":
-            cleaned = preprocess_doc(res.doc_id, res.text, be)
-            be.store_chunks(chunk_document(res.doc_id, cleaned))
+        _pipeline = _pipeline or Pipeline(be)
+        doc_id, trace = _pipeline.ingest(path, doc_type=doc_type, source="upload",
+                                         owner_id=owner_id)
+        ingest_stage = next((s for s in trace.stages if s.name == "ingest"), None)
+        detail = ingest_stage.detail if ingest_stage else {}
         _audit(session_id, "UPLOAD", "/upload",
-               query_text=file.filename or "", response_text=res.doc_id)
-        return {"doc_id": res.doc_id, "status": res.ocr_status,
-                "language": res.lang_detected, "pages": res.num_pages}
+               query_text=file.filename or "", response_text=doc_id)
+        return {"doc_id": doc_id, "status": detail.get("ocr_status", "OCR_FAIL"),
+                "language": detail.get("language", "unknown"),
+                "pages": detail.get("pages", 0), "trace": trace.to_dict()}
     except HTTPException:
         raise
     except Exception as exc:
@@ -200,17 +209,18 @@ def entities(doc_id: str, session_id: str = "anon"):
 
 @app.post("/ask")
 def ask(body: AskBody):
-    global _rag
+    global _pipeline
     try:
-        from smartlawai.core.rag import AdvisoryRAG
-        _rag = _rag or AdvisoryRAG(be)
-        result = _rag.answer(body.question, session_id=body.session_id)
-        # PII redact the answer text
-        if "answer" in result:
-            result["answer"], _ = redact(result["answer"])
-        # Disclaimer is already in rag.py's DISCLAIMER constant — ensure it's present
-        result["disclaimer"] = BCI_DISCLAIMER
-        return result
+        scope = Scope(doc_ids=tuple(body.scope.doc_ids), owner_id=body.scope.owner_id)
+        _pipeline = _pipeline or Pipeline(be)
+        result = _pipeline.ask(body.question, scope)
+        answer_text, n_pii = redact(result.answer)
+        _audit(body.session_id, "ASK", "/ask", query_text=body.question,
+               response_text=answer_text, pii_redacted=n_pii > 0)
+        return {"answer": answer_text, "decision": result.decision,
+                "trace": result.trace.to_dict(), "disclaimer": BCI_DISCLAIMER}
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
     except HTTPException:
         raise
     except Exception as exc:

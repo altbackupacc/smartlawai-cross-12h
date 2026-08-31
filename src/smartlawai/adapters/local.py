@@ -8,6 +8,8 @@ import shutil
 
 import duckdb
 
+from smartlawai.scope import Scope
+
 from .base import (
     AuditEvent,
     BackendInterface,
@@ -34,11 +36,13 @@ class LocalBackend(BackendInterface):
             doc_id VARCHAR PRIMARY KEY, filename VARCHAR, doc_type VARCHAR,
             language VARCHAR, source VARCHAR, storage_uri VARCHAR,
             num_pages INTEGER, ocr_applied BOOLEAN, raw_text VARCHAR,
-            session_id VARCHAR, uploaded_at TIMESTAMP DEFAULT now())""")
+            session_id VARCHAR, owner_id VARCHAR,
+            uploaded_at TIMESTAMP DEFAULT now())""")
         self.db.execute("""CREATE TABLE IF NOT EXISTS CHUNKS(
             chunk_id VARCHAR PRIMARY KEY, doc_id VARCHAR, parent_chunk_id VARCHAR,
             chunk_index INTEGER, chunk_text VARCHAR, char_start INTEGER,
-            char_end INTEGER, embedding VARCHAR, bm25_indexed BOOLEAN)""")
+            char_end INTEGER, embedding VARCHAR, bm25_indexed BOOLEAN,
+            owner_id VARCHAR)""")
         self.db.execute("""CREATE TABLE IF NOT EXISTS CLAUSES(
             clause_id VARCHAR PRIMARY KEY, doc_id VARCHAR, chunk_id VARCHAR,
             clause_type VARCHAR, clause_text VARCHAR, span_start INTEGER,
@@ -75,47 +79,64 @@ class LocalBackend(BackendInterface):
         dest = f"{DATA_DIR}/docs/{doc.doc_id}_{doc.filename}"
         shutil.copy(local_path, dest)
         self.db.execute(
-            "INSERT INTO DOCUMENTS VALUES (?,?,?,?,?,?,?,?,?,?,now()) ON CONFLICT DO NOTHING",
+            """INSERT INTO DOCUMENTS(doc_id,filename,doc_type,language,source,
+               storage_uri,num_pages,ocr_applied,raw_text,session_id,owner_id,
+               uploaded_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,now())
+               ON CONFLICT DO NOTHING""",
             [doc.doc_id, doc.filename, doc.doc_type, doc.language, doc.source,
-             dest, doc.num_pages, doc.ocr_applied, doc.raw_text, doc.session_id])
+             dest, doc.num_pages, doc.ocr_applied, doc.raw_text, doc.session_id,
+             doc.owner_id])
         return dest
 
     def store_chunks(self, chunks: list[Chunk]) -> None:
         self.db.executemany(
-            "INSERT INTO CHUNKS VALUES (?,?,?,?,?,?,?,?,?) ON CONFLICT DO NOTHING",
+            """INSERT INTO CHUNKS(chunk_id,doc_id,parent_chunk_id,chunk_index,
+               chunk_text,char_start,char_end,embedding,bm25_indexed,owner_id)
+               VALUES (?,?,?,?,?,?,?,?,?,?) ON CONFLICT DO NOTHING""",
             [[c.chunk_id, c.doc_id, c.parent_chunk_id, c.chunk_index, c.chunk_text,
               c.char_start, c.char_end,
-              json.dumps(c.embedding) if c.embedding else None, c.bm25_indexed]
+              json.dumps(c.embedding) if c.embedding else None, c.bm25_indexed,
+              c.owner_id]
              for c in chunks])
 
     def store_clauses(self, clauses: list[Clause]) -> None:
         self.db.executemany(
-            "INSERT INTO CLAUSES VALUES (?,?,?,?,?,?,?,?,?,?) ON CONFLICT DO NOTHING",
+            """INSERT INTO CLAUSES(clause_id,doc_id,chunk_id,clause_type,clause_text,
+               span_start,span_end,risk_tier,risk_score,statute_ref)
+               VALUES (?,?,?,?,?,?,?,?,?,?) ON CONFLICT DO NOTHING""",
             [[c.clause_id, c.doc_id, c.chunk_id, c.clause_type, c.clause_text,
               c.span_start, c.span_end, c.risk_tier, c.risk_score, c.statute_ref]
              for c in clauses])
 
     def store_summaries(self, summaries: list[Summary]) -> None:
         self.db.executemany(
-            "INSERT INTO SUMMARIES VALUES (?,?,?,?,?,?,?,now()) ON CONFLICT DO NOTHING",
+            """INSERT INTO SUMMARIES(summary_id,doc_id,section_label,level,
+               summary_text,faithfulness_score,model,created_at)
+               VALUES (?,?,?,?,?,?,?,now()) ON CONFLICT DO NOTHING""",
             [[s.summary_id, s.doc_id, s.section_label, s.level, s.summary_text,
               s.faithfulness_score, s.model] for s in summaries])
 
     def store_audit(self, e: AuditEvent) -> None:
         self.db.execute(
-            "INSERT INTO AUDIT_LOG VALUES (?,?,?,?,?,?,?,?,now()) ON CONFLICT DO NOTHING",
+            """INSERT INTO AUDIT_LOG(event_id,session_id,event_type,endpoint,
+               query_text,response_text,faithfulness_score,pii_redacted,created_at)
+               VALUES (?,?,?,?,?,?,?,?,now()) ON CONFLICT DO NOTHING""",
             [e.event_id, e.session_id, e.event_type, e.endpoint, e.query_text,
              e.response_text, e.faithfulness_score, e.pii_redacted])
 
     def store_ingestion(self, r: IngestionRecord) -> None:
         self.db.execute(
-            "INSERT INTO INGESTION_LOG VALUES (?,?,?,?,?,?,?,?,now()) ON CONFLICT DO NOTHING",
+            """INSERT INTO INGESTION_LOG(ingest_id,doc_id,stage_path,ocr_engine,
+               ocr_status,lang_detected,preprocess_status,error_msg,ingested_at)
+               VALUES (?,?,?,?,?,?,?,?,now()) ON CONFLICT DO NOTHING""",
             [r.ingest_id, r.doc_id, r.stage_path, r.ocr_engine, r.ocr_status,
              r.lang_detected, r.preprocess_status, r.error_msg])
 
     def store_eval(self, results: list[EvalResult]) -> None:
         self.db.executemany(
-            "INSERT INTO EVAL_RESULTS VALUES (?,?,?,?,?,?,?,now()) ON CONFLICT DO NOTHING",
+            """INSERT INTO EVAL_RESULTS(eval_id,task,system_name,metric,value,
+               split,n_examples,run_at) VALUES (?,?,?,?,?,?,?,now())
+               ON CONFLICT DO NOTHING""",
             [[r.eval_id, r.task, r.system_name, r.metric, r.value, r.split,
               r.n_examples] for r in results])
 
@@ -131,19 +152,20 @@ class LocalBackend(BackendInterface):
     def _row_to_chunk(self, r) -> Chunk:
         return Chunk(chunk_id=r[0], doc_id=r[1], parent_chunk_id=r[2], chunk_index=r[3],
                      chunk_text=r[4], char_start=r[5], char_end=r[6],
-                     embedding=json.loads(r[7]) if r[7] else None, bm25_indexed=r[8])
+                     embedding=json.loads(r[7]) if r[7] else None, bm25_indexed=r[8],
+                     owner_id=r[9] or "")
 
     def fetch_chunks(self, doc_id: str) -> list[Chunk]:
         rows = self.db.execute(
             "SELECT chunk_id,doc_id,parent_chunk_id,chunk_index,chunk_text,char_start,"
-            "char_end,embedding,bm25_indexed FROM CHUNKS WHERE doc_id=? "
+            "char_end,embedding,bm25_indexed,owner_id FROM CHUNKS WHERE doc_id=? "
             "ORDER BY chunk_index", [doc_id]).fetchall()
         return [self._row_to_chunk(r) for r in rows]
 
     def fetch_all_chunks(self) -> list[Chunk]:
         rows = self.db.execute(
             "SELECT chunk_id,doc_id,parent_chunk_id,chunk_index,chunk_text,char_start,"
-            "char_end,embedding,bm25_indexed FROM CHUNKS").fetchall()
+            "char_end,embedding,bm25_indexed,owner_id FROM CHUNKS").fetchall()
         return [self._row_to_chunk(r) for r in rows]
 
     def fetch_chunks_by_ids(self, chunk_ids: list[str]) -> list[Chunk]:
@@ -152,8 +174,18 @@ class LocalBackend(BackendInterface):
         ph = ",".join(["?"] * len(chunk_ids))
         rows = self.db.execute(
             f"SELECT chunk_id,doc_id,parent_chunk_id,chunk_index,chunk_text,char_start,"
-            f"char_end,embedding,bm25_indexed FROM CHUNKS WHERE chunk_id IN ({ph})",
+            f"char_end,embedding,bm25_indexed,owner_id FROM CHUNKS WHERE chunk_id IN ({ph})",
             chunk_ids).fetchall()
+        return [self._row_to_chunk(r) for r in rows]
+
+    def fetch_chunks_scoped(self, scope: Scope) -> list[Chunk]:
+        """I1 enforcement point: the SQL itself cannot return out-of-scope rows."""
+        ph = ",".join(["?"] * len(scope.doc_ids))
+        rows = self.db.execute(
+            f"SELECT chunk_id,doc_id,parent_chunk_id,chunk_index,chunk_text,char_start,"
+            f"char_end,embedding,bm25_indexed,owner_id FROM CHUNKS "
+            f"WHERE doc_id IN ({ph}) AND owner_id=? ORDER BY doc_id, chunk_index",
+            [*scope.doc_ids, scope.owner_id]).fetchall()
         return [self._row_to_chunk(r) for r in rows]
 
     def list_doc_ids(self) -> list[str]:
