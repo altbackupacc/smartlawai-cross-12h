@@ -124,6 +124,11 @@ sections(id, statute_id, number, heading, text,
 citation_strings(id, raw, normalised, target_type, target_id, confidence)
 ```
 
+> This schema is already repeal-event-agnostic — `repealed_by_statute_id` /
+> `superseded_by_section_id` don't assume there's only one supersession wave.
+> A second natural experiment (`## V2` below) populates more registry rows;
+> it needs no schema migration.
+
 ### Build demand-driven, not exhaustively — you do not need all 511 IPC sections
 Legal citations follow a power law.
 ```python
@@ -222,6 +227,13 @@ Streamlit, keyboard-driven, one item per screen. It must enforce:
 - Live Cohen's κ / Krippendorff's α
 - Exports straight to `eval/gold/*.jsonl`
 
+> Keep this annotator-pool-agnostic: nothing in the app or export schema should
+> assume who's rating (students vs. practising advocates). That's what makes
+> "recruit advocates instead of/alongside students" (`## V2` below) a recruiting
+> decision later, not a rebuild. Same for `repealed.jsonl`'s schema and
+> licensing — treat it as release-ready from the start so publishing it as a
+> standalone benchmark later is a README/licensing decision, not rework.
+
 ### Annotation techniques (full protocol: `RESEARCH.md` §7)
 1. **Model-assisted pre-labelling** — never label cold. 2–3× throughput. Control for
    anchoring with a 10% cold subset.
@@ -252,9 +264,17 @@ for free. If the harness is broken you find out at zero training cost.
 | **SaulLM-7B fp16, ±RAG** | L4 |
 | **BM25 + frontier model** ← *the one that matters* | API |
 | Frontier zero-shot, ±RAG | API |
+| **Citation-existence-only check** (small-scale replication of arXiv 2606.00898's citation-graph mechanism: flag a citation as valid iff it exists in the corpus, no in-force/date check) | local, no GPU |
 
 **Watch for:** if the hybrid+rerank pipeline does not beat BM25 + a good prompt, that is
 the most important finding in the project. Surface it now.
+
+**Why the citation-existence-only baseline**: `RESEARCH.md`'s literature scan (Aug 2026)
+found that a recent citation-graph hallucination-detection paper hit exactly the gap this
+project targets — their reviewers couldn't classify a citation that "looks like a repealed
+provision," because existence-checking has no temporal dimension. This baseline
+demonstrates that same failure empirically on *our* corpus, rather than only citing that
+someone else found it on theirs.
 
 **Contamination check (T1):** hold out judgments post-dating model cutoffs; report both.
 
@@ -354,7 +374,7 @@ handful of dev/test GPU-hours, not full days billed), not quotes.
 | Judge trained on data overlapping the eval splits | Perturbations generated from train split only; CI check | M6 |
 | Judge learns to like our own model's style | **Never train on our system's outputs** | M8a |
 | Synthetic perturbations ≠ natural hallucinations | Validate on human-labelled natural outputs too; report both | M8a |
-| Novelty claim stale at submission | arXiv alert now; re-run the search the month you submit | ongoing |
+| Novelty claim stale at submission | arXiv alert now; re-run the search the month you submit. **Baseline scan done Aug 2026** (`RESEARCH.md` §1's extended related-work table) — re-run against that dated list, don't start from scratch | ongoing |
 | Lost 20-hour run | Prove reload; push every epoch | M8 |
 | Dependency drift | Pin the day it works | M8 |
 | Real PII in the demo | Public judgments or synthetic only | M9 |
@@ -383,3 +403,24 @@ One sharp contribution executed impeccably beats four asserted ones.
 
 > Ship M0–M7 before you submit a single training job. A measured skeleton beats an
 > unmeasured cathedral.
+
+---
+
+## V2 — DEFERRED EXTENSIONS (not committed scope)
+
+Grew out of an Aug 2026 literature/strategy review (`RESEARCH.md` §1, §12).
+None of this is scheduled into M0–M9. Each item below only exists here because
+a V1 decision was deliberately made so it *stays* cheap to add later — if that
+V1 decision ever changes, re-check whether the "cheap later" claim still holds.
+
+| Extension | What it needs | Why it's cheap later, given V1 |
+|---|---|---|
+| **Second natural experiment** — another Indian statute repeal beyond IPC/CrPC/IEA | New registry rows (primary-source sourcing + verification, same process as M4's seed set) + a new eval slice | M4's schema (`repealed_by_statute_id`, `superseded_by_section_id`) is already repeal-event-agnostic — no migration, just more rows |
+| **Standalone published diagnostic benchmark** — release `eval/gold/repealed.jsonl` as a citable resource, not just an internal eval slice | Licensing decision, README, versioned release | M6's gold-set schema/licensing gets nailed down as release-ready in V1 (see M6 note above) — publishing becomes packaging, not rebuilding |
+| **Expert-annotated IndoLexQA** — practising lawyers instead of/alongside students | Recruiting + compensation budget for advocates | M6's annotation app is spec'd annotator-pool-agnostic (see M6 note above) — swapping who rates is a config/recruiting change |
+| **Multilingual verification** — Hindi/Indic judgments, not just OCR | New encoder-coverage validation, likely new eval data, possibly new training | **Not a cheap drop-in.** No V1 hook is being built for this. Treat as a separate, deliberately-scoped decision if pursued — don't assume it folds in |
+
+**If any of these get picked up**: update this table's row to note what
+changed, and re-verify the "why it's cheap later" claim still holds before
+assuming it does — a V1 decision made under one set of assumptions doesn't
+automatically stay valid if the surrounding code has moved since.

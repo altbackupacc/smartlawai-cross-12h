@@ -44,6 +44,15 @@ gcloud = [
   "psycopg2-binary>=2.9",
   "alembic>=1.13",
 ]
+# M1 data-foundation pipeline. Kept separate from [train]: that group's pins
+# (peft/trl/bitsandbytes/accelerate) are tightly coupled to the GPU/QLoRA stack
+# and already documented there as fragile; this is lightweight and CPU-only.
+data = [
+  "datasets>=2.19,<3.0",   # same pin as [train] -- avoid two divergent pins of one package
+  "huggingface_hub>=0.23",
+  "datasketch>=1.6",
+  "jiwer>=3.0",
+]
 train = [
   "peft>=0.11,<0.14",
   # trl<0.12: SFTTrainer(dataset_text_field=..., max_seq_length=..., tokenizer=...)

@@ -1,0 +1,10 @@
+__pycache__/
+*.ipynb
+.smartlaw_local/
+artifacts/
+models/
+node_modules/
+data/raw/
+*.duckdb
+*.bin
+data/processed/
