@@ -52,6 +52,7 @@ data = [
   "huggingface_hub>=0.23",
   "datasketch>=1.6",
   "jiwer>=3.0",
+  "google-cloud-aiplatform>=1.70",  # Vertex AI Model Garden calls for M1's Path 2 pilot/run
 ]
 train = [
   "peft>=0.11,<0.14",
