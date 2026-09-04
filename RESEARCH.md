@@ -48,6 +48,59 @@ This is unclaimed, safety-critical, legible to a legal audience, and — crucial
 > evidence*, not a co-equal headline. A paper with one sharp claim and strong support
 > beats one with two headlines competing for space.
 
+### Framed as a general NLP problem, not only a legal one
+
+A 2025–2026 literature check (below) confirms *temporal knowledge grounding* is
+an active NAACL/ACL/EMNLP-family subfield right now — *When Facts Change:
+Temporal Knowledge Conflict Resolution in LLMs* (ACL 2026 Findings), *DynamicQA*
+(EMNLP 2024), *Temporal Validity in Retrieval Memory* (arXiv 2606.26511), *RAG or
+Learning? Understanding the Limits of LLM Adaptation under Continuous Knowledge
+Drift* (arXiv 2604.05096). None of these use a structured, versioned knowledge
+registry, and none touch law. Positioning the authority registry as **a legal-
+domain instantiation of temporal knowledge grounding** — rather than only a
+legal-AI tool — gives a general-NLP reviewer (NAACL, EMNLP) a body of work to
+place this paper against, without displacing the legal framing that already
+works for ICAIL/JURIX (§9 Venue). The mechanism doesn't change; only which
+literature frames the introduction changes per target venue.
+
+### Extended related-work check (literature scan, August 2026)
+
+| Work | What it does | How this project differs |
+|---|---|---|
+| **ClaimRAG-Law** (arXiv 2605.21071) | Claim-level RAG benchmark, FR/EN, 968 validated claims; includes "factual recall" questions on citations and effective dates | ⚠️ **Open question, not yet resolved**: the abstract doesn't clarify whether it already checks in-force/currency of a citation vs. just recall-accuracy of a stated date. **Action item**: read the full paper before the "entailment cannot detect repealed law" claim goes into the submitted draft — soften to "differs from" until confirmed |
+| **Who Checks the Citations?** (Princeton, arXiv 2606.21155, Aug 2026) | Taxonomy of *fabricated* citation hallucinations from real US court filings, 1,300-item benchmark; finds hallucination rates aren't reliably falling across model generations | Targets fabrication (citing something that doesn't exist), not staleness (citing something real but no longer law) — orthogonal failure mode; cite as motivation, not a competitor |
+| **Citation Grounding via Legal Citation Graphs** (arXiv 2606.00898) | Citation-graph-based hallucination detection, Ukrainian jurisdiction | Their own reviewers hit our exact gap and said so in the paper: a citation "we cannot classify — it looks like a repealed provision." Directly supports the motivating claim that citation-*existence* checking alone (their mechanism) still misses repeals — quote this in Introduction |
+| **Stanford JELS 2025** (*Hallucination-Free?*) | Preregistered empirical eval of commercial legal AI (Lexis+ AI, Westlaw AI-Assisted Research): 17–33% hallucination rate | Real-world motivating statistic for the introduction; not a method comparison |
+| **Falkor-IRAC** (arXiv 2605.14665) | Graph-constrained IRAC-structured legal reasoning generation, Indian judicial AI | Verifies *reasoning structure*, not citation currency; no statute registry |
+| **Domain-Partitioned Hybrid RAG for Legal Reasoning ... India** (arXiv 2602.23371) | Neo4j knowledge graph + 3 domain RAG pipelines incl. IPC, LLM-as-judge evaluation | No in-force dates, no IPC→BNS mapping; verification is **LLM-as-judge** — exactly what `I3`/M5 reject as injection-vulnerable. Concrete contrast for related work |
+
+No NLP/ML paper was found mapping IPC↔BNS as a research artifact — only static
+lawyer-reference converter sites (ipc2bns.in, legalrath.in). No "InLegalNLI" was
+found anywhere. Both confirm the specific angle is still open as of this scan.
+**Re-run this search the month of submission** — see T-row in §8 and the
+"novelty claim stale at submission" row in `PLAN.md`'s pitfall checklist; this
+scan is the dated starting point, not a one-time check.
+
+### Formal definition — authority-grounded (temporal) faithfulness
+
+Standard **entailment-based faithfulness** asks: *is claim C supported by its
+cited passage P?* This is necessary but not sufficient when P's own authority
+can expire. Define:
+
+> A claim C, citing authority A, is **authority-grounded (temporally faithful)**
+> as of date *d* iff (1) C is entailed by its cited passage, **and** (2) A was
+> in force on *d* — i.e. A's `in_force_from ≤ d`, A has no `in_force_to` or
+> `in_force_to > d`, and A is not `superseded_by` a different authority as of *d*.
+
+Entailment-based faithfulness checks (1) only. This project's contribution is a
+mechanism for checking (2) as well, deterministically, against a maintained
+registry rather than an LLM's internal (frozen, uncurated) sense of what's
+current. The definition is domain-agnostic — anything with versioned or expiring
+authorities (statutes, regulations, medical guidelines, safety standards)
+qualifies; Indian criminal law's 2024 recodification is the demonstrated
+instance, not the boundary of the idea. See `PLAN.md`'s **V2** section for how
+a second such instance could be added later without a schema change.
+
 ---
 
 ## 2. THE CENTREPIECE: the IPC → BNS natural experiment
@@ -384,7 +437,10 @@ objection is answered with evidence rather than assurance.
 ## 9. PAPER OUTLINE
 
 1. Introduction — the grounded-but-repealed failure mode
-2. Related Work — IL-TUR, ClaimRAG-Law, SaulLM, CUAD, HHEM/Self-RAG. **Position as extension**
+2. Related Work — IL-TUR, ClaimRAG-Law, SaulLM, CUAD, HHEM/Self-RAG, temporal-knowledge-
+   conflict literature (*When Facts Change*, *DynamicQA*), *Who Checks the Citations?*,
+   *Citation Grounding via Legal Citation Graphs*, Falkor-IRAC, Domain-Partitioned Hybrid
+   RAG (§1 extended related-work table). **Position as extension, not competitor**
 3. The Authority Registry — schema, in-force intervals, supersession, sourcing
 4. **InLegalNLI** — architecture, perturbation taxonomy, per-type detection.
    **Place this immediately before Results** so the "entailment is weak on statutory
@@ -408,6 +464,13 @@ legal-correctness work that is our strongest asset.
 Weight the paper toward the registry for a legal venue; toward IndoLexQA and the
 ablations for an NLP venue.
 
+**For a NAACL/EMNLP/ACL-family submission specifically**: lead Introduction/
+Related Work with the temporal-knowledge-grounding framing and general-domain
+literature from §1's "Framed as a general NLP problem" subsection, not only
+legal-AI framing — that's what gives this audience a body of work to place the
+paper against. The registry stays the headline result either way; only the
+framing of *why it matters* shifts per venue.
+
 ---
 
 ## 10. REVIEWER OBJECTIONS — have these answers ready
@@ -415,7 +478,9 @@ ablations for an NLP venue.
 | Objection | Answer |
 |---|---|
 | "IL-TUR already benchmarks Indian legal NLP" | We extend it. IL-TUR has no QA and no clause extraction; our numbers are leaderboard-comparable on shared tasks |
-| "ClaimRAG-Law already does claim-level verification" | Entailment cannot detect repealed law. We show V2 catches ~0% of repealed citations; V3 catches most |
+| "ClaimRAG-Law already does claim-level verification" | Entailment-based checking differs from authority/in-force checking (§1 flags an open question here — confirm against ClaimRAG-Law's full text before final draft, not just its abstract). We show V2 catches ~0% of repealed citations; V3 catches most |
+| "Doesn't citation-graph grounding (e.g. arXiv 2606.00898) already solve this?" | No — that paper's own review found a citation "we cannot classify — it looks like a repealed provision." Citation graphs check existence, not temporal validity |
+| "Isn't this the same as fabricated-citation detection (e.g. Who Checks the Citations?, arXiv 2606.21155)?" | Different failure mode: they detect citations to things that don't exist; we detect citations to things that exist but are no longer law |
 | "Why not a bigger model?" | Scale ladder to 14B; dataset size (35k pairs) caps honest capacity; frontier models included as the ceiling |
 | "You built the registry you score against" | Primary sources, independent 200-entry audit, publicly released |
 | "You built the judge you score with" | Dual-reported with HHEM-2.1 throughout; κ vs human labels; externally evaluated on ClaimRAG-Law; released |
@@ -443,3 +508,32 @@ State these before running anything — it is what makes it science.
   stack, report HHEM only, and keep it as a negative result about domain adaptation
 
 Pre-registering these is a strength. Discovering them at review time is not.
+
+---
+
+## 12. V2 — DEFERRED EXTENSIONS (research rationale)
+
+Full engineering detail (what's cheap later because of a V1 design choice made
+now) lives in `PLAN.md`'s own `## V2` section. The research case for each,
+briefly:
+
+- **A second independent natural experiment** (another Indian repeal event
+  beyond IPC/CrPC/IEA) would turn "one dated example" into a small benchmark of
+  temporal-validity events, meaningfully strengthening the generalisation claim
+  in T7/§10 ("does this generalise beyond India?") beyond assertion.
+- **Publishing the repealed-citation set as a standalone diagnostic benchmark**
+  (not just an internal eval slice) is what turns "we measured this" into "we
+  defined a task" — a citable resource contribution independent of this
+  system's own score on it.
+- **Expert (practising-lawyer) annotation for IndoLexQA**, replacing or
+  supplementing crowd/student annotation, directly strengthens T9 (annotator
+  expertise) and is exactly the kind of costly-to-produce gold data that legal-
+  AI venues weight heavily.
+- **Multilingual verification** (Hindi/Indic judgments, not just OCR) would
+  make the "multilingual pipeline" claim killed in §1's positioning table
+  actually supportable — but honestly requires new encoder validation and eval
+  data, closer to a second project than an extension. Not assumed anywhere in
+  V1's design; tracked here so it isn't silently forgotten either.
+
+None of these are committed scope. They're documented so that, if pursued
+later, they extend cleanly rather than requiring rework of V1 decisions.

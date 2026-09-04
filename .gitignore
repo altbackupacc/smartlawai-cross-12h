@@ -14,3 +14,9 @@ node_modules/
 dist/
 .pytest_cache/
 .ruff_cache/
+
+# M1 data foundation -- large and/or fully regenerable from data/*.py + frozen splits
+data/raw/
+data/processed/
+!data/processed/near_duplicate_pairs.json
+data/ocr_wer_gold/pages/
