@@ -9,4 +9,4 @@ workerPoolSpecs:
       command:
         - bash
         - -c
-        - "pip install -q google-cloud-storage && python -c \"from google.cloud import storage; storage.Client().bucket('smartlawai-1-m1-pilot').blob('hhem_score_vertex.py').download_to_filename('/tmp/hhem_score_vertex.py')\" && python /tmp/hhem_score_vertex.py"
+        - "pip install -q google-cloud-storage && python -c \"from google.cloud import storage; storage.Client().bucket('smartlawai-1-m1-pilot').blob('hhem_score_batched.py').download_to_filename('/tmp/hhem_score_batched.py')\" && python /tmp/hhem_score_batched.py"

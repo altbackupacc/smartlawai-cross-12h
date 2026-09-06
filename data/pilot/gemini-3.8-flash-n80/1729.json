@@ -1,0 +1,16 @@
+{
+  "doc_id": "1729",
+  "il_tur_doc_tokens": 2845,
+  "il_tur_summ_tokens": 712,
+  "prompt_token_count": 4597,
+  "candidates_token_count": 724,
+  "elapsed_s": 19.3,
+  "parse_ok": true,
+  "sections": {
+    "facts": "Rupees 85,000/- was deposited with the appellant by his sister in January 1946. The appellant's sister migrated to Pakistan between June and August 1949. The Assistant Custodian called upon the appellant to pay this sum lying in deposit under Section 48 of the Act. The Assistant Custodian directed him to pay the amount under Section 48 as it then stood, which decision was affirmed in appeal as well as in revision. The appellant then moved a writ petition before the High Court, which was dismissed by the Single Judge. On Letters Patent Appeal, the High Court held on December 9, 1957, that the amount was not recoverable under Section 48 of the Act as it stood at the relevant time. In the meantime, Section 48 had been amended on October 22, 1956. On January 22, 1958, another notice of demand was served on the appellant by the Assistant Custodian, who again directed the amount to be recovered. The appellant preferred an appeal before the Custodian General, who allowed the appeal and remanded the proceedings for further enquiry. After remand, further evidence was taken and it was held that the amount was payable by the appellant as it was a deposit and was still recoverable when the property vested in the Custodian. The appellant's subsequent appeal to the Custodian General was dismissed. Special leave was then granted by the Supreme Court.",
+    "statute": "Section 48 and Section 9 of the Administration of Evacuee Property Act; Article 60 of the Limitation Act, 1908 (Act No. 9 of 1908).",
+    "argument": "The appellant pleaded that the amount could not be recovered from him because the money had been given to him as a loan and its recovery was barred in January 1949.",
+    "analysis": "Sub-sections (1) and (2) of the amended Section 48 are clearly procedural and apply to all cases investigated in accordance therewith after October 22, 1956, even though the claim may have arisen before the amended section was inserted. Procedural amendments apply retrospectively to all actions after they come into force, even if the actions began earlier or the claim was of an anterior date; hence, the notice of January 22, 1958, could be dealt with under amended Section 48(1) and (2). Furthermore, the property vesting in the Custodian was not actual money in specie lying with the appellant (who must be treated as a banker), but the right of the appellant's sister to recover the amount, which constituted incorporeal property in the form of an actionable claim. Under Section 48(1) and (2), the Custodian could proceed to recover sums payable in respect of that actionable claim, whereas Section 9 did not apply since the amount was not specific property liable to physical seizure. Lastly, because the amount was a deposit, limitation ran at the earliest from the date of demand. As there was no evidence of any demand prior to migration, limitation had not begun to run when the sister migrated to Pakistan (assuming Article 60 of the Limitation Act applied), meaning her right to recover vested in the Custodian and was not barred by limitation when she became an evacuee.",
+    "judgement": ""
+  }
+}

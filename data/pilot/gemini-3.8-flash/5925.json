@@ -1,0 +1,16 @@
+{
+  "doc_id": "5925",
+  "il_tur_doc_tokens": 2269,
+  "il_tur_summ_tokens": 854,
+  "prompt_token_count": 4131,
+  "candidates_token_count": 544,
+  "elapsed_s": 13.5,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The four appellants along with seven other accused were tried under Sections 147, 148 and 302 read with 149 of the Indian Penal Code. The Trial Court convicted eight accused, including the four appellants, under Section 302/149 I.P.C. and awarded life imprisonment, while convicting Appellants Nos. 1, 2, and 4 under Section 147 I.P.C. to one year's R.I. and Appellant No. 3 under Section 148 I.P.C. to two years' R.I. Three accused were acquitted by the Trial Court for want of corroboration. On appeal, the High Court upheld the convictions of the four appellants on all counts and acquitted the other four co-accused for want of corroboration.",
+    "statute": "Sections 141, 147, 148, 149, and 302 of the Indian Penal Code.",
+    "argument": "The appellants contended that Appellants Nos. 3 and 4 should also be acquitted for want of corroboration, given that the Trial Court acquitted three accused and the High Court acquitted four accused on that basis. The State countered that under Section 302 read with Section 149 I.P.C., corroboration regarding individual accused was not necessary, and there was sufficient corroboration on record to establish that the accused were members of the unlawful assembly at the time of the offence.",
+    "analysis": "Section 149 creates a specific and distinct offence imposing constructive or vicarious criminal liability on members of an unlawful assembly for acts committed in prosecution of its common object, which must fall within Section 141 I.P.C. Overt acts or active participation by every person are not necessary; mere membership with the requisite common object or knowledge fastens liability. Once it is established that the accused formed an unlawful assembly and an offence was committed in prosecution of its common object, every member is guilty, and the prosecution need not prove which specific overt act was done by whom. The evidence satisfactorily established that Appellants Nos. 3 and 4 were members of the unlawful assembly at the relevant time, rendering it immaterial whether they actively participated or caused specific injuries. The High Court erred in acquitting co-accused on the grounds of non-participation in violent acts or lack of corroboration, as courts cannot afford to be charitable in undeserving criminal cases.",
+    "judgement": "Appeal dismissed."
+  }
+}

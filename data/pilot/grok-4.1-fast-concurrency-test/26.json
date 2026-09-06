@@ -1,0 +1,17 @@
+{
+  "doc_id": "26",
+  "il_tur_doc_tokens": 2605,
+  "il_tur_summ_tokens": 124,
+  "prompt_token_count": 4079,
+  "candidates_token_count": 175,
+  "reasoning_tokens": 0,
+  "elapsed_s": 5.6,
+  "parse_ok": true,
+  "sections": {
+    "facts": "",
+    "statute": "Section 11 of the Bihar Buildings (Lease, Rent and Eviction) Control Act, 1947, has entrusted the Controller with a jurisdiction, which includes the jurisdiction to determine whether there is non payment of rent or not, as well as the jurisdiction, on finding that there is non payment of rent, to order eviction of a tenant.",
+    "argument": "",
+    "analysis": "Therefore, even if a Controller has wrongly decided the question whether there has been non payment of rent, his order for eviction on the ground that there has been non payment of rent cannot be questioned in a civil court. Queen vs Commissioners for Special Purposes of Income Tax (21 O.B.D. 313) and Colonial Bank of Australasia vs Willan (L.R. P.C. 417) relied on.",
+    "judgement": ""
+  }
+}

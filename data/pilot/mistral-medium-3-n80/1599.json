@@ -1,0 +1,16 @@
+{
+  "doc_id": "1599",
+  "il_tur_doc_tokens": 4156,
+  "il_tur_summ_tokens": 637,
+  "prompt_token_count": 6567,
+  "candidates_token_count": 559,
+  "elapsed_s": 6.1,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The assessee had encashed 51 high denomination notes of Rs. 1,000/ each in January, 1946. The assessee's explanation in his application for encashment of the notes was that he was a colliery proprietor and contractor, that for conducting the business and for payment to labour which came to about Rs. 30,000 to 40,000 every week he had to keep large sums of money to meet emergency and that the sum of Rs. 50,000 realised by encashment of the notes was neither profit nor part of profit but was floating capital for the purpose of conducting business.",
+    "statute": "",
+    "argument": "The assessee contended that the burden lay on the department to establish that the amount in question was income liable to tax and that the department had failed to establish this.",
+    "analysis": "The correct position is as follows. If there is an entry in the account books of the assessee which shows the receipt of a sum or conversion of the notes by the assessee himself, it is necessary for the assessee to establish, if asked, what the source of that money was and to prove that it did not bear the nature of income. The department is not at this stage required to prove anything. If the business, the state of accounts and dealing of the assessee show that he might have, for convenience, kept the whole or part of a particular sum in high denomination notes, the assessee prima facie discharges his initial burden. If the assessee does this the department cannot act unreasonably and reject that explanation to hold that it was income. If the explanation is unconvincing, the department can reject it and draw the inference that the amount represents income either from the source already disclosed by the assessee or from some undisclosed source. Before the department rejects such evidence it must either show an inherent weakness in the explanation or rebut it by putting to the assessee some information or evidence which it has in its possession. The fact that there was receipt of money or conversion of notes is itself prima facie evidence against the assessee on which the department can proceed in absence of good explanation.",
+    "judgement": "The department was justified in holding that Rs. 51,000 was assessable income of the assessee from some undisclosed source. It was not correct that the assessee was not required to prove anything and that the burden was entirely upon the department to prove that the amount received from the encashment of high denomination notes was income."
+  }
+}

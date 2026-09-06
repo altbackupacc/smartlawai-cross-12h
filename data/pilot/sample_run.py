@@ -15,7 +15,8 @@ from datasets import load_from_disk
 from google import genai
 from google.genai import types
 
-MODEL = "gemini-2.5-flash-lite"
+MODEL = "gemini-3.1-pro-preview"
+LOCATION = "global"  # Gemini 3.x is only served via the global endpoint, not regional
 N_SAMPLES = 10
 SEED = 42
 
@@ -50,7 +51,7 @@ def main() -> None:
     out_dir = Path("data/pilot") / MODEL
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    client = genai.Client(vertexai=True, project="smartlawai-1", location="us-central1")
+    client = genai.Client(vertexai=True, project="smartlawai-1", location=LOCATION)
 
     results = []
     for n, idx in enumerate(idxs, 1):

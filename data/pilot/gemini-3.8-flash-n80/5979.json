@@ -1,0 +1,16 @@
+{
+  "doc_id": "5979",
+  "il_tur_doc_tokens": 3590,
+  "il_tur_summ_tokens": 597,
+  "prompt_token_count": 5520,
+  "candidates_token_count": 654,
+  "elapsed_s": 9.8,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The Respondent entered into a contract with the appellant Food Corporation of India on or about May 1979 whereunder the appellant-Corporation was to give to the Respondent Paddy for being shelled/converted into rice at the rate of 70% of the Paddy. The Paddy was to be lifted from the godowns of the appellant. The shelling charge was fixed at Rs.2/20 p. per quintal. Some dispute having arisen between the parties, the Respondent moved an application before the Subordinate Judge for appointment of an arbitrator, and the Sub Judge appointed the arbitrator who gave his award on 22nd January 1982. In the award, the arbitrator did not allow some of the claims made by the appellant, in particular, a claim of Rs.55,060/29 p claimed as a penalty of Rs.2 per quintal for not lifting the balance of Paddy, taking the view that the appellant had to prove actual losses suffered which it failed to prove. Another claim not allowed by the arbitrator related to Rs.3,23,856/08 p. in respect of the cost of non-delivery of 137.39548 tonnes of rice @ Rs. 165 per quintal. The Respondent applied under section 14 of the Arbitration Act, 1940 to make the award a rule of the Court, while the appellant filed objections under sections 30 and 33 of the Act. The Subordinate Judge, First Class, on 2nd December 1982, found the award liable to be set aside, modified the award, and passed a decree in favour of the appellant. On 2nd March 1984, the Additional District Judge reversed this order on appeal, holding that the award was not liable to be corrected or interfered with. Aggrieved, the appellant filed a revision petition which the High Court dismissed on 11.12.1984, leading to the appeal before the Supreme Court.",
+    "statute": "Arbitration Act, 1940; Sections 14, 30, and 33.",
+    "argument": "",
+    "analysis": "The arbitrator made a speaking award by giving reasons for his conclusions. Where an arbitrator chooses to give reasons, the challenge to the award cannot be sustained unless it is demonstrated that such reasons are erroneous as propositions of law or that the view taken cannot possibly be sustained in any view of the matter. Even assuming that there was some mistake, such a mistake is not amenable to correction by the Court. The award was a fair order passed after considering all the records, and the conclusion arrived at by the arbitrator is a plausible conclusion. Consequently, the Court has no jurisdiction to interfere with or modify the award in the manner sought by the appellant. The Additional District Judge was justified in correcting the order of the Subordinate Judge, and the High Court was justified in not interfering with the Additional District Judge's order.",
+    "judgement": "The appeal was dismissed with no order as to costs."
+  }
+}

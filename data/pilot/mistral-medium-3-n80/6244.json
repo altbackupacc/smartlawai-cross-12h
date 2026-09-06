@@ -1,0 +1,16 @@
+{
+  "doc_id": "6244",
+  "il_tur_doc_tokens": 706,
+  "il_tur_summ_tokens": 248,
+  "prompt_token_count": 1495,
+  "candidates_token_count": 383,
+  "elapsed_s": 3.2,
+  "parse_ok": true,
+  "sections": {
+    "facts": "This writ petition has been filed pleading for separate schools and hostels for the children of prostitutes. It is said that prostitutes do not want to have children and ordinarily when children are born to them it is inspite of their desire not to rear children.",
+    "statute": "",
+    "argument": "On behalf of respondents, it was contended that since they are in fact unwanted children of prostitutes it is in the interest of such children and the society at large that they are segregated from their mothers and be allowed to mingle with others and become part of the society.",
+    "analysis": "Segregating prostitute children by locating separate schools and providing separate hostels, in our opinion, would not be in the interest of such children. Children of prostitutes should, however, not be permitted to live in inferno and the undesirable surroundings of prostitute homes. This is particularly so for young girls whose body and mind are likely to be abused with growing age for being admitted into the profession of their mothers. While we do not accept the plea for separate hostels for prostitute children it is necessary that accommodation in hostels and other reformatory homes should be adequately available to help segregation of these children from their mothers living in prostitute homes as soon as they are identified.",
+    "judgement": "Setting up a Committee consisting of 4 Advocates and 3 Social Workers to look into the matter and directing listing of the matter on receipt of the Committee's report, this Court. The Committee now set up will look into the problems and submit its report within 8 weeks. [This Court directed the Ministry of Welfare, Deptt. of Women & Child Development functioning under the Union of India to deposit a sum of Rs.20,000 within two weeks to meet the expenses of the Committee]."
+  }
+}

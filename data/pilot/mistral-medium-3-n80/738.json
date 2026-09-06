@@ -1,0 +1,16 @@
+{
+  "doc_id": "738",
+  "il_tur_doc_tokens": 3995,
+  "il_tur_summ_tokens": 610,
+  "prompt_token_count": 5893,
+  "candidates_token_count": 625,
+  "elapsed_s": 5.5,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The appellants were the trustees of a charity fund known as 'The Charity Fund founded by Sir Sassoon David, Baronet of Bombay'. Clause 13 of the deed of trust declared that the trustees should apply the net income for all or any of the following purposes: (a) the relief and benefit of the poor and indigent members of Jewish or any other community of Bombay or other parts of India or of the world, (b) the institution, maintenance and support of hospitals and schools, colleges or other educational institutions, (c) the relief of any distress caused by natural elements, (d) the care and protection of animals useful to mankind, (e) the advancement of religion, or (f) other purposes beneficial to the community not falling under any of the foregoing purposes. The deed added by way of provisos that in applying the net income for the purposes mentioned in sub-clause (a), the trustees must give preference to the poor and indigent relations or members of the family of Sir Sassoon David, including distant and collateral relatives, and that for the said purpose the trustees must apply not less than half of the income for the benefit of the members of the Jewish community of Bombay only, including the said relatives of Sir Sassoon David and Jewish objects.",
+    "statute": "The question for determination was whether the income from the trust fund was exempt from taxation under section 4(3)(i) of the Indian Income Tax Act.",
+    "argument": "The High Court came to the conclusion that the trust fund could not be said to be held, wholly or partly, for religious or charitable purposes involving an element of public utility and answered the question in the negative.",
+    "analysis": "There could be no doubt that each one of the primary purposes mentioned in the deed of trust, including the one mentioned in sub-clause (a), properly construed, involved an element of public utility and thus they constituted a valid charitable trust. Although it was open to the trustees to spend the entire income for the purpose mentioned in sub-clause (a), that could not detract from the validity of the trust since the relations or family members of the founder did not come in directly under any of the other purposes and could do so only under sub-clause (a) as preferential beneficiaries to be selected from out of the class of primary beneficiaries prescribed by it, in terms of the provisos. The test of the validity of such a public charitable deed of trust should be whether or not at the primary stage of eligibility it could be said to possess that character. The circumstance that in selecting the actual beneficiaries from the primary class of beneficiaries under sub-clause (a), the trustees had to give preference under the provisos, to the relations or members of the family of Sir Sassoon David, could not therefore affect the public charitable trust constituted under sub-clause (a).",
+    "judgement": "The income from the trust properties was entitled to exemption under section 4(3)(i) of the Indian Income Tax Act."
+  }
+}

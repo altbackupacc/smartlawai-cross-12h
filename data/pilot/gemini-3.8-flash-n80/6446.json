@@ -1,0 +1,16 @@
+{
+  "doc_id": "6446",
+  "il_tur_doc_tokens": 784,
+  "il_tur_summ_tokens": 276,
+  "prompt_token_count": 1497,
+  "candidates_token_count": 355,
+  "elapsed_s": 6.4,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The respondent landlady sought eviction of the appellant on the ground of bona fide requirement for continuing tailoring business of her son, being carried on in a small room of the same premises. The trial court accepted the claim. The appellate court, however, allowed the appeal on the ground that the business of the landlady's son was very poor and not growing at all and, therefore, the accommodation in his possession was not at all insufficient. The High Court found that the need of the landlady was genuine and bona fide.",
+    "statute": "Section 12(1)(f) of the M.P. Accommodation Control Act, 1961.",
+    "argument": "",
+    "analysis": "The landlady whose husband at one time had a flourishing business was now in dire circumstances. To keep both ends meet, the family depended not only on meagre income from rent and the tailoring shop, but the landlady had even to part with possession of another room of the same house adjacent to the shop in dispute to another tenant. Financial difficulty apart, the tenant admittedly had two shops each with spacious accommodation facing the road while the landlady's son had one with comparatively small and irregular dimensions in a lane in most unhygienic conditions, with not enough place for 3 or 4 machines with two or three helpers, let alone a trial room or other facilities for customers. The pathetic and pitiable condition of the landlady, with no injury to the tenant except that he shall be required to carry on business from one shop only, do not call for interference with the order of the High Court.",
+    "judgement": "The tenant's appeal was dismissed."
+  }
+}

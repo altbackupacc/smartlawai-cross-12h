@@ -1,0 +1,16 @@
+{
+  "doc_id": "5979",
+  "il_tur_doc_tokens": 3590,
+  "il_tur_summ_tokens": 597,
+  "prompt_token_count": 5709,
+  "candidates_token_count": 564,
+  "elapsed_s": 4.9,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The Respondent entered into a contract with the appellant Food Corporation of India on or about May 1979 whereby the appellant Corporation was to give to the Respondent Paddy for being shelled/ converted into rice at the rate of 70% of the Paddy. The Paddy was to be lifted from the godowns of the appellant. The shelling charge was fixed at Rs.2.20 per quintal. Some dispute having arisen between the parties, the Respondent moved an application before the Subordinate Judge for appointment of an arbitrator and the Sub Judge appointed the arbitrator who gave his award on 22nd January 1982.",
+    "statute": "The Respondent made an application under section 14 of the Arbitration Act, 1940 to make the award a rule of the Court. The appellant filed the objections under sections 30 and 33 of the Act.",
+    "argument": "The appellant had claimed the price of Rs. 165 per qtl. The arbitrator was of the view that the expression 'Economic Rate' had not been defined. Dr. L.M. Singhvi, learned counsel for the appellant, urged before us that the arbitrator was wrong in not awarding 50% of the added penalty as claimed by the appellant. Dr. Singhvi sought to urge that as per the terms of the contract the arbitrator was obliged to award penal rate in terms of clause g(i) of the contract.",
+    "analysis": "The arbitrator has chosen to make a speaking award in the instant case, that is he has given reasons for his conclusions. Since the arbitrator has chosen to give reasons, unless it is demonstrated to this Court that such reasons are erroneous as such as propositions of law or a view which the arbitrator has taken is a view which it could not possibly be sustained in any view of the matter, then the challenge to the award of the arbitrator cannot be sustained. Even assuming that there was some mistake, such a mistake is not amenable to be corrected in respect of the award by the Court. This was a fair order passed after considering all the records. The conclusion arrived at by the arbitrator is a plausible conclusion. The Court has no jurisdiction to interfere or modify the award in the manner sought for by the appellant.",
+    "judgement": "The Addl. Distt. Judge was justified in correcting the order of the Subordinate Judge and the High Court was also justified in not interfering with the order of the Addl. Distt. Judge. The appeal, therefore, fails and is accordingly dismissed. No order as to costs."
+  }
+}

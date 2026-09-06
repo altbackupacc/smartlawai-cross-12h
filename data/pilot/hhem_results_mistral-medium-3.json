@@ -1,0 +1,647 @@
+{
+  "device": "cuda",
+  "n_claims": 204,
+  "n_sections": 48,
+  "mean_claim_score": 0.9299176235263255,
+  "min": 0.021628214046359062,
+  "max": 0.9912817478179932,
+  "hallucination_rate_pct": 3.431372549019608,
+  "sections": [
+    {
+      "doc_id": "44",
+      "section": "facts",
+      "n_claims": 2,
+      "claim_scores": [
+        0.9655247926712036,
+        0.9733108282089233
+      ],
+      "mean_claim_score": 0.9694178104400635,
+      "text": "The Essential Supplies (Temporary Powers) Act (XXIV Of 1946) came into force on 19th November, 1946. The appellant, who was convicted under section 7 of the Act in respect of an act committed on the 14th October, 1949, within Darjeeling, contended that the Act was not validly extended to the District of Darjeeling and was not therefore in force there on the date of the alleged offence."
+    },
+    {
+      "doc_id": "44",
+      "section": "statute",
+      "n_claims": 1,
+      "claim_scores": [
+        0.9838384389877319
+      ],
+      "mean_claim_score": 0.9838384389877319,
+      "text": "Section 1 (3) of the Essential Supplies Act provided that it shall cease to have effect on the expiration of the period mentioned in section 4 of the India (Central Government and Legislature) Act, 1946."
+    },
+    {
+      "doc_id": "44",
+      "section": "argument",
+      "n_claims": 1,
+      "claim_scores": [
+        0.9723445773124695
+      ],
+      "mean_claim_score": 0.9723445773124695,
+      "text": "The appellant contended that the Act was not validly extended to the District of Darjeeling and was not therefore in force there on the date of the alleged offence."
+    },
+    {
+      "doc_id": "44",
+      "section": "analysis",
+      "n_claims": 2,
+      "claim_scores": [
+        0.9813886880874634,
+        0.9544854760169983
+      ],
+      "mean_claim_score": 0.9679370820522308,
+      "text": "The Governor's notification extended the Act to the District of Darjeeling without specifying any particular period for its applicability, the Act would remain in force in this district as long as it remained in force in the rest of India and a fresh notification of the Governor under section 92 (1) of the Government of India Act, 1935, was not necessary. Under the adaptations made under sections 9 and 19 of the Indian Independence Act the powers conferred on the Houses of Parliament became vested in the Constituent Assembly and the Act was in force in the district of Darjeeling on the date of the alleged contravention of the Act."
+    },
+    {
+      "doc_id": "44",
+      "section": "judgement",
+      "n_claims": 1,
+      "claim_scores": [
+        0.960064172744751
+      ],
+      "mean_claim_score": 0.960064172744751,
+      "text": "There was no question of delegation of legislative power in this case as the Legislature had itself applied its mind and fixed the duration of the Act, leaving only the machinery to reach the maximum period to be worked out in a particular manner."
+    },
+    {
+      "doc_id": "4458",
+      "section": "facts",
+      "n_claims": 6,
+      "claim_scores": [
+        0.9768620133399963,
+        0.9852723479270935,
+        0.9576517343521118,
+        0.9859587550163269,
+        0.9651365876197815,
+        0.9877546429634094
+      ],
+      "mean_claim_score": 0.9764393468697866,
+      "text": "The Bombay Provincial Municipal Corporations Act, 1949 came into operation in the city of Poona on 15th of February, 1950. The Corporation had been levying octroi on the materials received by the appellants. The appellants sought exemption under rule 5(8). The Corporation rejected their claim for exemption of octroi on the ground that exemption can only be granted if the area within which the concern was situated was declared as industrial area and demarcated for the purpose. Being aggrieved, the appellants filed petitions under Article 226 of the Constitution in the High Court for the issue of a writ of Mandamus requiring the respondent Corporation to define and demarcate the area where their factories were situated as industrial area, within the meaning of rule 5(8), and to exempt them from payment of octroi. During the pendency of these petitions rule 5(8) was repealed."
+    },
+    {
+      "doc_id": "4458",
+      "section": "statute",
+      "n_claims": 2,
+      "claim_scores": [
+        0.981433093547821,
+        0.953629195690155
+      ],
+      "mean_claim_score": 0.967531144618988,
+      "text": "Section 127(2) of the Bombay Provincial Municipal Corporations Act, 1949 authorised the Corporation to impose octroi and other taxes, while section 149 prescribed the procedure to be allowed in levying taxes. Rule 5(8) of the new Rules provided for exemption in respect of levy of octroi."
+    },
+    {
+      "doc_id": "4458",
+      "section": "argument",
+      "n_claims": 4,
+      "claim_scores": [
+        0.9853190183639526,
+        0.9620123505592346,
+        0.9809730052947998,
+        0.9810123443603516
+      ],
+      "mean_claim_score": 0.9773291796445847,
+      "text": "The appellants amended the writ petitions and further contended that (1) that the repeal of rule 5(8) was illegal and/or ultra vires and, therefore, rule 5(8) still continues to be effective and (2) that in any event they were entitled to get the benefit of rule 62 B which had not been repealed. In the appeals to this Court it was contended on behalf of the appellants (1) that the disputed area had been included in the development plan under the Bombay Town Planning Act, 1954 before the promulgation of rule 5(8) and had thus automatically become an industrial estate or area for the purposes of that rule. (2) The Corporation had refused to grant exemption to the appellants on the arbitrary ground that the concern of the appellants was not a new one. (3) There had been violation of Article 14 of the Constitution in as much as some industries in similar situations have been granted exemption while the appellants have been deprived of the benefit of rule 5(8) and (4) While denying the benefit of rule 5(8) the Corporation had taken into consideration extraneous or irrelevant considerations."
+    },
+    {
+      "doc_id": "4458",
+      "section": "analysis",
+      "n_claims": 6,
+      "claim_scores": [
+        0.9813610911369324,
+        0.9847124814987183,
+        0.9741569757461548,
+        0.9746817350387573,
+        0.9560756683349609,
+        0.9684509634971619
+      ],
+      "mean_claim_score": 0.9732398192087809,
+      "text": "A bare perusal of rule 5(8) makes it apparent that for the purpose of the exemption from octroi, an industrial estate or area means the area which the Corporation may from time to time demarcate for the purpose of the rule as the area in which industries can be suitably located for the interest of industrialisation of the City. Therefore, the demarcation made under the Town Planning Act will not be a demarcation for the purpose of rule 5(8) and unless there is a demarcation as contemplated by rule 5(8) the appellants cannot claim exemption from octroi. The purpose of the Town Planning Act is to plan the town and to keep industrial areas away from the residential or commercial areas and that no industries could be set up in an area other than the industrial area declared in pursuance of the Act. The purpose of demarcation as industrial estate or area under rule 5(8) is for the giving of incentive and impetus to industries in a particular area. An analysis of the preamble to the new octroi Rules makes it clear that rule 62 B relating to octroi was repealed by implication. The promulgation of rule 5(8) as a part of an exhaustive set of new rules, has the effect of a repeal of rule 62 B by necessary implication, although not in express terms."
+    },
+    {
+      "doc_id": "4458",
+      "section": "judgement",
+      "n_claims": 5,
+      "claim_scores": [
+        0.9647246599197388,
+        0.9869526624679565,
+        0.9736575484275818,
+        0.9472889304161072,
+        0.9435694813728333
+      ],
+      "mean_claim_score": 0.9632386565208435,
+      "text": "The High Court repelled both the contentions and held that old rule 62B and the new rule 5(8) were repealed and that there was no legal flaw. It however took the view that despite the repeal of Rule 5(8) the appellant could still get the relief under rule 5(8) because if the proviso attached to the repealing rule the area in question was not demarcated as industrial estate or area for the purpose of rule 5(8) and that it was solely in the discretion of the Corporation to demarcate an area as industrial estate. It consequently dismissed the writ petitions. The considerations which have weighed with the Corporation for denying the benefit of exemption from octroi to the appellants cannot be said to be either irrelevant or extraneous. These are within the ambit of rule 5(8) of the octroi Rules."
+    },
+    {
+      "doc_id": "2077",
+      "section": "facts",
+      "n_claims": 6,
+      "claim_scores": [
+        0.9822657108306885,
+        0.984872043132782,
+        0.9698353409767151,
+        0.9821142554283142,
+        0.9834725856781006,
+        0.9785407185554504
+      ],
+      "mean_claim_score": 0.9801834424336752,
+      "text": "The second defendant sold property belonging to himself and his minor son the third defendant and also executed an indemnity bond in favour of the vendee agreeing to indemnify him for any loss that might be caused to him in case the sale of the third defendant's half share should later on be set aside. The vendee sold the property to the plaintiffs and assigned the indemnity bond in their favour and the plaintiffs took possession of the property. The third defendant, after attaining majority, sued for setting aside the sale in respect of his half share and for partition. The plaintiffs contested the suit but the third defendant's suit was decreed. He, however, did not dispossess the plaintiffs. Meanwhile, a creditor of the third defendant obtained a money decree against him and in execution thereof attached and brought to sale the third defendant's half share, and the brother-in-law of the plaintiffs purchased the property, but the plaintiffs continued in possession of the property."
+    },
+    {
+      "doc_id": "2077",
+      "section": "argument",
+      "n_claims": 2,
+      "claim_scores": [
+        0.9830273389816284,
+        0.9760581851005554
+      ],
+      "mean_claim_score": 0.9795427620410919,
+      "text": "The plaintiffs filed the suit for recovery of half the consideration paid by them, on the allegation that they sustained damage by the loss of one half of the property bought by them, and that they were entitled to recover damages from the second defendant. The suit was contested on the ground that the court sale in favour of the brothers-in-law of the plaintiffs was benami for the plaintiffs, and that as the plaintiffs never lost ownership or possession of the half share, they did not sustain any loss."
+    },
+    {
+      "doc_id": "2077",
+      "section": "analysis",
+      "n_claims": 3,
+      "claim_scores": [
+        0.9823394417762756,
+        0.9727405309677124,
+        0.9746809601783752
+      ],
+      "mean_claim_score": 0.9765869776407877,
+      "text": "The sale of the half share of the third defendant was not void ab initio but was only voidable. In such a case the indemnity bond becomes enforceable only if the vendee is dispossessed from the properties, because a breach of the covenant can only occur on the disturbance of the vendee's possession. So long as the vendee remains in possession, he suffers no loss and no suit can be brought for damages either on the basis of the indemnity bond or for the breach of a covenant of the warranty of title."
+    },
+    {
+      "doc_id": "2077",
+      "section": "judgement",
+      "n_claims": 1,
+      "claim_scores": [
+        0.985788881778717
+      ],
+      "mean_claim_score": 0.985788881778717,
+      "text": "The High Court was right in granting a decree to the plaintiffs only for the sum which was the actual loss sustained by them."
+    },
+    {
+      "doc_id": "6610",
+      "section": "facts",
+      "n_claims": 26,
+      "claim_scores": [
+        0.9841876029968262,
+        0.9853604435920715,
+        0.9811968207359314,
+        0.782959520816803,
+        0.9864603281021118,
+        0.9691663980484009,
+        0.9648687243461609,
+        0.9748793840408325,
+        0.9877969622612,
+        0.9862915873527527,
+        0.9885846972465515,
+        0.970061719417572,
+        0.9698305130004883,
+        0.9865652918815613,
+        0.9848942160606384,
+        0.9637252688407898,
+        0.8050334453582764,
+        0.9853149652481079,
+        0.9652340412139893,
+        0.9448519349098206,
+        0.945286750793457,
+        0.782959520816803,
+        0.970008373260498,
+        0.9060152173042297,
+        0.9654107093811035,
+        0.9730884432792664
+      ],
+      "mean_claim_score": 0.9503858800117786,
+      "text": "A settlement was arrived at on 22.2.1972 between the Rajasthan State Electricity Board and the Union representing its employees. In pursuance of this settlement, notification dated 22.3.1972 was issued revising the pay scales of various categories of posts, effective from 1st April, 1969. As per the settlement, Meter Reader/Meter Checker was mentioned under scale No. 3. On December 2, 1972 a Second Settlement was entered into between the parties with a view to removing certain ambiguities in the earlier settlement. In this second Settlement, notified on 6.12.1972, it was agreed to have two categories of Meter Readers, that is, Meter Reader I/Meter Checker I and Meter Reader II/Meter Checker II. This settlement was made effective w.e.f. 1.4.1968. Some employees appointed before 6.12.1972 challenged the notification dated 6.12.1972. The learned Single Judge of the High Court allowed the writ petitions and quashed the notification mainly on the ground that the Second Settlement could not have been made as no conciliation proceedings were pending before the second settlement. The Division Bench dismissed the appeal filed by the Board. Accordingly, the Board implemented the Judgment of the High Court and issued orders to provide scale No. 3 to all the Meter Readers appointed upto 6.12.1972. During this period, the State Electricity Board in exercise of the powers conferred by section 79, sub section (c) and (k) of the made regulations which are cared Rajasthan State Electricity Board Employees (Emoluments) Regulations, 1978. These Regulations were made applicable retrospectively from 1st April, 1974. Under these regulations, post of Meter Reader II/Meter Checker II was mentioned in scale No. 2. In 1979, an arbitration award was given between the Board and the union under which two categories of Meter Readers/Meter Checkers were again made. Subsequently, 35 employees appointed between the period 1972-79 filed the present writ petitions in the High Court. The stand taken by these employees was that the Notification dated 6.12.1972 had already been quashed by the High Court and as such they were to be governed by the First Settlement dated February 22, 1972 in which there was only one category of Meter Reader/Meter Checker to whom pay scale No. 3 had been given and as such they were also entitled to pay scale No. 3. The High Court allowed the writ petitions and granted pay scale No. 3 to all the petitioners. The Division Bench dismissed the special appeal of the Board. The Board has now come before this Court against such employees who were appointed after 1.4.1974."
+    },
+    {
+      "doc_id": "6610",
+      "section": "statute",
+      "n_claims": 2,
+      "claim_scores": [
+        0.9328724145889282,
+        0.12775936722755432
+      ],
+      "mean_claim_score": 0.5303158909082413,
+      "text": "The Rajasthan State Electricity Board (Emoluments) Regulation, 1978 made in exercise of the powers conferred by Sec. 79 Sub-sections (c) and (k) of the Electricity (Supply) Act, 1948."
+    },
+    {
+      "doc_id": "6610",
+      "section": "argument",
+      "n_claims": 7,
+      "claim_scores": [
+        0.9678732752799988,
+        0.945409893989563,
+        0.962096631526947,
+        0.9667165875434875,
+        0.782959520816803,
+        0.7032191157341003,
+        0.9701197743415833
+      ],
+      "mean_claim_score": 0.8997706856046405,
+      "text": "The contentions of the Board before this Court were that (i) even if for arguments ' sake the earlier decision given by the High Court may be considered as final, that was in respect of the employees who were appointed before 6th December, 1972; (ii) as regards the present employees no benefit could be granted in their case as the First Settlement itself was to remain in force upto 31st March, 1974; (iii) in any case in the appointment orders of the respondents it was clearly mentioned that they were appointed as Meter Reader/Meter Checkers Gr. II in the pay scale No. 2; and (iv) under the Rajasthan State Electricity Employees (Emoluments) Regulations 1978, which were made applicable from 1st April, 1974 Meter Reader II/Meter Checker II have been placed in pay scale No. 2 and Meter Reader I/Meter Checker I have been placed in pay scale No. 3. On behalf of the employees respondents it was contended that (i) though according to Clause IX of the First Settlement dated 22.2.1972 the settlement was to remain in force till 31st March, 1974 yet the same would remain in operation until the expiry of two months from the date on which a notice in writing of an intention to terminate the settlement was given by one of the parties to the other party or parties to the settlement as provided under sub section (2) of Section 19 of the Industrial Disputes Act, 1947; (ii) that an arbitration award was given in 1979 between the Board and the employees federation under which two categories of Meter Readers/Meter Checkers were again made and hence all the Meter Readers appointed upto 1979 before the arbitration award were entitled to scale No. 3, and (iii) the contention with regard to the first settlement having come to an end on March 31, 1974 as well as the contention raised on the basis of Regulations were rightly negatived by the Division Bench of the High Court as these points were not taken in the writ petitions and were not argued before the learned Single Judge."
+    },
+    {
+      "doc_id": "6610",
+      "section": "analysis",
+      "n_claims": 10,
+      "claim_scores": [
+        0.9525739550590515,
+        0.9585856795310974,
+        0.8917174339294434,
+        0.96864253282547,
+        0.9754330515861511,
+        0.9629819393157959,
+        0.9571841955184937,
+        0.8050334453582764,
+        0.9711245894432068,
+        0.7217938899993896
+      ],
+      "mean_claim_score": 0.9165070712566376,
+      "text": "The respondents/employees in the present case want to take advantage of the First Settlement simply on the ground that it did not make any mention of Meter Reader/Meter Checker Gr. I or II and it simply made mention of Meter Reader/Meter Checker to whom pay scale No. 3 was given. The above ambiguity was clarified by an agreement between the Board and the Union representing the employees as early as on 2.12.1972 itself to the effect that Meter Reader/Meter Checker could be placed in two different grades. After this there was no restriction on the Board to make appointment of the Meter Reader/Meter Checker in Grade II after 1.4.1974. There was clear mention in the appointment orders of the respondents that they were appointed as Meter Readers/Meter Checkers Gr. II in pay scales No. 2. Learned Counsel for the respondents/employees were unable to show that the Board had no power to make such appointments of the Meter Reader/Meter Checker in Gr. The Board had already taken the stand that the first settlement was clarified by the second settlement and as such even if the High Court had quashed the second settlement, it was at least a sufficient notice within the meaning of section 19(2) of the Industrial Disputes Act, 1947 that the Board had terminated the first settlement after 31.3.1974."
+    },
+    {
+      "doc_id": "6610",
+      "section": "judgement",
+      "n_claims": 2,
+      "claim_scores": [
+        0.5251238942146301,
+        0.029997285455465317
+      ],
+      "mean_claim_score": 0.2775605898350477,
+      "text": "The appeals were allowed, the judgment of the High Court was set aside, and all the writ petitions were dismissed. The parties were directed to bear their own costs."
+    },
+    {
+      "doc_id": "5925",
+      "section": "facts",
+      "n_claims": 11,
+      "claim_scores": [
+        0.9808773398399353,
+        0.9761437177658081,
+        0.9832866191864014,
+        0.9086570143699646,
+        0.9722554087638855,
+        0.9705716371536255,
+        0.8793488144874573,
+        0.9478975534439087,
+        0.967430830001831,
+        0.9898120760917664,
+        0.9810178279876709
+      ],
+      "mean_claim_score": 0.9597544399174777,
+      "text": "The four appellants along with seven other accused were tried under Sections 147, 148 and 302 read with 149 of the Indian Penal Code. The trial Court convicted the eight accused, including the four appellants, under section 302/149 I.P.C. and awarded life imprisonment. Appellants Nos. 1, 2 & 4 were also convicted under Section 147 I.P.C. and each awarded one years R.I. Appellant No. 3 was also convicted under Section 148 I.P.C. and awarded two years R.I. The remaining three accused were acquitted by the Trial Court for want of corroboration. On appeal by the eight convicted persons the High Court upheld the conviction of only four appellants on all the counts and allowed the appeal of the other four co-accused for want of corroboration."
+    },
+    {
+      "doc_id": "5925",
+      "section": "statute",
+      "n_claims": 4,
+      "claim_scores": [
+        0.9728411436080933,
+        0.9891043901443481,
+        0.9608879089355469,
+        0.9517756700515747
+      ],
+      "mean_claim_score": 0.9686522781848907,
+      "text": "Section 149 creates a specific and distinct offence. It imposes constructive or vicarious criminal liability of the members of the unlawful assembly for the unlawful acts committed pursuant to the common object by any other member of the assembly. The two essentials of the section are the commission of an offence by any member of an unlawful assembly and that such offence must have been committed in prosecution of the common object of that assembly or must be such as the members of that assembly knew to be likely to be committed. The common object of the assembly must be one of the five objects mentioned in section 141 of the Indian Penal Code."
+    },
+    {
+      "doc_id": "5925",
+      "section": "argument",
+      "n_claims": 4,
+      "claim_scores": [
+        0.9672920107841492,
+        0.9796341061592102,
+        0.9763518571853638,
+        0.97405606508255
+      ],
+      "mean_claim_score": 0.9743335098028183,
+      "text": "In this appeal by special leave it was contended that appellants No. 3 and 4 should also be acquitted for want of corroboration as the Trial Court has acquitted three accused and the High Court, on appeal, has further acquitted four accused for want of corroboration. The appeal was contested on behalf of the State contending that in case of conviction under section 302 read with section 149 of the I.P.C. corroboration in case of individual accused was not necessary and there was enough corroboration on record to prove that the accused were members of the unlawful assembly at the time of commission of offence."
+    },
+    {
+      "doc_id": "5925",
+      "section": "analysis",
+      "n_claims": 9,
+      "claim_scores": [
+        0.9671937823295593,
+        0.9765672087669373,
+        0.9673606157302856,
+        0.9631288647651672,
+        0.9416326880455017,
+        0.9912817478179932,
+        0.9870703816413879,
+        0.9835652709007263,
+        0.9848734140396118
+      ],
+      "mean_claim_score": 0.9736304415596856,
+      "text": "It is not necessary that all persons forming an unlawful assembly must do some overt acts. The section makes a member of the unlawful assembly responsible as a principal for the acts of each, and all, merely because he is a member of an unlawful assembly. While overt acts and active participation may indicate common intention of the persons perpetrating the crime, the mere presence in the unlawful assembly may fasten vicarious criminal liability under the section. The basis of the constructive guilt under section 149 is mere membership of the unlawful assembly, with requisite common object or knowledge. In an appeal by the persons convicted under section 302 with the aid of section 149 I.P.C. the question whether a particular person was a member of the unlawful assembly at the relevant time may be examined; and if it is found from the evidence on record that he was not a member of the unlawful assembly, he could not be convicted with the aid of section 149. But once the Court holds that certain accused persons formed an unlawful assembly and an offence is committed by any member of that assembly in prosecution of the common object of that assembly or such as the members of the assembly knew to be likely to be committed in prosecution of that object, every person who at the time of committing that offence was a member of the same assembly is to be held guilty of that offence. After such a finding it is not open to the Court to see as to who actually did the offensive act. The prosecution is not obliged to prove which specific overt act was done by which of the accused."
+    },
+    {
+      "doc_id": "5925",
+      "section": "judgement",
+      "n_claims": 9,
+      "claim_scores": [
+        0.9607493281364441,
+        0.976936399936676,
+        0.9695797562599182,
+        0.9785544276237488,
+        0.9507251381874084,
+        0.9820905327796936,
+        0.9734119176864624,
+        0.921789288520813,
+        0.9813699722290039
+      ],
+      "mean_claim_score": 0.9661340845955743,
+      "text": "From the evidence on record it has been satisfactorily established that appellants No. 3 and 4 were members of the unlawful assembly at the relevant time. Both the Courts below have held them to have been members of the unlawful assembly. The fact that they were not active participants and whether any specific injury could individually be attributed to them or not are not at all material. In the instant case the High Court having held that the appellants formed an unlawful assembly carrying dangerous weapons with the common object of resorting to violence and committed an offence punishable with the aid of Section 149 I.P.C. erred in acquitting some of the members on the ground that they themselves did not perform any violent act or that there was no corroboration of their participation. Doing so would amount to forgetting the very nature and essence of the offence created by Section 149. The Court in undeserving cases cannot afford to be charitable in the administration of criminal justice which is so vital for peace and order in the society. Dismissing the appeal."
+    },
+    {
+      "doc_id": "442",
+      "section": "facts",
+      "n_claims": 8,
+      "claim_scores": [
+        0.9841087460517883,
+        0.9855742454528809,
+        0.9885579347610474,
+        0.9663623571395874,
+        0.9911591410636902,
+        0.9854316115379333,
+        0.9762594699859619,
+        0.9355999827384949
+      ],
+      "mean_claim_score": 0.976631686091423,
+      "text": "The appellant company could not work its Mills to full capacity owing to short supply of sugar cane and got the permission of the Government to sell its machinery but continued crushing cane under a lease from the purchaser. The workmen's Union in order to frustrate the transaction resolved to go on strike and communicated its resolution to the company. There was correspondence between the parties in course of which the company offered to pay to the workmen 25 per cent. of the profits of the sale on condition that the strike notice must immediately be withdrawn. The workmen did not fulfill the condition and made certain counter proposals. The company insisted that the condition must first be fulfilled before the counter proposals could be considered and renewed its offer. Although the workmen did not actually go on strike, they did not withdraw the strike notice, and did not cooperate with the management in the dismantling and delivery of the machinery to the purchaser, with the result that the company lost heavily. On the expiry of the lease and closure of the industry, the services of the workmen were duly terminated by the company on March 21, 1951."
+    },
+    {
+      "doc_id": "442",
+      "section": "statute",
+      "n_claims": 2,
+      "claim_scores": [
+        0.9608045816421509,
+        0.9756947755813599
+      ],
+      "mean_claim_score": 0.9682496786117554,
+      "text": "The definition of an industrial dispute contained in section 2(k) of the Industrial Disputes Act XIV of 1947 and adopted by the U.P. Industrial Disputes Act XXVIII of 1947 contemplated the existence of an industry and a subsisting relationship of employer and employee between the parties."
+    },
+    {
+      "doc_id": "442",
+      "section": "argument",
+      "n_claims": 1,
+      "claim_scores": [
+        0.9858033657073975
+      ],
+      "mean_claim_score": 0.9858033657073975,
+      "text": "It was contended on behalf of the appellant company that the notification was ultra vires, and the reference and the award void in consequence and that there having been no concluded agreement between the parties, it was not bound to pay."
+    },
+    {
+      "doc_id": "442",
+      "section": "analysis",
+      "n_claims": 3,
+      "claim_scores": [
+        0.9800541400909424,
+        0.9820134043693542,
+        0.9857954978942871
+      ],
+      "mean_claim_score": 0.9826210141181946,
+      "text": "Section 3 of the U.P. Industrial Disputes Act of 1947 only required that there must be an industrial dispute before the Government could make a reference under that section and, consequently, in the instant case where the claim in dispute had arisen, if at all, prior to the closing of the industry, the Government was fully competent to issue the notification. In the instant case, however, as the findings of the Tribunal were inconsistent and conflicting, the court examined the correspondence and held that it did not establish that there was a concluded agreement between the parties whereby the workmen could be entitled to any share of the profits and, consequently, the award made by the Labour Appellate Tribunal must be set aside."
+    },
+    {
+      "doc_id": "442",
+      "section": "judgement",
+      "n_claims": 1,
+      "claim_scores": [
+        0.9744744300842285
+      ],
+      "mean_claim_score": 0.9744744300842285,
+      "text": "Nor was the award sustainable as one for compensation for termination of the services of workmen on closure of the industry as such discharge was different from discharge on retrenchment, which implied the continuance of the industry and discharge only of the surplusage, and the workmen were not entitled either under the law as it stood on the day of their discharge or even on merits to any compensation."
+    },
+    {
+      "doc_id": "5072",
+      "section": "facts",
+      "n_claims": 4,
+      "claim_scores": [
+        0.9647737145423889,
+        0.02455059252679348,
+        0.393744558095932,
+        0.974663257598877
+      ],
+      "mean_claim_score": 0.5894330306909978,
+      "text": "The petitioner, an association of dealers engaged in the business of selling dry fruit in North India, who purchase dry fruits either locally or through imports from outside India, challenged the grant of additional licences to the respondents diamond exporters. The respondents diamond exporters had applied for the grant of Export House Certificates under the Import Policy 1978-79 and had been denied the Certificates on the erroneous ground that they had not diversified their exports. The respondents commenced the import of acrylic ester monomers, which was challenged by an Indian company manufacturing acrylic ester monomers. The petitioners contend that the principle which was applied to the import of acrylic ester monomers extends likewise to the import of all other commodities under Additional Licences granted to diamond exporters in similar circumstances."
+    },
+    {
+      "doc_id": "5072",
+      "section": "statute",
+      "n_claims": 2,
+      "claim_scores": [
+        0.9730048775672913,
+        0.9363471865653992
+      ],
+      "mean_claim_score": 0.9546760320663452,
+      "text": "Under Article 32 of the Constitution of India. Import Policy 1978-79 and Import Policy 1985-88."
+    },
+    {
+      "doc_id": "5072",
+      "section": "argument",
+      "n_claims": 2,
+      "claim_scores": [
+        0.9653042554855347,
+        0.8442561030387878
+      ],
+      "mean_claim_score": 0.9047801792621613,
+      "text": "On behalf of the petitioners, it was contended: (i) that the goods sought to be imported on the Additional Licences included those which were prohibited by the prevalent Import Policy; (ii) that the diamond exporters are not entitled to import dry fruit; and (iii) that the import of dry fruit is covered by item 121 in Appendix 2 Part B (List of Restricted Items) of the Import Policy 1985-88 and, therefore, the respondents are not entitled to resort to Item 1 of Appendix 6. On behalf of the respondents, it was contended: (i) that paragraph 176 of the Import Policy 1978-79 envisages the grant of Additional Licences for the import of raw materials which have been placed on Open General Licence for Actual Users (Industrial); (ii) that they import the dry fruits as raw material for the purpose of selling to eligible Industrial Actual Users for processing for manufacturing into a variety of products under Item 1 of Appendix 6 of the Import Policy 1985-86; (iii) that item 121 of Appendix 2 Part B (List of Restricted Items) is not attracted because it refers to 'consumer goods', and consumer goods are not raw material for the purposes of item 1 of Appendix 6; and (iv) that the petition under Article 32 is not maintainable because the petitioners' fundamental rights are not violated."
+    },
+    {
+      "doc_id": "5072",
+      "section": "analysis",
+      "n_claims": 10,
+      "claim_scores": [
+        0.9777997732162476,
+        0.9371986389160156,
+        0.9528926014900208,
+        0.9819363951683044,
+        0.9870671629905701,
+        0.9429941177368164,
+        0.9279876351356506,
+        0.9415547847747803,
+        0.965731680393219,
+        0.9703536033630371
+      ],
+      "mean_claim_score": 0.9585516393184662,
+      "text": "Under the Import Policy 1978-79, dry fruits (excluding cashewnuts) could be imported by all persons for whatever purpose under the Open General Licence. No Additional Licence was required. The position in regard to the import of dry fruits (excluding cashewnuts) is simple and suffers from no complexity. Dry fruits (excluding cashewnuts) could be imported by all persons under Open General Licence under the Import Policy 1978-79. But under the Import Policy 1985-88 dry fruits (excluding cashewnuts and dates) are no longer open to import under Open General Licence. The diamond exporters cannot be regarded as dealers engaged in the trade of stocking and selling dry fruits (excluding cashewnuts and dates). Dry fruits must be regarded as consumer goods of agricultural origin. The words 'agricultural origin' are used in the broadest sense. The expression 'specifically banned' occurring in the order dated April 18, 1985 of this Court determines the range of the items open to import by diamond exporters holding Additional Licences. The present Appendix 2 Part A and Appendix 2 Part B constitute together what was originally List 4 (List of Absolutely Banned Items) under the Import Policy 1978-79."
+    },
+    {
+      "doc_id": "5072",
+      "section": "judgement",
+      "n_claims": 7,
+      "claim_scores": [
+        0.9233126044273376,
+        0.8359271287918091,
+        0.8999292850494385,
+        0.9857014417648315,
+        0.9853473901748657,
+        0.9848426580429077,
+        0.959296464920044
+      ],
+      "mean_claim_score": 0.9391938533101764,
+      "text": "The Writ Petition and the Appeal are allowed. Respondents Nos. 10 and 11 are restrained from importing dry fruits during the period 1985-88 under the Additional Licences granted to them under the Import Policy 1978-79. The diamond exporters are not entitled to take advantage of item 121 of Appendix 2 Part B for the purpose of importing dry fruits. The holders of Additional Licences are entitled to import only those goods which are included in Appendix 6 Part 2 List 8 of the Import Policy 1985-88. Dry fruits are not included in that List and, therefore, they cannot be imported under Additional Licences. An interim order cannot defeat the fundamental rights of the petitioners merely because it has not been questioned by the Customs Authorities or the Import Control Authorities."
+    },
+    {
+      "doc_id": "743",
+      "section": "facts",
+      "n_claims": 3,
+      "claim_scores": [
+        0.9538437128067017,
+        0.9742060899734497,
+        0.9861381649971008
+      ],
+      "mean_claim_score": 0.9713959892590841,
+      "text": "Initially the appellant was a 100% subsidiary of the British company, Crompton Parkinson Ltd. In 1947 an agreement called \"Technical Aid Agreement\" was concluded between the two companies under which the appellant agreed to pay to the parent company 5% of the net value of its sales every year as service fee for the use of their patterns, valuable designs, technical aid, benefit of research and ancillary services and facilities. As the appellant obtained the benefit of the parent company's technical knowledge and research it did not maintain a separate research establishment on which it would otherwise have had to spend far more than the service fee it paid."
+    },
+    {
+      "doc_id": "743",
+      "section": "argument",
+      "n_claims": 1,
+      "claim_scores": [
+        0.9829133152961731
+      ],
+      "mean_claim_score": 0.9829133152961731,
+      "text": "In the claim for bonus by the workmen, the Tribunal, in calculating the gross profits, pruned down the allowable expenditure on account of the service fee to one fourth on the grounds that the amount of service fee paid was excessive and beyond the requirements of commercial necessity and that a large part of the payment was in the nature of capital expenditure."
+    },
+    {
+      "doc_id": "743",
+      "section": "analysis",
+      "n_claims": 2,
+      "claim_scores": [
+        0.9825640320777893,
+        0.9823660254478455
+      ],
+      "mean_claim_score": 0.9824650287628174,
+      "text": "The agreement had received the approval of the Government; the income tax authorities had, every year, allowed the service fee as legitimate expenditure; and the remittances to the parent company had been sanctioned by the Reserve Bank of India. In calculating the available surplus the Tribunal deducted as a first charge 4 1/2 months basic wages as bonus before deducting depreciation and income tax contrary to the terms of the Full Bench formula."
+    },
+    {
+      "doc_id": "743",
+      "section": "judgement",
+      "n_claims": 5,
+      "claim_scores": [
+        0.9764717221260071,
+        0.9740185141563416,
+        0.981391966342926,
+        0.9511142373085022,
+        0.934425950050354
+      ],
+      "mean_claim_score": 0.9634844779968261,
+      "text": "Held, that the entire amount of service fee paid ought to have been allowed as proper expenditure. Unless it was definitely found that a purported expenditure was sham or had been made with the express object of minimising the profits with a view to deprive the workmen of their bonus, the Tribunal could not substitute its own judgment as to what was or was not commercially justified in place of that of the appellant and its directors. The service fee was a genuine expenditure and represented a binding contractual obligation which could legally be enforced against the appellant and a breach thereof may have had serious consequences affecting its business. Held further, that the Tribunal acted wrongly in deducting bonus as a prior charge even before the recognised items of prior charges. Such departures from the Full Bench Formula by Tribunals were to be deprecated."
+    },
+    {
+      "doc_id": "890",
+      "section": "facts",
+      "n_claims": 3,
+      "claim_scores": [
+        0.9436269998550415,
+        0.9702680706977844,
+        0.9839425086975098
+      ],
+      "mean_claim_score": 0.9659458597501119,
+      "text": "The Madhya Pradesh Government issued a notification under section 5(2) of the Minimum Wages Act, 1948, prescribing the minimum rates of wages for employment in stone breaking and stone crushing operations carried on in mines. The appellant company, engaged in the manganese mining industry, challenged the validity of the said notification by a writ petition filed in the High Court. The High Court found against the appellant and rejected the petition."
+    },
+    {
+      "doc_id": "890",
+      "section": "statute",
+      "n_claims": 1,
+      "claim_scores": [
+        0.9682095050811768
+      ],
+      "mean_claim_score": 0.9682095050811768,
+      "text": "The notification was issued under section 5(2) of the Minimum Wages Act, 1948, and the authority was delegated by the President by a notification under article 258 of the Constitution."
+    },
+    {
+      "doc_id": "890",
+      "section": "argument",
+      "n_claims": 2,
+      "claim_scores": [
+        0.9896841049194336,
+        0.9493931531906128
+      ],
+      "mean_claim_score": 0.9695386290550232,
+      "text": "The appellant's case was that the notification was ultra vires section 5(2) of the Act. The question for determination in the appeal was whether item 8 in Part I of the Schedule to the Act, properly construed, included stone breaking and stone crushing operations in a mining industry."
+    },
+    {
+      "doc_id": "890",
+      "section": "analysis",
+      "n_claims": 1,
+      "claim_scores": [
+        0.9668630361557007
+      ],
+      "mean_claim_score": 0.9668630361557007,
+      "text": "Item 8 in Part I of the Schedule to the Act was not intended to cover the breaking or crushing of stones incidental to mining operations and must be limited to stone breaking and stone crushing employment in quarries."
+    },
+    {
+      "doc_id": "890",
+      "section": "judgement",
+      "n_claims": 3,
+      "claim_scores": [
+        0.9809839725494385,
+        0.9822814464569092,
+        0.9835759997367859
+      ],
+      "mean_claim_score": 0.9822804729143778,
+      "text": "The impugned notification was, therefore, ultra vires section 5(2) of the Act and could not be enforced. It would, however, be open to the Government, if it so desired, to achieve the object it had in view in issuing the impugned notification by adding appropriate items to the Schedule in exercise of its power under section 27 of the Act. It was not necessary for the appellant to challenge the vires of the Presidential notification in the first instance in order to impugn the notification in question."
+    },
+    {
+      "doc_id": "5933",
+      "section": "facts",
+      "n_claims": 4,
+      "claim_scores": [
+        0.970125138759613,
+        0.19756166636943817,
+        0.9693781733512878,
+        0.961954653263092
+      ],
+      "mean_claim_score": 0.7747549079358578,
+      "text": "The respondents are oil millers and traders who carry on business in the sale and purchase of groundnut seed and groundnut seed oil which is edible. The State Government issued a Circular Order dated 21.6.1985 containing directions regulating the transport and export of groundnut seeds and oil outside the State. The oil millers and traders were permitted to export oil and groundnut seeds only on the condition that they deliver oil to the State Government at a fixed price in proportion of one tonne of oil for every three tonnes to be transported outside the State. The respondents challenged the validity of the Order of the State Government by means of writ petitions before the Andhra Pradesh High Court."
+    },
+    {
+      "doc_id": "5933",
+      "section": "statute",
+      "n_claims": 4,
+      "claim_scores": [
+        0.17428483068943024,
+        0.9886074662208557,
+        0.9388554692268372,
+        0.9697467684745789
+      ],
+      "mean_claim_score": 0.7678736336529255,
+      "text": "The Essential Commodities Act, 1955 is a Central Enactment providing for the control of the production, supply and distribution, trade and commerce in certain specified essential commodities. Section 3 of the Act confers power on the Central Government to provide for regulating or prohibiting the production, supply and distribution thereof and trade and commerce therein. The Central Government issued the Notification No. GSR 800 dated June 9, 1978 delegating its powers under section 3(1) of the Act to the State Governments to make orders in respect of the matters specified in the various sub clauses of sub section (2) of section 3 in relation to foodstuffs subject to certain conditions specified therein."
+    },
+    {
+      "doc_id": "5933",
+      "section": "argument",
+      "n_claims": 1,
+      "claim_scores": [
+        0.9580832123756409
+      ],
+      "mean_claim_score": 0.9580832123756409,
+      "text": "It was contended on behalf of the appellants that the directions contained in the Government Order dated 21st June, 1985 were issued by the State Government in exercise of its powers under clause 12(2) of the Andhra Pradesh Scheduled Commodities Dealers (Licensing and Distribution) Order, 1982 which had been made by the State Government with the prior concurrence of the Central Government in exercise of powers conferred by section 3 of the Act and that the directions were legal and valid."
+    },
+    {
+      "doc_id": "5933",
+      "section": "analysis",
+      "n_claims": 4,
+      "claim_scores": [
+        0.9718446135520935,
+        0.9839248657226562,
+        0.9798110127449036,
+        0.9889401793479919
+      ],
+      "mean_claim_score": 0.9811301678419113,
+      "text": "The 1982 Order which was framed by the State Government in exercise of the delegated powers does not contain any provision placing any restriction on the transport or movement of edible oil or oil seeds nor it provides for imposition of compulsory levy further it does not fix any price. The directions issued by the State Government by its Circular Order dated June 21, 1985 placing restrictions on the movement of oil seeds and oil and imposing compulsory levy and requiring millers and traders to sell oil seeds and oil at a price fixed by it, are outside the purview of 1982 Order. The State Government's directions requiring the millers and traders to sell groundnut oil to the State Government is a matter directly specified within the terms of section 3(2)(f) of the Act. The State Government had no authority to place any such restriction without the prior concurrence of the Central Government."
+    },
+    {
+      "doc_id": "5933",
+      "section": "judgement",
+      "n_claims": 4,
+      "claim_scores": [
+        0.9380382895469666,
+        0.9439349174499512,
+        0.9722672700881958,
+        0.021628214046359062
+      ],
+      "mean_claim_score": 0.7189671727828681,
+      "text": "The High Court has rightly struck down the directions issued by the State Government. The directions contained in the Government Circular Order dated June 21, 1985 are illegal and void as the same have been issued in exercise of and in contravention of the power delegated to the State Government under the Notification No. GSR 800 dated June 9, 1978. The appeals are dismissed with costs."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "doc_id": "1367",
+  "il_tur_doc_tokens": 2905,
+  "il_tur_summ_tokens": 374,
+  "prompt_token_count": 4151,
+  "candidates_token_count": 463,
+  "elapsed_s": 14.3,
+  "parse_ok": true,
+  "sections": {
+    "facts": "Under a scheme for taking over certain stage carriage services to the complete exclusion of private operators, which was approved and notified by the State of Mysore under Chapter IV A of the Motor Vehicles Act, it was provided, inter alia: \"The State Transport Undertaking will operate services to the complete exclusion of other persons (i) on all the notified inter district routes except in regard to the portions of inter district routes Lying outside the limits of Mysore District, and also (ii) over the entire length of each of the inter district routes Lying within the limits of Mysore District.\" The appellants were running stage carriage omnibuses on certain routes, some of which were inter district and inter State.",
+    "statute": "Chapter IV A of the Motor Vehicles Act.",
+    "argument": "The appellants challenged the validity of the scheme on the ground, inter alia, that between the routes which were taken over and some of the inter district and inter State routes which were left to the private operators, there was an overlap in the Mysore District, and that those routes which were not taken over, including the portion of the route lying within the Mysore District, should not be affected by the scheme, because \"route\" meant a notional line running between two termini and following a distinct course.",
+    "analysis": "The scheme of the Act is that the word \"route\" means not only the notional line but also the actual road over which the omnibuses run. Under the Act, the route or area stands for the road on which the omnibuses run or portions thereof. (Kondala Rao v. Andhra Pradesh State Road Transport Corporation relied on; Kelani Valley Motor Transit Co., Ltd. v. Colombo Ratnapura Omnibus Co., Ltd. explained and distinguished).",
+    "judgement": "In the present case, in view of the fact that the scheme reserved all the routes within the Mysore District to the State Transport Undertaking, the private operators would not be able to ply their omnibuses on that sector, and even those routes which were inter district open to them would stand pro tanto cut down to only that portion which lay outside the Mysore District. (Nilkanth Prasad v. The State of Bihar followed)."
+  }
+}

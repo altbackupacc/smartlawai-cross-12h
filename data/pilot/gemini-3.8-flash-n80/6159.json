@@ -1,0 +1,16 @@
+{
+  "doc_id": "6159",
+  "il_tur_doc_tokens": 1887,
+  "il_tur_summ_tokens": 597,
+  "prompt_token_count": 3295,
+  "candidates_token_count": 672,
+  "elapsed_s": 9.1,
+  "parse_ok": true,
+  "sections": {
+    "facts": "Two Writ Petitions were filed by the widows of pensioners, Smt. Bhagwanti and Smt. Sharda Swamy, upon being refused family pension after the demise of their husbands. Smt. Bhagwanti is the widow of an Ex-Subedar of the Indian Army who retired after serving for 18 years on August 3, 1947, and received a pension. His wife died in 1955, and in 1965 he married the petitioner. He died in September 1985 in an accident. Smt. Bhagwanti, having two minor children, applied for family pension but was not granted the same. Smt. Sharda Swamy is the wife of a retired railway employee who took voluntary retirement at age 44 in November 1979. She married him in 1981, had a daughter born in 1984, and her husband died in 1986. Her application for family pension was rejected by a letter dated August 3, 1988, stating that it was not possible to include the wife of a Government Servant who married after retirement in the definition of 'family' for the grant of family pension.",
+    "statute": "Rule 54(14)(b) of the Central Civil Services (Pension) Rules, 1972; Article 14 of the Constitution of India.",
+    "argument": "In the counter affidavits filed on behalf of the Union, the stand taken in the first case was that pension was refused because the marriage took place after retirement, and in the other case the Union relied on the definition of 'family' occurring in Rule 54(14)(b) of the Central Civil Services (Pension) Rules, 1972, which speaks of marriage before retirement. The common stand taken by the Union was that family pension would not be admissible to spouses who marry after the retirement of the Government servant, nor to children born after retirement.",
+    "analysis": "Pension is payable on the consideration of past service rendered by the Government servant, and the payability of family pension is basically on the self-same consideration. Since pension is linked with past service and the avowed purpose of the Pension Rules is to provide sustenance in old age, the distinction between marriage during service and marriage after retirement appears arbitrary. In most cases, marriage after retirement is done to provide protection, secure companionship, and secure support in old age. The considerations upon which pension proper is admissible or the benefit of family pension is extended do not justify the distinction envisaged in the definition of 'family' by keeping the post-retiral spouse out of it. The two limitations incorporated in the definition of 'family' suffer from the vice of arbitrariness and discrimination and cannot be supported by nexus or reasonable classification.",
+    "judgement": "Allowing the Writ Petitions, the Court held that the words 'provided the marriage took place before retirement of the Government servant' in clause (i) and 'but shall not include son or daughter born after retirement' in clause (ii) are ultra vires Article 14 of the Constitution and cannot be sustained."
+  }
+}

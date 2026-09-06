@@ -1,0 +1,16 @@
+{
+  "doc_id": "847",
+  "il_tur_doc_tokens": 1960,
+  "il_tur_summ_tokens": 290,
+  "prompt_token_count": 3243,
+  "candidates_token_count": 508,
+  "elapsed_s": 15.8,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The respondent had made an application under section 153 C of the Companies Act, 1913, with an alternative prayer for winding up against the appellant company, to the District Judge, Poona, who had been authorised under the Act to exercise jurisdiction. While the application was pending, the Companies Act, 1913, was repealed by the Companies Act, 1956.",
+    "statute": "Section 153 C of the Companies Act, 1913; Sections 10, 397 to 407, 647, and 658 of the Companies Act, 1956; Sections 6 and 24 of the General Clauses Act.",
+    "argument": "The appellant company applied to the District Judge to dismiss the application on the ground that the court had ceased to have any jurisdiction to deal with the application upon the repeal of the Act of 1913.",
+    "analysis": "Section 647 of the Companies Act, 1956 did not indicate any intention to affect the rights under the Indian Companies Act of 1913, for section 658 of the Act of 1956 made section 6 of the General Clauses Act applicable notwithstanding anything contained in section 647 of that Act. Furthermore, section 24 of the General Clauses Act does not put an end to any notification; it does not therefore cancel the notification issued under the Indian Companies Act of 1913 insofar as that notification empowered the District Judge to exercise jurisdiction under section 153 C of the Indian Companies Act of 1913, even though under section 10 of the Act of 1956, a District Judge can no longer be empowered to exercise jurisdiction under sections 397 to 407 (which correspond to section 153 C) or in respect of the winding up of a company having a paid-up share capital of not less than Rs. 1,00,000, which the appellant company was.",
+    "judgement": "Held, that section 6 of the General Clauses Act preserved the jurisdiction of the District Judge to deal with the application under section 153 C of the Indian Companies Act of 1913, notwithstanding the repeal of that Act."
+  }
+}
