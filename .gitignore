@@ -27,3 +27,6 @@ data/ocr_wer_gold/pages/
 # regenerable via data/pilot/download_ocr_source_pdfs*.py, large binary data.
 data/pilot/ocr_raw_pdfs/
 data/pilot/ocr_raw_pdfs_hc/
+# Generated review pages -- regenerable via data/build_human_validation_reviewer.py
+# from the committed rater{N}_sample.csv files; ~1.2MB each, no need to track.
+data/human_validation/rater*_review.html

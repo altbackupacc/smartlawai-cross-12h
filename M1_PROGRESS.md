@@ -551,9 +551,36 @@ human-only work, not something this session can do. Once both
 and write the resulting numbers into `data/PROVENANCE.md` §7, per T4 —
 reported plainly regardless of what they turn out to be.
 
+**Follow-up this session**: the raw CSV proved unreadable in Excel (two long
+free-text columns overflow with no wrapping across 200 rows). Built
+`data/build_human_validation_reviewer.py`: takes a rater CSV, generates a
+single self-contained offline HTML page (`rater{N}_review.html`) — no
+server, no new Python dependency, no data leaves the machine. One item at a
+time, clearly labeled Source/Generated blocks, three big verdict buttons
+(also bound to keys A/S/D), autosaves every answer to the browser's
+`localStorage` (survives closing the tab/restarting the machine — resuming
+just means reopening the same file), and an Export-CSV button that writes
+back the **exact same column schema** `score_human_validation.py` already
+expects, so nothing downstream changes.
+
+Tested end-to-end via a temporary local HTTP server + this session's browser
+tool (real `file://` access isn't permitted by that tool, so the page was
+served over `localhost` instead — equivalent for testing, since the app
+itself is 100% static/offline either way): rendering, click-to-mark,
+auto-advance, and `localStorage` persistence across a full page reload all
+verified working. One misleading result during testing — simulated keyboard
+events (Right arrow, then 's') appeared to mark the wrong item — was
+isolated by calling the underlying JS functions (`go()`, `setVerdict()`)
+directly in the console, which behaved perfectly; concluded it was a
+synthetic-event timing artifact of the remote browser-automation tool
+itself, not a bug a real user's keypresses would hit. CSV-export escaping
+was verified byte-for-byte against what Python's `csv.QUOTE_ALL` would
+produce (every field quoted, internal quotes doubled) — safe to round-trip
+through `score_human_validation.py` unchanged. `ruff check` clean.
+
 ---
 
-## 11. Git / PR status
+## 12. Git / PR status
 
 Branch: `m1-data-foundation`. The original PR
 [kramjiy/smartlawai#5](https://github.com/kramjiy/smartlawai/pull/5) was
