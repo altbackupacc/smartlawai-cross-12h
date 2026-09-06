@@ -505,7 +505,55 @@ against the hard-fail path.
 
 ---
 
-## 10. Git / PR status
+## 10. 200-item human validation pass: sampling + scoring tooling built
+
+Built the tooling for `RESEARCH.md` T4's other required human check —
+distinct from §9's OCR-WER work: this validates whether HHEM's automated
+accept/reject filter (§5-6) agrees with a human reader, not OCR quality.
+
+**`data/sample_human_validation.py`**: samples 200 items from
+`data/processed/section_pairs_scored.jsonl` (the pre-dedup, all-31,621-pairs
+file — the only one with both accepted *and* rejected pairs; the frozen
+`section_pairs.jsonl` only carries accepted ones). Deliberately **100
+accepted + 100 rejected**, not proportional to the corpus's real 96.5%/3.5%
+split — proportional sampling would yield only ~7 rejected items, far too
+few to say anything about the filter's false-reject behavior. Excludes any
+pair whose source document was dropped as a near-duplicate (cross-referenced
+against `data/processed/near_duplicate_pairs.json`), so the validation
+sample matches documents that actually survived into the real corpus.
+Writes blind rater CSVs (`data/human_validation/rater{N}_sample.csv` — no
+HHEM verdict shown, to avoid anchoring a rater's judgment) plus a
+`answer_key.json` kept separately for scoring. `--num-raters` controls how
+many independent copies to generate (2, matching `RESEARCH.md` §7.4's
+"silver validation... 2 raters", by default in this session's test run).
+
+**`data/score_human_validation.py`**: takes one or more filled-in rater
+CSVs, reports each rater's agreement rate + confusion matrix against HHEM's
+verdict (binarizing Accept vs. Revise/Reject — a section a human would
+still edit isn't one that should enter training data unedited), and with
+2+ raters, pairwise Cohen's κ on the original 3-way verdicts (not the
+binarized version, per `RESEARCH.md` §7.5's agreement-reporting mandate).
+
+Verified end-to-end with simulated verdicts (deliberately noisy, ~10-15%
+random disagreement, to exercise the agreement math and hard-fail paths —
+not real data): confusion matrix and agreement-rate arithmetic checked by
+hand, Cohen's κ computed correctly, and both hard-fails (blank verdict,
+invalid verdict string) trigger correctly with a clear message. Fresh
+**blank** CSVs (`rater1_sample.csv`, `rater2_sample.csv`, 200 rows each,
+same seed=42 sample) were regenerated after that test and are what's
+actually sitting in `data/human_validation/` now, ready for real raters.
+`ruff check` clean.
+
+**What's left**: the actual annotation (two people reading 200
+source/generated-text pairs each and marking Accept/Revise/Reject) is
+human-only work, not something this session can do. Once both
+`rater{N}_sample.csv` files are filled in, run `data/score_human_validation.py`
+and write the resulting numbers into `data/PROVENANCE.md` §7, per T4 —
+reported plainly regardless of what they turn out to be.
+
+---
+
+## 11. Git / PR status
 
 Branch: `m1-data-foundation`. The original PR
 [kramjiy/smartlawai#5](https://github.com/kramjiy/smartlawai/pull/5) was
