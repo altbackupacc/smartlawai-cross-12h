@@ -363,9 +363,79 @@ GCS bucket `smartlawai-1-m1-pilot`, this session's Vertex Custom Jobs
 
 ---
 
-## 8. Git / PR status
+## 8. Dedup, split, pretokenize, OCR-WER harness — COMPLETE (freeze point reached)
 
-Branch: `m1-data-foundation`. PR: [kramjiy/smartlawai#5](https://github.com/kramjiy/smartlawai/pull/5)
-(open, updated with the research-positioning upgrade + initial GCP/pilot
-commits — the production run and full-corpus filtering results are not yet
-committed as of this log entry).
+All CPU-only, local, no GCP/GPU involved. Full detail and final numbers are
+in `data/PROVENANCE.md` §6-8; summarized here.
+
+**`data/dedup_split.py`**: MinHash near-duplicate detection (word 5-grams,
+`num_perm=128`, LSH threshold 0.9) over `summ`'s full judgment text, header/
+citation-line noise stripped first. Found **29 near-duplicate pairs** (all
+exact-content duplicates, jaccard=1.0) across 7,130 documents; dropped 29.
+Split the surviving 7,101 docs 80/10/10 with seed 42 →
+**train=5,681 / dev=710 / test=710 documents**. Joined the HHEM-accepted
+pairs against this frozen split → `data/processed/section_pairs.jsonl`:
+**train=24,346 / dev=3,015 / test=3,044 section pairs** (30,405 total; 119
+pairs excluded because their source doc was a dropped duplicate — accounts
+for all 30,524 accepted pairs exactly). `data/splits/{train,dev,test}.json`
+are now frozen per I5.
+
+**Real bug hit and fixed**: the first version of `build_minhash()` called
+`MinHash.update()` once per shingle in a Python loop. Across this corpus's
+~28.5M total shingles (one judgment alone has 117,512), that ran for 60+
+minutes with no end in sight before being killed. Root cause diagnosed via
+targeted micro-benchmarks (isolated shingling, minhash-building, and
+LSH-insert/query timings on samples) — `.update()`'s fixed per-call overhead
+dominates at this scale; `MinHash.update_batch()` (vectorized) does the exact
+same computation in under two minutes. **Not a GPU-vs-CPU problem** —
+MinHash/LSH is pure hashing/set-membership work with no matrix math, so
+cloud GPU compute would not have helped here at all; this was purely an
+API-usage bug.
+
+**`tests/test_data_leakage.py`**: 3 tests per `M1_ONBOARDING.md` §9 —
+`test_no_doc_id_in_two_splits`, `test_no_near_duplicate_spans_splits` (both
+green against the real split/near-dup files), and
+`test_no_qa_eval_item_from_training_doc` (correctly skips: no
+`eval/gold/*.jsonl` yet, M6 not landed). Full suite: **63 passed, 1 skipped**.
+
+**`data/pretokenize.py`**: InLegalBERT tokenizer (`law-ai/InLegalBERT`,
+`max_len=512`), run over the frozen `section_pairs.jsonl` →
+`data/processed/section_pairs.arrow/` (30,405 rows, schema: `doc_id, split,
+section_id, source_text, target_text, provenance, source_input_ids,
+source_attention_mask, target_input_ids, target_attention_mask`). Verified
+round-trips via `load_from_disk`. Ran with only `transformers` installed (no
+`torch` in this venv) — tokenization alone doesn't need a model backend.
+
+**`eval/ocr_wer.py`**: harness built per `M1_ONBOARDING.md` §11 (reuses
+`core/ocr.py`'s `extract_text`, computes WER via `jiwer`). Correctly
+hard-fails since `data/ocr_wer_gold/` doesn't exist yet (0/50 gold pages) —
+by design, this is human-supplied work that can't be fabricated, and is not
+a blocker for the rest of M1. **Decision made this session**: once the 50
+hand-transcribed pages exist, the transcripts (small .txt files) will be
+**committed** to the repo for reproducibility of the WER number; the page
+images stay gitignored (already the case — `.gitignore` only excludes
+`data/ocr_wer_gold/pages/`, not `transcripts/`).
+
+`ruff check` clean on all new files.
+
+**M1's literal done-when list is now met**: ~30.4k section pairs exist
+(slightly under the ~35k target, explained in `PROVENANCE.md` by the 65
+generation errors + near-duplicate drops + HHEM rejections), splits are
+frozen and committed with provenance, leakage tests are green, and the
+segmentation decision (Path 2) is documented with its rationale. Remaining
+open items are explicitly non-blocking: the 200-item human validation pass,
+`ACCEPT_THRESHOLD` calibration against it, and the OCR-WER gold set.
+
+---
+
+## 9. Git / PR status
+
+Branch: `m1-data-foundation`. The original PR
+[kramjiy/smartlawai#5](https://github.com/kramjiy/smartlawai/pull/5) was
+**merged into `main` on 2026-09-04** (before this session's production-run
+and filtering work existed) — pushing new commits to the same branch did
+**not** reopen it. A new PR,
+[kramjiy/smartlawai#6](https://github.com/kramjiy/smartlawai/pull/6), was
+opened for the commits made since that merge (production Path 2 generation +
+full-corpus HHEM filtering). The dedup/split/pretokenize/OCR-harness work in
+§8 above is not yet committed as of this log entry.

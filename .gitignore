@@ -17,6 +17,9 @@ dist/
 
 # M1 data foundation -- large and/or fully regenerable from data/*.py + frozen splits
 data/raw/
-data/processed/
+# Exclude contents, not the directory itself -- git never looks inside a
+# wholesale-excluded directory, so a negation for one file inside it (below)
+# would otherwise silently have no effect.
+data/processed/*
 !data/processed/near_duplicate_pairs.json
 data/ocr_wer_gold/pages/
