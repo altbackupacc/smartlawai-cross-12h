@@ -580,7 +580,79 @@ through `score_human_validation.py` unchanged. `ruff check` clean.
 
 ---
 
-## 12. Git / PR status
+## 12. GLM-OCR comparison: tooling built, waiting on Ollama install
+
+User pushed on whether Tesseract (the pipeline's existing OCR engine) is
+actually the best available, leading to real research rather than assumed
+answers:
+
+- **Confirmed Tesseract is not state-of-the-art** for degraded/historical
+  documents specifically (2026 benchmarks: GPT-4o 97.3% char accuracy on
+  degraded scans vs Tesseract's general-purpose, speed-optimized design;
+  Calamari/ABBYY FineReader purpose-built for historical typewritten
+  archives). Kept Tesseract as the *first* measurement anyway (not
+  replaced pre-emptively) because: the WER harness is free to run (already
+  built), switching engines has a real cost (new dependency/GPU), and the
+  50-page hand transcription work is engine-agnostic — it becomes a
+  reusable gold standard for testing *any* OCR engine, not just the first.
+- **Corrected a real gap in my own research**: initially missed
+  **GLM-OCR** (Z.ai/Zhipu AI, Feb 2026) until the user asked directly why
+  it wasn't mentioned. It's the actual top scorer on OmniDocBench v1.5
+  (94.62, ahead of Gemini-3 Pro's 90.33 and Qwen3-VL-235B's 89.15) despite
+  being only 0.9B parameters — and open-weight, so self-hostable without
+  per-call API cost or sending documents to a third party. Confirmed it
+  runs locally via Ollama (`ollama pull glm-ocr`, ~3GB VRAM at FP16),
+  fitting the project's existing local-inference convention rather than
+  introducing a new one.
+- **Answered two scoping questions directly**: Hindi OCR accuracy is not
+  a compulsory requirement -- `RESEARCH.md`'s own V2 section defers
+  multilingual work, and the `summ` corpus this pipeline runs on is
+  essentially all-English; the existing `eng+hin` Tesseract call is a
+  defensive default, not a validated requirement. GLM-OCR can run on
+  ordinary laptop hardware given its ~3GB VRAM footprint.
+- **Dataset search for an immediate comparison hit real dead ends,
+  diagnosed rather than glossed over**: every public degraded-document
+  OCR dataset found had a specific blocker -- IMPACT (English, real
+  ground truth) needs registration; Reichsanzeiger-GT/Finnish NLF are
+  German/Finnish, not English; the Black Digital Archives Benchmark
+  explicitly lacks full manual transcription ground truth (its own paper
+  uses annotation-free proxy metrics instead); the ICDAR 2019 Post-OCR
+  Correction dataset (Zenodo, free, English) turned out to contain only
+  already-OCR'd text, no original scan images, so it can't test a fresh
+  OCR engine at all.
+- **User proposed the actual right approach**: skip external datasets
+  entirely and run GLM-OCR directly on the real 50 scanned pages already
+  in `data/ocr_wer_gold/pages/` (the genuine Kerala HC scans from §9) now,
+  ahead of the human transcriptions -- then score it against the same
+  transcripts Tesseract will be scored against, once they exist. Strictly
+  better than every alternative considered: real degradation, zero new
+  data, and a direct, apples-to-apples number against Tesseract on
+  identical pages.
+
+**Built**: `data/pilot/glm_ocr_client.py` (calls Ollama's native
+`/api/generate` endpoint -- confirmed via research that the
+OpenAI-compatible endpoint has known vision-request limitations on
+Ollama; `run_batch()` iterates all 50 gold-set pages, caches predictions
+to `data/ocr_wer_gold/glm_ocr_predictions.json`, resumable). Extended
+`eval/ocr_wer.py` with `--engine {tesseract,glm-ocr}` (default
+`tesseract`, so existing behavior/output path is unchanged) -- the
+`glm-ocr` path reads the cached predictions file, falling back to a live
+Ollama call for any page missing from it. Verified both engine paths
+still correctly hard-fail with 0/50 transcripts (regression-safe), full
+`pytest -q` still green (63 passed, 1 skipped), `ruff check` clean.
+
+**Blocked on**: Ollama is not installed on this machine. Asked the user to
+install it themselves (`ollama.com/download`) and run `ollama pull
+glm-ocr` -- a background service, not just a CLI tool, so this wasn't
+installed automatically the way Poppler was earlier. Once pulled,
+`python data/pilot/glm_ocr_client.py` can run immediately (doesn't need
+the human transcripts yet); `python -m eval.ocr_wer --engine glm-ocr` (and
+`--engine tesseract` for the existing engine) only produce real WER
+numbers once the transcripts land.
+
+---
+
+## 13. Git / PR status
 
 Branch: `m1-data-foundation`. The original PR
 [kramjiy/smartlawai#5](https://github.com/kramjiy/smartlawai/pull/5) was

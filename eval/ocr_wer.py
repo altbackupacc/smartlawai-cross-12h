@@ -14,10 +14,21 @@ Expected input structure:
     data/ocr_wer_gold/transcripts/{page_id}.txt        (hand transcription)
     50 matched pairs minimum.
 
-Output: eval/ocr_wer.md (markdown table + summary stats + gold-set size + date)
+Supports two OCR engines via --engine, scored against the exact same gold
+set for a direct comparison:
+    tesseract  (default) -- smartlawai.core.ocr.extract_text(), the engine
+               already used in the serving pipeline.
+    glm-ocr    -- reads data/pilot/glm_ocr_client.py's cached predictions
+               (run that script first); falls back to a live Ollama call
+               for any page missing from the cache.
+
+Output: eval/ocr_wer.md for --engine tesseract (unchanged default path);
+eval/ocr_wer_glm-ocr.md for --engine glm-ocr.
 """
 from __future__ import annotations
 
+import argparse
+import json
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -27,6 +38,7 @@ from smartlawai.core.ocr import extract_text
 
 MIN_PAIRS = 50
 PAGE_EXTENSIONS = (".png", ".jpg", ".jpeg", ".tiff", ".tif", ".pdf")
+GLM_OCR_PREDICTIONS_PATH = Path("data/ocr_wer_gold/glm_ocr_predictions.json")
 
 
 def compute_wer(reference: str, hypothesis: str) -> float:
@@ -51,8 +63,38 @@ def find_matched_pairs(gold_dir: Path) -> list[tuple[str, Path, Path]]:
     return pairs
 
 
+def _run_tesseract(page_path: Path) -> tuple[str | None, str, str | None]:
+    """Returns (text_or_None, status, error_or_None)."""
+    result = extract_text(str(page_path))
+    if result.ocr_status == "OCR_FAIL":
+        return None, "OCR_FAIL", result.error
+    return result.text, result.ocr_status, None
+
+
+def _run_glm_ocr(page_id: str, page_path: Path,
+                  predictions: dict[str, str]) -> tuple[str | None, str, str | None]:
+    """Returns (text_or_None, status, error_or_None). Prefers the cached
+    predictions file (data/pilot/glm_ocr_client.py); falls back to a live
+    Ollama call for a page missing from the cache."""
+    text = predictions.get(page_id)
+    if text is None:
+        from data.pilot.glm_ocr_client import ocr_image
+        try:
+            text = ocr_image(page_path)
+        except Exception as e:  # noqa: BLE001 - report as a failure row, don't crash the run
+            return None, "GLM_OCR_FAIL", str(e)
+    if not text.strip():
+        return None, "GLM_OCR_FAIL", "empty prediction"
+    return text, "GLM_OCR_OK", None
+
+
 def run_ocr_wer_eval(gold_dir: Path = Path("data/ocr_wer_gold"),
-                      out_path: Path = Path("eval/ocr_wer.md")) -> None:
+                      out_path: Path | None = None,
+                      engine: str = "tesseract") -> None:
+    if out_path is None:
+        out_path = Path("eval/ocr_wer.md") if engine == "tesseract" \
+            else Path(f"eval/ocr_wer_{engine}.md")
+
     pairs = find_matched_pairs(gold_dir)
     if len(pairs) < MIN_PAIRS:
         raise SystemExit(
@@ -66,18 +108,23 @@ def run_ocr_wer_eval(gold_dir: Path = Path("data/ocr_wer_gold"),
             f"rest of M1 -- run this script again once the gold set is complete."
         )
 
-    print(f"Found {len(pairs)} matched pairs. Running OCR + computing WER per page...")
+    glm_predictions: dict[str, str] = {}
+    if engine == "glm-ocr" and GLM_OCR_PREDICTIONS_PATH.exists():
+        glm_predictions = json.loads(GLM_OCR_PREDICTIONS_PATH.read_text(encoding="utf-8"))
+
+    print(f"Found {len(pairs)} matched pairs. Running {engine} OCR + computing WER per page...")
     rows = []
     for page_id, page_path, transcript_path in pairs:
         reference = transcript_path.read_text(encoding="utf-8", errors="ignore")
-        result = extract_text(str(page_path))
-        if result.ocr_status == "OCR_FAIL":
-            rows.append({"page_id": page_id, "wer": None, "status": "OCR_FAIL",
-                         "error": result.error})
+        if engine == "tesseract":
+            text, status, error = _run_tesseract(page_path)
+        else:
+            text, status, error = _run_glm_ocr(page_id, page_path, glm_predictions)
+        if text is None:
+            rows.append({"page_id": page_id, "wer": None, "status": status, "error": error})
             continue
-        wer = compute_wer(reference, result.text)
-        rows.append({"page_id": page_id, "wer": wer, "status": result.ocr_status,
-                     "error": None})
+        wer = compute_wer(reference, text)
+        rows.append({"page_id": page_id, "wer": wer, "status": status, "error": None})
 
     scored = [r["wer"] for r in rows if r["wer"] is not None]
     n_failed = len(rows) - len(scored)
@@ -85,7 +132,7 @@ def run_ocr_wer_eval(gold_dir: Path = Path("data/ocr_wer_gold"),
     median_wer = sorted(scored)[len(scored) // 2] if scored else None
 
     lines = [
-        "# OCR Word Error Rate — M1 (RESEARCH.md T5)",
+        f"# OCR Word Error Rate — M1 (RESEARCH.md T5) — engine: {engine}",
         "",
         (f"Gold set size: {len(pairs)} pages. Evaluated: "
         f"{datetime.now(tz=UTC).date().isoformat()}."),
@@ -107,4 +154,7 @@ def run_ocr_wer_eval(gold_dir: Path = Path("data/ocr_wer_gold"),
 
 
 if __name__ == "__main__":
-    run_ocr_wer_eval()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--engine", choices=["tesseract", "glm-ocr"], default="tesseract")
+    args = parser.parse_args()
+    run_ocr_wer_eval(engine=args.engine)
