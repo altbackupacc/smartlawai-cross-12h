@@ -1,0 +1,16 @@
+{
+  "doc_id": "1367",
+  "il_tur_doc_tokens": 2905,
+  "il_tur_summ_tokens": 374,
+  "prompt_token_count": 4253,
+  "candidates_token_count": 544,
+  "elapsed_s": 5.0,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The appellants were running stage carriage omnibuses on 18 routes, and 14 such routes are inter District. The appellants challenged the validity of the scheme on the ground that between the routes which were taken over and some of the inter District and inter State routes which were left to the private operators, there was an overlap in the Mysore District.",
+    "statute": "The scheme was approved under the provisions of Chap. IV A of the Motor Vehicles Act, inserted by section 62 of Act 100 of 1956. Section 68C of the Motor Vehicles Act permits the taking over of any route or area either wholly or partly by the State Undertaking.",
+    "argument": "The appellants argued that the scheme is vague, indefinite and contradictory and does not carry out the orders of the Chief Minister; that there has been non compliance with the mandatory requirements of sections 68C and 68E of the Motor Vehicles Act; that the scheme is destructive of coordination, which is the gist of efficient motor transport services; and that the routes on which the appellants operated, were, in any event, not affected by the monopoly on certain routes created in favour of the State Transport Undertaking. It was also argued that the word 'route' meant a notional line running between two termini and following a distinct course.",
+    "analysis": "The scheme is not required, under the law, to deal with fares and timings, and the omission of these details from the scheme does not militate against it. The scheme of the Act in section 68F(2)(c)(iii) shows that the Regional Transport Authority, in giving effect to the approved scheme, may curtail the area or route covered by the permit in so far as such permit relates to the notified area or notified route. The word 'route' meant not only the notional line but also the actual road over which the omnibuses run. Under the Act, the route or area stand for the road on which the omnibuses run or portions thereof.",
+    "judgement": "The appeal was dismissed. The scheme was held to be valid, and the provisions of Chap. IV A, in view of the amendments effected by the Constitution (First Amendment) Act, 1951, in article 19(6), were held intra vires the State Legislatures. The scheme reserved all the routes within the Mysore District to the State Transport Undertaking, and the private operators would not be able to ply their omnibuses on that sector."
+  }
+}

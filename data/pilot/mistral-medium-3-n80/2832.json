@@ -1,0 +1,16 @@
+{
+  "doc_id": "2832",
+  "il_tur_doc_tokens": 1589,
+  "il_tur_summ_tokens": 324,
+  "prompt_token_count": 2681,
+  "candidates_token_count": 601,
+  "elapsed_s": 4.9,
+  "parse_ok": true,
+  "sections": {
+    "facts": "Notices under section 22(2) of the Income tax Act, 1922, were not complied with by the respondent (assessee) and the Income tax Officer issued notices under section 22(4). Since they were also not complied with the Income tax Officer made a best judgment assessment under section 23(4). Thereupon, the assessee applied under section 27 for reopening the assessment. The Income tax Officer found that there was sufficient cause for noncompliance with the notices under section 22(4), but, as there was no sufficient cause for non compliance with the notices under section 22(2), he declined to reopen the assessment.",
+    "statute": "Section 23(4) empowers the Income tax Officer to make a best judgment assessment if the assessee fails to make the return required by a notice under section 22(2) or a revised return under section 22(3), or fails to comply with the terms of a notice issued under section 22(4) or fails to comply with the terms of a notice issued under section 23(2). Section 27 empowers the Income tax Officer to cancel the assessment when sufficient cause is shown.",
+    "argument": "The assessee argued that the Income tax Officer, having recorded a finding that there was sufficient cause for non-compliance with the notice issued under Section 22(4), was bound to cancel the assessment made under Section 23(4) and to proceed to make a fresh assessment even though there was no sufficient cause for non-compliance with the notice under Section 22(2).",
+    "analysis": "The High Court considered that the provisions of section 27 were not cumulative but disjunctive and so the assessee could claim cancellation of the assessment on one of the grounds on which such cancellation could be sought under the section. The clear import of section 23(4) is that on committing any one of the defaults mentioned therein the Income tax Officer is bound to make the assessment to the best of his judgment. Section 27 empowers the Income tax Officer to cancel the assessment when sufficient cause is shown but such cause has to be shown for each default. Although the word 'or' which is disjunctive is used in section 27 it has to be read in a reasonable and harmonious way and in conjunction with section 23(4).",
+    "judgement": "The view of the High Court cannot be sustained. The assessee cannot ask for cancellation of the assessment by merely showing cause for one of such defaults. The judgment of the High Court has to be set aside, and the question has to be answered against the assessee and in favour of the appellant. The appeals are accordingly allowed with costs."
+  }
+}

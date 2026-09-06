@@ -1,0 +1,17 @@
+{
+  "doc_id": "6378",
+  "il_tur_doc_tokens": 4047,
+  "il_tur_summ_tokens": 508,
+  "prompt_token_count": 6420,
+  "candidates_token_count": 530,
+  "reasoning_tokens": 0,
+  "elapsed_s": 11.1,
+  "parse_ok": true,
+  "sections": {
+    "facts": "Respondent workman was in employment of the Appellant management as Bus driver. Following an incident of misconduct committed by him, a domestic inquiry was conducted against him under Standing Orders 15(1)(b) and 15(1)(r) of the Company wherein he was held guilty by the Enquiry Officer and was eventually dismissed from the service w.e.f. 31.12.1979. On that day itself the management moved an application before the Industrial Tribunal under section 33(2)(b) of the Act for approval of the action taken and towards meeting the requirements of the provisions of the act paid to the workman before hand wages for one month. The workman filed his objection Statement to that application raising several contentions denying all the allegations made against him and challenging the validity of the domestic enquiry. This application somehow was kept pending by the Tribunal for over six years when sometime in July, 1986 the workman moved an application before the Tribunal seeking amendment of his objection petition to urge an additional ground that one month's wages paid to him were short by Rs. 12, being the monthly night shift allowance as he was ordinarily expected to work by rotation as per standing orders of the Company and thus as full one month's wages had not been paid to him as required under section 33(2)(b) of the Act, the approval sought for ought to be declined.",
+    "statute": "",
+    "argument": "The management contended that the night shift allowance is neither paid nor payable unless the night shift is actually performed and thus this amount cannot form part of the month's wages automatically.",
+    "analysis": "The Industrial Tribunal while abandoning giving any finding on the validity of the domestic enquiry, upheld the additional objection taken by the workman and declined the management's application seeking approval to the dismissal of the workman.",
+    "judgement": "Setting aside the impugned judgment and order of the Tribunal and allowing their application made under section 33(2)(b) of the Act, this Court in allowing the appeal, HELD: The workman had to earn night shift allowance by actually working in the night shift and his claim to that allowance was contingent upon his reporting to duty and being put to that shift. The night shift allowance did not automatically form part of his wages and it was not such an allowance which flowed to him as an entitlement of his service. The Tribunal fell into a grave error in declining the application of the management for approval on the ground of short payment of Rs. 12 on account of night shift allowance, which the workman supposedly would have earned had he gone to report for duty."
+  }
+}

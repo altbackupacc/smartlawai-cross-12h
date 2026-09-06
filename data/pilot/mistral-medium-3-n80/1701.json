@@ -1,0 +1,16 @@
+{
+  "doc_id": "1701",
+  "il_tur_doc_tokens": 5162,
+  "il_tur_summ_tokens": 413,
+  "prompt_token_count": 7134,
+  "candidates_token_count": 504,
+  "elapsed_s": 4.9,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The third respondent was declared elected to the Legislative Assembly of Andhra Pradesh in the general election held in 1962. The appellant, a voter of the constituency, filed an election petition challenging the election of the third respondent on several grounds including corrupt practices. The petition was accompanied by the requisite number of copies which were true copies and each of them bore the signature of the petitioner. But there was no attestation at the foot of the copies that they were true copies.",
+    "statute": "Section 81(3) of the Representation of the People Act, 1951, which requires that every election petition shall be accompanied by as many copies thereof as there are respondents mentioned in the petition and one more copy for the use of the Election Commission, and every such copy shall be attested by the petitioner under his own signature to be a true copy of the petition.",
+    "argument": "The third respondent raised various preliminary objections and the Election Tribunal rejected all of them. Thereupon he filed a writ petition in the High Court praying for the issue of a writ quashing the Tribunal's order. His main contention was that since the copies of the petition did not contain an attestation stating that the copies were true copies, there has been a violation of the mandatory provision of section 80(3) of the Representation of the People Act, 1951.",
+    "analysis": "The High Court accepted the contention and issued a writ as prayed for. The present appeal was filed with special leave granted by this Court. The expression 'copy' in section 81(3) was meant not an exact copy but only one so true that nobody by any possibility misunderstands it not being the same as the original. The signatures on the copies cannot be held to have been merely intended to be a copy of those on the original, since a signature in original was not needed on the copy and writing or copying out the name of the signatory would suffice. The absence of a writing in the copy indicating the signature in the original would not detract the copy from being a true copy.",
+    "judgement": "The appeal is allowed. The facts and circumstances of the case show that there has been a substantial compliance with the requirement of section 81(3). The wider question whether section 81(3) or any part thereof is mandatory or directory is left open."
+  }
+}

@@ -18,8 +18,9 @@ from transformers import AutoModelForSequenceClassification  # noqa: E402
 from google.cloud import storage  # noqa: E402
 
 BUCKET = "smartlawai-1-m1-pilot"
-INPUT_BLOB = "staging_for_vertex.json"
-OUTPUT_BLOB = "hhem_results.json"
+MODEL_TAG = sys.argv[1] if len(sys.argv) > 1 else ""  # e.g. "gemini-3.8-flash"
+INPUT_BLOB = f"staging_{MODEL_TAG}.json" if MODEL_TAG else "staging_for_vertex.json"
+OUTPUT_BLOB = f"hhem_results_{MODEL_TAG}.json" if MODEL_TAG else "hhem_results.json"
 MODEL_ID = "vectara/hallucination_evaluation_model"
 PREMISE_CHUNK_WORDS = 300
 PREMISE_CHUNK_OVERLAP = 50
@@ -60,13 +61,23 @@ def main() -> None:
     model = AutoModelForSequenceClassification.from_pretrained(MODEL_ID, trust_remote_code=True)
     model = model.to(device)
 
+    malformed_structure = 0
     pairs = []
     for r in results:
         if "error" in r or not r.get("parse_ok"):
             continue
+        sections = r["sections"]
+        # Some models (observed: Gemini 3.1 Pro Preview) occasionally wrap the answer
+        # in a list containing one dict instead of returning the dict directly, even
+        # with response_mime_type=json and an explicit schema -- count it as a real
+        # structural-reliability data point, not silently paper over it, but still
+        # recover the content rather than dropping the whole document.
+        if isinstance(sections, list):
+            malformed_structure += 1
+            sections = sections[0] if len(sections) == 1 and isinstance(sections[0], dict) else {}
         doc_id = r["doc_id"]
         headnote = headnotes.get(str(doc_id)) or headnotes.get(doc_id) or ""
-        for section, text in r["sections"].items():
+        for section, text in sections.items():
             if section.startswith("_") or not text:
                 continue
             pairs.append((doc_id, section, headnote, text))
@@ -95,6 +106,7 @@ def main() -> None:
         "device": device,
         "n_claims": len(all_claim_scores),
         "n_sections": len(scored),
+        "n_malformed_structure": malformed_structure,
         "mean_claim_score": sum(all_claim_scores) / len(all_claim_scores) if all_claim_scores else None,
         "min": min(all_claim_scores) if all_claim_scores else None,
         "max": max(all_claim_scores) if all_claim_scores else None,

@@ -1,0 +1,16 @@
+{
+  "doc_id": "2832",
+  "il_tur_doc_tokens": 1589,
+  "il_tur_summ_tokens": 324,
+  "prompt_token_count": 2611,
+  "candidates_token_count": 480,
+  "elapsed_s": 15.2,
+  "parse_ok": true,
+  "sections": {
+    "facts": "Notices under section 22(2) of the Income tax Act, 1922, were not complied with by the respondent (assessee), and the Income tax Officer issued notices under section 22(4). Since they were also not complied with, the Income tax Officer made a best judgment assessment under section 23(4). The assessee applied under section 27 for reopening the assessment. The Income tax Officer found sufficient cause for noncompliance with notices under section 22(4), but declined to reopen the assessment as there was no sufficient cause for noncompliance with notices under section 22(2). This order was confirmed in appeal and by the Tribunal, but the High Court held in favour of the assessee.",
+    "statute": "Income tax Act, 1922: Sections 22(2), 22(3), 22(4), 23(2), 23(4), and 27.",
+    "argument": "",
+    "analysis": "Under section 23(4), on the assessee committing any of the defaults mentioned therein\u2014namely, failure to make a return required by notice under section 22(2) or a revised return under section 22(3), noncompliance with terms of a notice under section 22(4), or failure to comply with terms of a notice under section 23(2)\u2014the Income tax Officer is bound to make a best judgment assessment. Section 27 empowers the Income tax Officer to cancel the assessment when sufficient cause is shown, but such cause must be shown for each default. Therefore, if the assessee defaults by not filing a return pursuant to section 22(2) and also fails to comply with a notice under section 22(4), sufficient cause must be shown for noncompliance with both provisions. The Legislature could not have intended that in cases of multiple defaults, each warranting an ex parte best judgment assessment, an assessee could obtain cancellation by showing cause for only one such default.",
+    "judgement": "The view taken in Chiranjilal Tibrewala vs Commissioner of Income tax, Bombay City II, was approved, deciding the appeal in favour of the appellant."
+  }
+}

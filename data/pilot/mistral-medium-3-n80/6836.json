@@ -1,0 +1,16 @@
+{
+  "doc_id": "6836",
+  "il_tur_doc_tokens": 4984,
+  "il_tur_summ_tokens": 864,
+  "prompt_token_count": 7865,
+  "candidates_token_count": 731,
+  "elapsed_s": 6.2,
+  "parse_ok": true,
+  "sections": {
+    "facts": "Appellant Company filed criminal complaints under Section 630(l)(b), Companies Act and Section 406, IPC against its employees (the first respondent of each appeal) as they did not vacate the company quarters after about six months even after retirement. The Judicial Magistrate, First Class dismissed the complaints as the same were not filed within the period of limitation of six months from the date of retirement of the Respondents employees. The High Court, holding that the offence under Section 630(1) was not a continuing offence, dismissed the Company's revision petitions.",
+    "statute": "Section 630 of the Companies Act. Section 406, IPC. Section 468 of the Criminal Procedure Code. Section 472 of the Code of Criminal Procedure. Section 473 of the Code of Criminal Procedure.",
+    "argument": "In the appeal to this Court on the question, whether the offence under Section 630(l)(b) of the Companies Act is a continuing offence for the purpose of limitation.",
+    "analysis": "The beneficent provision contained in section 630, no doubt penal, has been purposely enacted by the legislature with the object of providing a summary procedure for retrieving the property of the company. The concept of continuing offence does not wipe out the original guilt, but it keeps the contravention alive day by day. The expression 'continuing offence' has not been defined in the Code. The question whether a particular offence is a 'continuing offence' or not must, therefore, necessarily depend upon the language of the statute which creates that offence, the nature of the offence and the purpose intended to be achieved by constituting the particular act as an offence. The offence under section 630 is not such as can be said to have consummated once for all. Wrongful withholding, or wrongfully obtaining possession and wrongful application of the company's property, that is, for purposes other than those expressed or directed in the articles of the company and authorised by the Companies Act, cannot be said to be terminated by a single act or fact but would subsist for the period until the property in the offender's possession is delivered up or refunded.",
+    "judgement": "Allowing the Appeals of the Appellant Company, this Court held that the offence under section 630 of the Companies Act is not one time but a continuing offence and the period of limitation must be computed accordingly, and when so done, the complaints could not be said to have been barred by limitation. W.M.I. Cranes Ltd. vs G.G. Advani & Anr., [1984] 1 Kar. Law Cronicle 462 overruled; Bhagirath Kanoria and Ors. vs State of Madhya Pradesh with Bahadur Singh vs Provident Fund Inspector and Ors., A.I.R. 1984 S.C. 1688 referred; Baldev Krishna Sahi vs Shipping Corporation of India Ltd. and Anr., [1987] 4 S.C.C. 361; Amrit Lal Chum vs Devoprasad Dutta Roy and Anr.; State of Bihar vs Deokaran Nenshi, [1973] 1 S.C.R. 1004; Bhagirath Kanoria & Ors. vs State of Madhya Pradesh & Ors. followed."
+  }
+}

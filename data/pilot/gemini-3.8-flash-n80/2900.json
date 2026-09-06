@@ -1,0 +1,16 @@
+{
+  "doc_id": "2900",
+  "il_tur_doc_tokens": 2059,
+  "il_tur_summ_tokens": 415,
+  "prompt_token_count": 3368,
+  "candidates_token_count": 550,
+  "elapsed_s": 13.7,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The appellant set fire to grass lying near a khalyan and was arrested the next day. From the date of his arrest to February 2, 1965, he was kept in police custody and thereafter sent to jail. The Assistant Surgeon, the Civil Surgeon, and the Psychiatrist of the mental hospital to which he was referred reported that he was depressed and silent, and according to the Psychiatrist, he was a lunatic in terms of the Indian Lunacy Act, 1912. At his trial under section 435 of the Indian Penal Code, two of his relatives appeared as defence witnesses and testified that he was mentally unsound. The trial Magistrate acquitted the accused on the finding that the appellant fell within the general exception in section 84 of the Indian Penal Code, but the High Court, in an appeal filed by the State, reversed the judgment.",
+    "statute": "Section 84 and Section 435 of the Indian Penal Code; Indian Lunacy Act, 1912; Section 342 of the Code of Criminal Procedure.",
+    "argument": "",
+    "analysis": "It is well settled that the crucial point of time at which unsoundness of mind should be established is the time when the crime was committed. The burden of proving this lies on the accused, though the burden is no higher than that which rests upon a party to civil proceedings (State of Madhya Pradesh v. Ahmadulla and D. C. Thakker v. State of Gujarat referred to). There was no reason why the defence witnesses should not be believed; they were no doubt relations of the appellant, but it is the relations who are likely to remain in intimate contact. The High Court was wrong in drawing an adverse inference against the accused on the ground that he had not produced any expert medical evidence in defence, as this could not be expected from a poor villager, specially in view of the certificates issued by the medical authorities after he was arrested. Furthermore, the High Court's observation that the appellant appeared to be of normal understanding and the fact that he had given intelligent answers to questions under section 342 Cr. P.C. were irrelevant considerations in view of the time that had elapsed since the alleged commission of the offence.",
+    "judgement": "In appeal by special leave, held that the appellant had discharged the burden. The behaviour of the appellant on the day of occurrence, the failure of the police to lead evidence as to his condition when he was in custody, and the medical evidence indicated that the appellant was insane within the meaning of section 84 I.P.C."
+  }
+}

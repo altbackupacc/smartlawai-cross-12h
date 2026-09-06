@@ -1,0 +1,16 @@
+{
+  "doc_id": "228",
+  "il_tur_doc_tokens": 9005,
+  "il_tur_summ_tokens": 1027,
+  "prompt_token_count": 14016,
+  "candidates_token_count": 553,
+  "elapsed_s": 6.0,
+  "parse_ok": true,
+  "sections": {
+    "facts": "On the death of the holder of an impartible estate who represented the first branch his widow K got into possession claiming that the estate was the separate property of her husband and also under a will. Disputes arose between her and the members of the 2nd, 3rd and 4th branches of the family and these were settled amicably. S who was the senior member of the 3rd branch obtained village D and one fourth of certain pannai lands as absolute owner and executed a release deed on 6th May, 1890. S who represented the 2nd branch and had instituted a suit against K compromised the suit on the 10th May, 1890, under a deed which provided inter alia: (i) that the zamindari shall be enjoyed by K till her lifetime and that KS and his heirs shall after the lifetime of K enjoy the zamindari except village D which was given to S; (ii) village B and one fourth of certain pannai lands shall be given to KS absolutely; (iii) all other pannai lands, buildings and movables which belonged to K's husband shall be enjoyed by K and her heirs absolutely. On the death of K the estate became vested in Z, the son of KS. On the death of Z without issue the second branch became extinct and disputes arose with regard to the ownership of the pannai lands and buildings, village B, and the zamindari between the widow of Z (who was the grand daughter of K) and the senior members of the 3rd and 4th branches.",
+    "statute": "",
+    "argument": "",
+    "analysis": "The arrangement made in 1890 did not evidence a partition amongst the members of the joint family or prove an intention on the part of the junior members of the family to renounce their expectancy of succession by survivorship on failure of the male lineal descendants in the branch of KS. The recitals in the release deed executed by S had to be read in the light of the compromise in the suit of KS, and the proper inference from both the documents read together was that S renounced only his right to succeed to the zemindari immediately as the seniormost member of the family and that he did not renounce his right or the right of his branch to succeed to the zemindari by survivorship if and when occasion arose.",
+    "judgement": "The senior member of the 3rd branch was therefore entitled to succeed to the zamindari in preference to the senior member of the 4th branch and the widow of Z."
+  }
+}

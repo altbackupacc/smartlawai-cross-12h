@@ -1,0 +1,16 @@
+{
+  "doc_id": "6132",
+  "il_tur_doc_tokens": 1374,
+  "il_tur_summ_tokens": 666,
+  "prompt_token_count": 2671,
+  "candidates_token_count": 557,
+  "elapsed_s": 12.7,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The respondent let out his premises to the appellant by way of an unregistered lease deed which inter alia stated that without the permission of the landlord the premises should not be sublet except to associate concerns, and the lessee was liable for payment of rent. Alleging that the appellant, an automobile manufacturing company, had sublet the premises to M/s United Automobiles without his consent, the respondent initiated eviction proceedings. Both the Rent Controller and the appellate authority held that the term of the lease was not inadmissible, but ordered eviction on the ground that M/s United Automobiles was inducted in the premises as a sub-lessee. The appellant filed a second appeal before the High Court, which dismissed it in limine, leading to the present appeal by special leave.",
+    "statute": "Section 14(1) Proviso (b) of the Delhi Rent Control Act.",
+    "argument": "The appellant contended that M/s United Automobiles, being the authorised dealer and distributor of products manufactured by it, was in occupation of the premises in that capacity and could not be described as a sub-tenant. Alternatively, it contended that in view of the specific term in the lease deed, the arrangement with an associate concern was not a sublease without the landlord's consent. The respondent took the stand that the term could not be looked into as the document was not registered, and that M/s United Automobiles could not be assumed to be an 'associate concern' within the meaning of the term.",
+    "analysis": "The appellant created a sublease in favour of its dealer and parted with possession within the meaning of section 14(1) Proviso (b) of the Delhi Rent Control Act. The appellant company has a separate legal entity and has nothing to do with M/s United Automobiles except that the latter is the dealer-distributor of some of its manufactured articles. M/s United Automobiles is not a licensee and is not in possession of the premises on behalf of the appellant. Its monetary benefit is confined to commission received on vehicle sales and does not include the right of enjoyment of the premises, and the fixed rent it pays is independent of sales. Whether a lessee is entitled to sublease is a term of the lease transaction; if the document is inadmissible for non-registration, all its terms, including permission to sublease, are inadmissible. Furthermore, the clause contained consent only in general terms without reference to M/s United Automobiles, which was inducted much later. Such general permission cannot be treated as the consent required under section 14(1) Proviso (b) of the Act, which requires specific written consent.",
+    "judgement": "Appeal dismissed."
+  }
+}

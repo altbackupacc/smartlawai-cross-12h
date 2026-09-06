@@ -1,0 +1,16 @@
+{
+  "doc_id": "2912",
+  "il_tur_doc_tokens": 1150,
+  "il_tur_summ_tokens": 592,
+  "prompt_token_count": 2245,
+  "candidates_token_count": 635,
+  "elapsed_s": 11.9,
+  "parse_ok": true,
+  "sections": {
+    "facts": "On October 5, 1960, the appellant agreed to perform certain construction work for the respondent, a company registered under the Indian Companies Act with its principal place of business in Bombay, under the terms and conditions of a written tender. Clause 12 of the tender provided for arbitration in case of disputes, and Clause 13 provided that, notwithstanding the place where work was executed, the contract was deemed to have been entered into at Bombay and the courts in Bombay alone had jurisdiction to adjudicate thereon. When disputes arose, the appellant filed a petition in the Court at Varanasi under Section 20 of the Arbitration Act for filing the agreement and making a reference to arbitration. The trial court held that the entire cause of action arose at Varanasi and that parties could not by agreement confer jurisdiction on the Bombay courts. In revisional jurisdiction, the Allahabad High Court held that Bombay courts had jurisdiction under general law and that, under Clause 13, the petition could not be entertained at Varanasi, directing the petition to be returned for presentation to the proper court. The appellant appealed to the Supreme Court by special leave.",
+    "statute": "Section 20 and Section 41 of the Arbitration Act, 1940; Section 20(a), Explanation II to Section 20, and Order 29 of the Code of Civil Procedure, 1908; Section 28 of the Indian Contract Act, 1872; and the Indian Companies Act.",
+    "argument": "The respondent contended that in view of Clause 13 of the arbitration agreement, only the courts at Bombay had jurisdiction. Further, it was contended that Explanation II to Section 20(a) of the Code of Civil Procedure refers only to statutory or Government corporations and not to companies registered under the Indian Companies Act.",
+    "analysis": "By virtue of Section 41 of the Arbitration Act, the Code of Civil Procedure applies in its entirety to proceedings under the Arbitration Act, and the jurisdiction of courts to entertain proceedings for filing an award is governed by the Code. Under Section 20(a) read with Explanation II of the Code, the respondent company, having its principal place of business in Bombay, was liable to be sued at Bombay. While parties cannot by agreement confer jurisdiction on a court that does not possess it under the Code, where two or more courts have jurisdiction under the Code, an agreement to have disputes tried in one such court is neither contrary to public policy nor violative of Section 28 of the Contract Act. Furthermore, Order 29 of the Code deals with suits by or against a corporation, and there is nothing in the Code to support the contention that a corporation under Section 20 means only a statutory corporation and not a company registered under the Indian Companies Act.",
+    "judgement": "Since the courts at Bombay had jurisdiction under the Code of Civil Procedure, the agreement between the parties that the courts in Bombay alone shall have jurisdiction to try the proceedings relating to arbitration was binding between them."
+  }
+}

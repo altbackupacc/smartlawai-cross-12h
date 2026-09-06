@@ -76,29 +76,55 @@ audit is the whole defense).
 
 ## 4. What already exists — reuse it, don't rebuild it
 
-- **`src/smartlawai/core/ner.py`** — a working regex + spaCy citation extractor. It
-  already recognizes IPC/CrPC/BNS/BNSS/Contract Act/Constitution/etc. section
-  references in several phrasings ("Section 420 IPC", "Section 302 of the Indian
-  Penal Code"). This is your input for the demand-driven frequency analysis — run it
-  over whatever corpus exists and `Counter()` the results. It has 13 passing unit
-  tests in `tests/test_ner.py` already.
+- **`src/smartlawai/core/ner.py`** — a working hybrid regex + spaCy citation
+  extractor. It already recognizes IPC/CrPC/BNS/BNSS/Contract Act/Constitution/etc.
+  section references in several phrasings ("Section 420 IPC", "Section 302 of the
+  Indian Penal Code"), plus case citations, courts, judges, dates, money, and case
+  numbers, each tagged with a `label` (`STATUTE`, `PROVISION`, `CASE_CITATION`,
+  `COURT`, ...) and a `source` (`"regex"` or `"spacy"`). Call
+  `extract_entities(doc_id, text) -> NERResult`; the `.statutes` and
+  `.legal_provisions` fields are your input for the demand-driven frequency analysis
+  — run it over whatever corpus exists and `Counter()` the results. It has **16**
+  passing unit tests in `tests/test_ner.py` already (re-verify with
+  `grep -c "^def test_" tests/test_ner.py` before relying on this number — it may
+  have grown further by the time you start).
 - **One known limitation to design around**: a bare section number mentioned without
   the act name nearby (e.g. "Section 420" appearing two sentences after the Act was
-  last named) comes back as a generic `PROVISION` entity with no statute attached.
-  Your resolver needs a fallback for this — the natural one is attributing an
-  unattached `PROVISION` to the nearest preceding `STATUTE` mention in the same
-  paragraph — since undercounting per-statute citation frequency would quietly
-  deflate your coverage number.
+  last named) comes back as a generic `PROVISION` entity with no statute attached
+  (see `ner.py`'s `_SECTION_REF` pattern and how `_classify_into_buckets` routes
+  `PROVISION` separately from `STATUTE`). Your resolver needs a fallback for this —
+  the natural one is attributing an unattached `PROVISION` to the nearest preceding
+  `STATUTE` mention in the same paragraph — since undercounting per-statute citation
+  frequency would quietly deflate your coverage number.
 - **`src/smartlawai/adapters/local.py`** — the existing DuckDB pattern to follow:
-  named-column inserts (never positional — see `CLAUDE.md` §4), `CREATE TABLE IF NOT
-  EXISTS`, this general shape. Don't reinvent the storage style.
+  `LocalBackend.__init__` opens `duckdb.connect(...)` and calls `_init_schema()`,
+  which issues `CREATE TABLE IF NOT EXISTS` statements with named columns (never
+  positional — see `CLAUDE.md` §4) for `DOCUMENTS`, `CHUNKS`, `CLAUSES`, `SUMMARIES`,
+  `INGESTION_LOG`. Match this exact shape for your own registry tables (a fresh
+  `duckdb.connect()` against your own `.duckdb` file, not a shared connection with
+  `LocalBackend` — the registry is a standalone database, not another table bolted
+  onto the pipeline's existing one).
 - **`pyproject.toml`'s base `dependencies`** already include `duckdb>=0.10` — you
   don't need to add anything for the registry database itself.
-- **Corpus availability**: M1 (data foundation) may or may not be done yet when you
-  start — check with whoever owns Track A/B. If it isn't, use
-  `sample_docs/sample_judgment.txt` for structural testing only (proving your
-  extraction/resolution pipeline works end to end), not for real coverage numbers —
-  those need the real corpus.
+- **Corpus availability — concretely, not hypothetically.** M1 has already pulled and
+  cached `data/raw/summ` (IL-TUR's `SUMM` config — 7,100 Supreme Court judgments)
+  via `data/prepare_iltur.py`. It's a `datasets.DatasetDict` saved with
+  `.save_to_disk()`, so you load it with:
+  ```python
+  from datasets import load_from_disk
+  ds = load_from_disk("data/raw/summ")   # DatasetDict; inspect ds["train"].features
+  ```
+  **This is enough to run your demand-driven citation frequency analysis today** —
+  you do not need to wait for M1's dedup/split/freeze steps, because you're not
+  training or evaluating with train/test isolation here, you're just counting which
+  citations appear across whatever judgment text exists. (M1's own alignment step hit
+  zero document overlap between the `rr` and `summ` configs and is now going through
+  Path 2 — frontier-generated section summaries with human validation. None of that
+  affects you; you only need `summ`'s raw judgment text, not its section pairs.) If
+  `data/raw/summ` isn't present when you actually start (re-check — this document is
+  a snapshot), fall back to `sample_docs/sample_judgment.txt` for structural testing
+  only (proving your extraction/resolution pipeline works end to end), not for real
+  coverage numbers — those need the real corpus.
 
 ---
 
@@ -195,7 +221,8 @@ cd smartlawai
 git checkout -b m4-registry
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
-pip install -e ".[dev]"          # duckdb + pytest, everything M4 needs
+pip install -e ".[dev,data]"     # duckdb + pytest, plus datasets/huggingface_hub
+                                  # so you can load_from_disk("data/raw/summ") (§4)
 pytest -q                        # should already be green: existing tests for
                                   # local backend, API, metrics, NER
 ```
@@ -208,8 +235,10 @@ pytest -q                        # should already be green: existing tests for
    machine-readable vs. scanned **immediately** — this is the single biggest
    unknown in your whole estimate and determines the rest of the week.
 2. Scaffold `registry/` — schema (§2), following `adapters/local.py`'s DuckDB style.
-3. Run `core/ner.py`'s extraction over whatever corpus is available; `Counter()` the
-   results to find the ~95%-coverage citation set.
+3. Load `data/raw/summ` via `load_from_disk` (§4) and run `core/ner.py`'s
+   `extract_entities()` over each judgment's text; `Counter()` the `.statutes` /
+   `.legal_provisions` results across the corpus to find the ~95%-coverage citation
+   set.
 4. Parse the MHA tables into `sections`/`statutes` rows; hand-verify a stratified
    100-entry sample against the Gazette; record the verification accuracy.
 5. Build `registry/resolver.py` and `verify/registry_check.py` to the exact contract
@@ -225,7 +254,10 @@ pytest -q                        # should already be green: existing tests for
 
 Don't guess past these — they affect the paper's argument, not just code:
 - MHA tables turn out scanned/unreliable
-- The RR↔SUMM section-pair decision (M1, owned by the other track) affects what
-  corpus you're extracting citations from
 - Any point where "demand-driven ~95% coverage" starts looking like it's covering
   meaningfully less in practice — report the real number, don't quietly lower the bar
+- Whether `data/raw/summ` is still the right/only corpus to extract citations from by
+  the time you start — M1's Path 2 (frontier-generated section summaries) is a
+  separate, later artifact than the raw judgment text you're using here, but worth a
+  quick check with whoever owns Track A/B that nothing about the raw corpus itself
+  has changed (e.g. a re-pull, a filtering pass) since this document was written

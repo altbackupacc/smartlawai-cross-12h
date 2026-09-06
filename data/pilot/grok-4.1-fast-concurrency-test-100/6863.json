@@ -1,0 +1,17 @@
+{
+  "doc_id": "6863",
+  "il_tur_doc_tokens": 750,
+  "il_tur_summ_tokens": 410,
+  "prompt_token_count": 2340,
+  "candidates_token_count": 583,
+  "reasoning_tokens": 0,
+  "elapsed_s": 12.8,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The appellant landlady, filed a suit under s.21 of the U.P. Urban Building (Regulation of letting, rent and eviction) Act, 1972 for eviction of the tenant on the ground of bona fide requirement. The prescribed authority and the Appellate Tribunal found as a fact that the appellant's requirement was bona fide and decreed the suit. But, the High Court set aside the order on the sole ground that the married daughters of the original tenant, who were the necessary parties, were not impleaded and, therefore, the non joinder of the necessary parties disentitled the appellant landlady to have the ejectment of the tenants, namely, the sons and the widow of the deceased tenant. In the instant case, the original tenant died in 1965. Thereafter, the proceedings were initiated in 1974. Till then, one of the sons of the deceased tenant, namely, the first respondent was in occupation of the premises and did carry on business. The married daughters never participated, nor claimed interest in the business conducted by the first respondent and even before the death of the father, they were married and they were living with their husbands elsewhere.",
+    "statute": "Section 3(a)(2) of the U.P. Urban Building (Regulation of letting, rent and eviction) Act, 1972 postulates that tenant in relation to a building means a person by whom rent is payable, and on the tenant's death, in the case of a non residential building, his heirs. Therefore, as defined under s3(a)(2) all heirs of the tenants are the tenants who succeeded intestate as per the Hindu Succession Act, 1956.",
+    "argument": "The High Court set aside the order on the sole ground that the married daughters of the original tenant, who were the necessary parties, were not impleaded and, therefore, the non joinder of the necessary parties disentitled the appellant landlady to have the ejectment of the tenants, namely, the sons and the widow of the deceased tenant.",
+    "analysis": "Consequently, the married daughters are tenants within the meaning of section 3(a)(2), and entitled to succeed to the tenant's lease hold rights under the Act, including not merely to the liabilities to pay rent but also to continue the business until duly ejected as per the provisions of the Act. The Rent Appellate Tribunal has found that by necessary implication, the married daughters surrendered their tenancy rights inherited under the Act, since after the demise of the original tenant, the daughters evinced no interest to assert their rights. In view of this, their non impleadment as respondents does not vitiate the action for non joinder of them as necessary parties nor maintainability of the proceedings for ejectment itself.",
+    "judgement": "Allowing the appeal of the landlady, this Court, HELD:"
+  }
+}

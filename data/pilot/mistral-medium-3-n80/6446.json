@@ -1,0 +1,16 @@
+{
+  "doc_id": "6446",
+  "il_tur_doc_tokens": 784,
+  "il_tur_summ_tokens": 276,
+  "prompt_token_count": 1568,
+  "candidates_token_count": 414,
+  "elapsed_s": 3.4,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The respondent landlady sought eviction of the appellant under section 12(1)(f) of the M.P. Accommodation Control Act, 1961 on the ground of bona fide requirement for continuing tailoring business of her son, being carried on in a small room of the same premises. The landlady whose husband at one time had a flourishing business was now in dire circumstances. The tenant admittedly had two shops each with spacious accommodation facing the road while the landlady's son had one with comparatively small and irregular dimension in a lane in most unhygienic conditions.",
+    "statute": "Section 12(1)(f) of the M.P. Accommodation Control Act, 1961.",
+    "argument": "The appellate court allowed the appeal on the ground that the business of the landlady's son was very poor and not growing at all and, therefore, the accommodation in his possession was not at all insufficient. The principal attack was on the jurisdiction of the High Court to interfere with the finding of fact in the second appeal.",
+    "analysis": "The High Court found that the need of the landlady was genuine and bona fide. The pathetic and pitiable condition of the landlady with no injury to the tenant except that he shall be required to carry on business from one shop only, do not call for interference with the order of the High Court.",
+    "judgement": "Dismissing the tenant's appeal, this Court held that the landlady had to part with possession of another room of the same house adjacent to the shop in dispute to another tenant. Financial difficulty apart, the tenant had two shops each with spacious accommodation facing the road while the landlady's son had one with comparatively small and irregular dimension in a lane in most unhygienic conditions, with not enough place for 3 or 4 machines with two or three helpers."
+  }
+}

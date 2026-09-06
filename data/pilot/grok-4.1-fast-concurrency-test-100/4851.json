@@ -1,0 +1,17 @@
+{
+  "doc_id": "4851",
+  "il_tur_doc_tokens": 1934,
+  "il_tur_summ_tokens": 400,
+  "prompt_token_count": 3736,
+  "candidates_token_count": 587,
+  "reasoning_tokens": 0,
+  "elapsed_s": 11.5,
+  "parse_ok": true,
+  "sections": {
+    "facts": "",
+    "statute": "'Wages' as defined in section 2(22) of the Employees' State Insurance Act, 1948 includes all remuneration paid or payable in cash to an employee, if the terms of the contract of employment, express or implied, were fulfilled and includes any payment to an employee in respect of any period of authorised leave, lock out, strike which is not illegal or lay off and other additional remuneration, if any, paid at intervals not exceeding two months, but does not include (a) any contribution paid by the employer to any pension fund or provident fund, or under this Act; (b) any travelling allowance or the value of travelling concession; (c) any sum paid to the person employed to defray special expenses entailed on him by the nature of his employment; or (d) any gratuity payable on discharge.",
+    "argument": "The question was whether the expression 'wages' as defined in section 2(22) of the Employees' State Insurance Act, 1948 includes 'House Rent Allowance', 'Night Shift Allowance', 'Heat, Gas and Dust Allowance' and 'Incentive Allowance' paid by an employer to his employees.",
+    "analysis": "Employees' State Insurance Act, 1948 is a piece of social welfare legislation. The definition of 'wages' is designedly wide. The definition on its plain reading is clear and unambiguous. Even if there is any ambiguity, the expression has to be given a liberal interpretation and receive beneficent construction. Wages as defined in section 2(22) of the Act includes not only remuneration paid or payable under the terms of the contract of employment, express or implied but further extends to other additional remuneration, if any paid at intervals not exceeding two months, though outside the terms of employment. 'Remuneration' under the first clause has to be under a contract of employment, express or implied while 'remuneration' under the third clause need not be under the contract of employment but may be any 'additional remuneration' outside the contract of employment. The inclusive part and the exclusive portion in the definition of 'wages' in section 2(22) clearly indicate that the expression 'wages' has been given a very wide meaning. The inclusive part of the definition read with the exclusive part in the definition clearly shows that the inclusive portion is not intended to be limited only to the items mentioned therein. Taking into consideration the excluding part in the definition and reading the definition as a whole the inclusive part, is only illustrative and tends to express the wide meaning and import of the word 'wages'.",
+    "judgement": "'Wages' as defined in section 2(22) of the Employees' State Insurance Act, 1948 must necessarily include 'House Rent Allowance', 'Night Shift Allowance', 'Heat, Gas and Dust Allowance' and 'Incentive Allowance'."
+  }
+}

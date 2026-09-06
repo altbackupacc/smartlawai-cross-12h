@@ -1,0 +1,16 @@
+{
+  "doc_id": "587",
+  "il_tur_doc_tokens": 4526,
+  "il_tur_summ_tokens": 351,
+  "prompt_token_count": 6196,
+  "candidates_token_count": 505,
+  "elapsed_s": 8.7,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The appellant was the auction purchaser of the property at a revenue sale held under the provisions of the Berar Land Revenue Code, 1928, for recovery of land revenue due. At the time of the attachment and sale, the property was in the possession of a Receiver appointed under Order 40, Rule 1 of the Code of Civil Procedure by the Bombay High Court. Notice of the attachment and sale was not given to the Receiver, nor was any leave of the Court taken for the sale. The Receiver instituted a suit for a declaration that the sale was a nullity or, at any rate, was illegal and liable to be set aside.",
+    "statute": "Berar Land Revenue Code, 1928, Sections 156, 157, and 192(1); Code of Civil Procedure, Order 40, Rule 1.",
+    "argument": "The auction purchaser contended that the sale without notice to the Receiver or without impleading him was not void but only voidable, and that, in any event, the suit was barred by the provisions of Sections 157 and 192 of the Berar Land Revenue Code, 1928.",
+    "analysis": "Sub-section (1) of Section 157 of the Code, which bars the institution of a suit to set aside a sale, is confined only to claims on the ground of irregularity or mistake in publishing or conducting the sale as referred to in Section 156; suits based on other grounds, including those referred to in sub-section (2) of Section 157, are not within the prohibition of sub-section (1). Section 192 of the Code is not applicable as the suit is not one simpliciter to set aside the sale held by the revenue authorities, but one for a declaration and consequential relief on grounds taken by the Receiver that are not covered by the specific provisions of the Code for setting aside a sale which the revenue authorities are empowered to determine, decide, or dispose of within the meaning of Section 192(1).",
+    "judgement": "Held, (1) that the sale was illegal in the absence of the leave of the Court and the necessary notice to the Receiver; and (2) that the suit was not barred by any of the provisions of the Code."
+  }
+}

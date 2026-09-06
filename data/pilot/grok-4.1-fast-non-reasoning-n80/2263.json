@@ -1,0 +1,17 @@
+{
+  "doc_id": "2263",
+  "il_tur_doc_tokens": 2366,
+  "il_tur_summ_tokens": 325,
+  "prompt_token_count": 3957,
+  "candidates_token_count": 460,
+  "reasoning_tokens": 0,
+  "elapsed_s": 3.0,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The land owned by the respondents were requisitioned by the first appellant under the Bombay Land Requisition Act for a public purpose viz., for establishing a new village site to resettle victims of flood. The respondents filed a writ petition in the High Court challenging the validity of the order. The High Court accepted the objection and, quashed the order.",
+    "statute": "The power to requisition under the Act could be exercised whether the public purpose was temporary or not. The words for any public purpose in section 5(1) are wide enough to include any purpose of whatsoever nature do not contain any restriction regarding the nature of that purpose. It places no limitation on the competent authority as to what kind of public purpose it should be for the valid exercise of its power nor does it confine the exercise of that power to a purpose which is a temporary one. There is no antitheses between the power to requisition and the power of compulsory acquisition under the Land Acquisition Act. Neither of the two Acts contains any provision under which it can be said that if one is acted upon, the other cannot.",
+    "argument": "The respondents filed a writ petition in the High Court challenging the validity of the order on the ground that since Act was a temporary Act extended until then upto 1963, the power to requisiton thereunder would inhere to the Government only during the time that it subsisted; so an order passed for a permanent purpose could not be in the contemplation of the Act.",
+    "analysis": "The words for any public purpose in section 5(1) are wide enough to include any purpose of whatsoever nature do not contain any restriction regarding the nature of that purpose. It places no limitation on the competent authority as to what kind of public purpose it should be for the valid exercise of its power nor does it confine the exercise of that power to a purpose which is a temporary one. There is no antitheses between the power to requisition and the power of compulsory acquisition under the Land Acquisition Act. Neither of the two Acts contains any provision under which it can be said that if one is acted upon, the other cannot.",
+    "judgement": "The excercise of that power for the purpose of rehabilitation of flood suffers was neither in abuse of nor unjustified under the Act."
+  }
+}

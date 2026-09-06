@@ -1,0 +1,17 @@
+{
+  "doc_id": "4068",
+  "il_tur_doc_tokens": 674,
+  "il_tur_summ_tokens": 273,
+  "prompt_token_count": 2002,
+  "candidates_token_count": 327,
+  "reasoning_tokens": 0,
+  "elapsed_s": 6.0,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The husband (petitioner) sought a decree for divorce of his wife (respondent) under Sec. 13(1)(b) of the Hindu Marriage Act. The single Judge and the Division Bench of the High Court did not grant dissolution of the marriage. In the instant case the minor frictions which got distorted into disruption being really the wear and tear of wedded fabric and there being a child whose future is to be largely moulded by the sweetness and survival of the wedlock.",
+    "statute": "Sec. 13(1)(b) of the Hindu Marriage Act.",
+    "argument": "",
+    "analysis": "The benign perspective which the Court must bring to bear upon a matrimonial cause is the resolution of the conflict between the parties and eventual restoration of the conjugal home. The first essay of the Judge aided by counsel is that of reconciliation of the ruptured marriage. The sanctity of marriage is the foundation of civilisation and therefore Court and counsel owe a duty to society to strain to the utmost to repair the snapped relations between the parties. The task becomes more insistent when an innocent off spring struggles in between the disputed parents. Judicial monitoring is a salutary prophylactic.",
+    "judgement": "the Court impressed upon counsel and the parties for resolution of the conflict and restoration of the conjugal home. They responded, put in their statements and the Court directed the husband and wife (petitioner and respondent) to live together in terms of their statements and hopefully, never to separate until death do them part. The Court further granted three months time to now whether the marriage is back on its wheels to run smoothly."
+  }
+}

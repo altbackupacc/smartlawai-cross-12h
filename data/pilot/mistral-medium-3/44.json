@@ -1,0 +1,16 @@
+{
+  "doc_id": "44",
+  "il_tur_doc_tokens": 2031,
+  "il_tur_summ_tokens": 382,
+  "prompt_token_count": 3541,
+  "candidates_token_count": 401,
+  "elapsed_s": 6.0,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The Essential Supplies (Temporary Powers) Act (XXIV Of 1946) came into force on 19th November, 1946. The appellant, who was convicted under section 7 of the Act in respect of an act committed on the 14th October, 1949, within Darjeeling, contended that the Act was not validly extended to the District of Darjeeling and was not therefore in force there on the date of the alleged offence.",
+    "statute": "Section 1 (3) of the Essential Supplies Act provided that it shall cease to have effect on the expiration of the period mentioned in section 4 of the India (Central Government and Legislature) Act, 1946.",
+    "argument": "The appellant contended that the Act was not validly extended to the District of Darjeeling and was not therefore in force there on the date of the alleged offence.",
+    "analysis": "The Governor's notification extended the Act to the District of Darjeeling without specifying any particular period for its applicability, the Act would remain in force in this district as long as it remained in force in the rest of India and a fresh notification of the Governor under section 92 (1) of the Government of India Act, 1935, was not necessary. Under the adaptations made under sections 9 and 19 of the Indian Independence Act the powers conferred on the Houses of Parliament became vested in the Constituent Assembly and the Act was in force in the district of Darjeeling on the date of the alleged contravention of the Act.",
+    "judgement": "There was no question of delegation of legislative power in this case as the Legislature had itself applied its mind and fixed the duration of the Act, leaving only the machinery to reach the maximum period to be worked out in a particular manner."
+  }
+}

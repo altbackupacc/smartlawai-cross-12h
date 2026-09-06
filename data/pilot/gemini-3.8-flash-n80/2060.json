@@ -1,0 +1,16 @@
+{
+  "doc_id": "2060",
+  "il_tur_doc_tokens": 2419,
+  "il_tur_summ_tokens": 446,
+  "prompt_token_count": 3709,
+  "candidates_token_count": 539,
+  "elapsed_s": 10.1,
+  "parse_ok": true,
+  "sections": {
+    "facts": "Selection to the post of Travelling Ticket Inspector from that of Travelling Ticket Examiner is made by a Selection Board under the Promotion and Selection Rules (Non-Gazetted) framed under the Indian Railway Establishment Code, whereby eligible staff up to four times the number of anticipated vacancies are called for written and viva voce tests under rule 8(7) to prepare a promotional panel. In 1959, in the ex-Muzaffarpur region of the North Eastern Railway, eight vacancies were to be filled immediately and an additional panel of six was to be drawn up. Due to an incorrect assessment, 92 persons, including the appellant, were called for examination instead of 56. A panel of 14 persons was prepared where the appellant was ranked 12th, and in the final list he was ranked 13th, but with an appended note stating that the selection of candidates 9 to 14 was provisional. Subsequently, under the orders of the General Manager as the prescribed authority, the names of candidates 9 to 14 were deleted from the panel. The appellant filed a writ petition under Article 226, which was dismissed by the High Court.",
+    "statute": "Article 226 and Article 311 of the Constitution of India; Rule 8(7) of the Promotion and Selection Rules (Non-Gazetted) framed under the Indian Railway Establishment Code.",
+    "argument": "The appellant contended that the deletion of his name from the panel amounted to a reduction in rank and that the order was bad in law because he was not given an opportunity to be heard before his name was deleted.",
+    "analysis": "If a civil servant has a right to a particular rank, a reduction from that rank operates as a penalty since he loses the emoluments and privileges of that rank; however, if he has no right to the particular rank, reduction from an officiating higher rank to his substantive lower rank does not ordinarily constitute punishment. Because the word 'provisional' was specifically noted against the appellant's name in the panel, he did not acquire any right to the post. As no penal consequences were visited upon him, the appellant could not complain of any infraction of the constitutional guarantee afforded to government servants, and the deletion of his name from the panel did not attract the provisions of Article 311.",
+    "judgement": "The deletion of the appellant's name from the panel did not attract the provisions of Article 311 of the Constitution, and the appeal against the dismissal of the petition was rejected."
+  }
+}

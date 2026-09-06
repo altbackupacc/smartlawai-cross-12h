@@ -1,0 +1,16 @@
+{
+  "doc_id": "2239",
+  "il_tur_doc_tokens": 6944,
+  "il_tur_summ_tokens": 1136,
+  "prompt_token_count": 10170,
+  "candidates_token_count": 563,
+  "elapsed_s": 5.2,
+  "parse_ok": true,
+  "sections": {
+    "facts": "On August 19, 1964, officers belonging to the Department of the appellant raided and searched the premises of a company and forcibly removed certain accounts and goods. The respondents challenged the department's action by writ petitions filed in the High Court under article 226 of the Constitution praying that the articles seized should be returned.",
+    "statute": "Section 41 of the Madras General Sales Tax Act, No. 1 of 1959.",
+    "argument": "It was contended by the petitioners that on a proper construction of section 41 of the Madras General Sales Tax Act, No. 1 of 1959, the officers of the Department had no authority to search the premises and seize any account books or goods found there; that if section 41(4) authorised seizure and confiscation of goods, it was beyond the legislative competence of the State Legislature, for it was not covered by item 54 of List II of the Seventh Schedule to the Constitution relating to 'taxes on the sale or purchase of goods'; and that if various provisions in section 41 were capable of being construed as authorising search and seizure, they were violative of article 19(1)(f) and (g) of the Constitution.",
+    "analysis": "The High Court allowed the Petitions holding, inter alia, that section 41 (2) did not permit a search being made and only provided for inspection; the power of seizure or confiscation in section 41(4) was beyond the legislative competence of the State Legislature; and that subsections (2), (3) and (4) of section 41 contained unreasonable restrictions and were violative of article 19(1) (f) and (g). The High Court also found with respect to one of the petitions that the search warrant had been issued without the application of mind by the magistrate and was bad.",
+    "judgement": "The appeals were dismissed. The court held that anything recovered during the search must be returned to the petitioners for the safeguards provided by section 165 of the Code of Criminal Procedure were not followed and in one case the finding of the High Court that the search warrant issued by the magistrate was bad on various grounds was not challenged; furthermore anything confiscated must also be returned as sub section (4) of section 41 must fall. The court also held that sub sections (2) and (3) of section 41 are not violative of article 19 as they are protected by clauses (5) and (6) of article 19 of the Constitution."
+  }
+}

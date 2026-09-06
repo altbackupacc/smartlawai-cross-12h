@@ -1,0 +1,16 @@
+{
+  "doc_id": "4129",
+  "il_tur_doc_tokens": 1597,
+  "il_tur_summ_tokens": 521,
+  "prompt_token_count": 2897,
+  "candidates_token_count": 578,
+  "elapsed_s": 4.5,
+  "parse_ok": true,
+  "sections": {
+    "facts": "The appellant, an Advocate, tenanted a building belonging to the respondent. The respondent sued the appellant for possession of the premises and by a compromise, the Appellant agreed to vacate the premises by a certain date. A decree in terms thereof was passed. Then the Act came into being which by extension of its operation applied to Chandigarh with effect from 4 11 1972.",
+    "statute": "Section 13 of the East Punjab Rent Restriction Act, 1949. The expression 'tenant' includes a 'tenant' continuing in possession after the termination of the tenancy in his favour. An advocate, under this Act, enjoys special protection.",
+    "argument": "It was contended that (i) had the decree been passed but a few days later, the Act would have admittedly interdicted the eviction because of Section 13 thereof; and had the decree been made and executed a day before the extension of the Act, the years of litigative procrastination of eviction might have been impossible. The salvation of the appellant is certain if he be a 'tenant' within the meaning of the Act and his eviction is certain if the definition of tenant does not cover him in its amplitude and (ii) that the effect of compromise decree is that the tenancy of the appellant has been terminated.",
+    "analysis": "The expression 'tenant' includes, by express provision, a quondam tenant whose nexus with the property is continuance in possession. The fact that a decree or any other process extinguishes the tenancy under the general law of real property does not terminate the status of a tenant under the Act having regard to the carefully drawn inclusive clause. Subudhi's case related to a statute where the definition in section 2(5) of that Act expressly included 'any person against whom a suit for ejectment is pending in a court of competent jurisdiction' and more pertinent to the point specially excluded 'a person against whom a decree or order for eviction has been made by such a court.' The text, reinforced by the context, especially of section 13, convincingly includes ex-tenants against whom decrees for eviction might have been passed, whether on compromise or otherwise.",
+    "judgement": "Nobody has a case that the appellant is not continuously in possession. The conclusion is inevitable that he remains tenant and enjoys immunity under section 13(1) of the Act. The execution proceedings must therefore fail because the statutory road block cannot be removed. A conflict is best resolved by the parties as both sides in the present case have produced an enlightened settlement by an agreement to sell the property in dispute by the respondent to the appellant."
+  }
+}
