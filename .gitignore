@@ -23,3 +23,7 @@ data/raw/
 data/processed/*
 !data/processed/near_duplicate_pairs.json
 data/ocr_wer_gold/pages/
+# Raw downloaded source PDFs for the OCR-WER gold-set prep tooling --
+# regenerable via data/pilot/download_ocr_source_pdfs*.py, large binary data.
+data/pilot/ocr_raw_pdfs/
+data/pilot/ocr_raw_pdfs_hc/

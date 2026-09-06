@@ -428,7 +428,84 @@ open items are explicitly non-blocking: the 200-item human validation pass,
 
 ---
 
-## 9. Git / PR status
+## 9. OCR-WER gold set: sourced and produced (50/50 real scanned pages)
+
+Built the missing prep tooling and produced the actual 50-page gold set
+(pending only human transcription now). All CPU-only, local, no GCP/GPU —
+confirmed again this session that neither the download nor detection nor
+rendering steps have any compute-scale angle.
+
+**Source hunting hit two real dead ends before working**, each diagnosed
+rather than assumed:
+
+1. **Kaggle "SC Judgments India 1950-2024"** (`adarshsingh0903/...`):
+   organized as one directory per year, looked ideal. `kagglehub`'s
+   per-folder `path=` download 404'd — turned out this specific dataset is
+   stored as a single opaque 6.4GB archive blob (`1.archive`), not
+   individually-listable files; no per-year targeting is possible against
+   it via any tool. Downloaded the full archive instead (succeeded at
+   16MB/s after an earlier attempt hit a `ConnectionError` at 26MB — wrapped
+   in an auto-retry script, `data/pilot/run_ocr_download_supervised.sh`,
+   same pattern as the Path 2 production run's supervisor).
+   **Then found the deeper problem**: every 1950 document's text was
+   cleanly extractable (0/61 pages flagged as scanned). Inspected the
+   extracted text directly — clean structured fields (`Equivalent
+   citations:`, `Bench:`, `PETITIONER:`/`RESPONDENT:`) that no 1950s
+   typewriter+scan could produce. Root cause: this dataset is *"scraped
+   and compiled from Indian Kanoon"*, which hosts judgments as its own
+   clean re-transcribed text, not scans of the original filings. No year
+   in this dataset would ever contain a genuine scan — a property of the
+   source, not fixable by widening the year range.
+2. **`vanga/indian-high-court-judgments`** (AWS Open Data, public S3,
+   `--no-sign-request`): real per-court/per-year prefixes this time
+   (confirmed via direct unauthenticated HTTPS `ListObjectsV2` calls
+   against the bucket, no `aws` CLI needed) — `data/tar/year=1950/` etc.,
+   each court/bench a separate small tar (whole 1947-1965 range summed to
+   ~20MB, checked before downloading anything). **Found a real gotcha the
+   docs don't mention**: the S3 `year=` partition is the *case-filing*
+   year parsed from the case number, not the decision date — e.g.
+   `HCBM020000041950_1_2006-11-21.pdf` sits under `year=1950` but was
+   decided in 2006. Filtering by partition alone would have silently
+   pulled modern digital documents. Fixed by parsing the real order date
+   from each filename's trailing `_YYYY-MM-DD.pdf` and keeping only
+   `<= 1970` regardless of which year-partition a file came from
+   (`data/pilot/download_ocr_source_pdfs_hc.py`) — 45 genuinely
+   old-order-date PDFs kept out of 308 downloaded.
+   **Then found a second, subtler problem** in the detector itself: many
+   of these 45 PDFs already carry a low-quality OCR text layer embedded by
+   whoever digitized them, so `core/ocr.py`'s own `DIGITAL_TEXT_MIN_CHARS`
+   text-length heuristic (reused from the serving pipeline) wrongly
+   classified them as "digital" — only 2/135 pages flagged. Visually
+   confirmed one flagged-"digital" page was genuinely a scan (rendered it,
+   looked at it directly: visible scan noise, typewriter irregularities,
+   a handwritten margin tick) despite having "clean-looking" extracted
+   text. Root cause: the embedded OCR layer produces plausible-length text
+   even though the page is an image underneath. Fixed by switching
+   detection to check for an embedded raster image covering ≥50% of the
+   page area instead of text length (confirmed via `page.images`: the
+   genuine scan had a 612×1008 JPEG exactly matching its page's mediabox;
+   a genuinely digital "Proceeding Sheet" page had zero embedded images).
+   This raised the hit rate to 132/135 pages.
+
+**Result**: 50/50 real scanned pages in `data/ocr_wer_gold/pages/`, all
+genuine 1948-1958 Kerala High Court judgments (order dates confirmed via
+filename, several visually spot-checked), manifest recorded at
+`data/ocr_wer_gold/manifest.json` (doesn't conflict with `.gitignore`'s
+`data/ocr_wer_gold/pages/` rule — one directory up). `eval/prepare_ocr_gold.py`
+holds the final image-coverage-based detector; the two source download
+scripts (`data/pilot/download_ocr_source_pdfs.py` for the abandoned Kaggle
+path, `download_ocr_source_pdfs_hc.py` for the working AWS path) are both
+kept for the record.
+
+**What's left**: hand-transcribe each of the 50 pages into
+`data/ocr_wer_gold/transcripts/{page_id}.txt` (human-only work, per
+`RESEARCH.md` T5 — cannot be automated or approximated), then run
+`python -m eval.ocr_wer`, which is already built and tested end-to-end
+against the hard-fail path.
+
+---
+
+## 10. Git / PR status
 
 Branch: `m1-data-foundation`. The original PR
 [kramjiy/smartlawai#5](https://github.com/kramjiy/smartlawai/pull/5) was
