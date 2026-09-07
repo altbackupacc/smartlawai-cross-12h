@@ -1,0 +1,72 @@
+{
+  "bns-2023": {
+    "act_id": "AC_CEN_5_23_00048_2023-45_1719292564123",
+    "sections": 358,
+    "repealed_sections": 0,
+    "enforcement_date": "2024-07-01",
+    "sections_with_text": 358
+  },
+  "bnss-2023": {
+    "act_id": "AC_CEN_5_23_00049_202346_1719552320687",
+    "sections": 531,
+    "repealed_sections": 0,
+    "enforcement_date": "2024-07-01",
+    "sections_with_text": 531
+  },
+  "bsa-2023": {
+    "act_id": "AC_CEN_5_23_00049_2023-47_1719292804654",
+    "sections": 170,
+    "repealed_sections": 0,
+    "enforcement_date": "2024-07-01",
+    "sections_with_text": 170
+  },
+  "contract-1872": {
+    "act_id": "AC_CEN_3_20_00035_187209_1523268996428",
+    "sections": 268,
+    "repealed_sections": 0,
+    "enforcement_date": "1872-09-01",
+    "sections_with_text": 268
+  },
+  "arbitration-1996": {
+    "act_id": "AC_CEN_3_46_00004_199626_1517807323919",
+    "sections": 106,
+    "repealed_sections": 0,
+    "enforcement_date": "1996-08-22",
+    "sections_with_text": 93
+  },
+  "consumer-2019": {
+    "act_id": "AC_CEN_21_44_00007_201935_1596441164903",
+    "sections": 107,
+    "repealed_sections": 0,
+    "enforcement_date": "None",
+    "sections_with_text": 107
+  },
+  "cpc-1908": {
+    "act_id": "AC_CEN_3_20_00051_190805_1523340333624",
+    "sections": 171,
+    "repealed_sections": 0,
+    "enforcement_date": "1909-01-01",
+    "sections_with_text": 171
+  },
+  "ni-1881": {
+    "act_id": "AC_CEN_2_33_00042_00042_1523271998701",
+    "sections": 155,
+    "repealed_sections": 0,
+    "enforcement_date": "1882-03-01",
+    "sections_with_text": 155
+  },
+  "it-2000": {
+    "act_id": "AC_CEN_45_76_00001_200021_1517807324077",
+    "sections": 125,
+    "repealed_sections": 0,
+    "enforcement_date": "2000-10-17",
+    "sections_with_text": 125
+  },
+  "stamp-1899": {
+    "act_id": "AC_CEN_2_2_00036_189902_1523339055436",
+    "sections": 97,
+    "repealed_sections": 0,
+    "enforcement_date": "1899-07-01",
+    "sections_with_text": 97
+  }
+}
