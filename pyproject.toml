@@ -70,6 +70,18 @@ train = [
   "accelerate>=0.30,<0.35",
   "datasets>=2.19,<3.0",
 ]
+# M6 evaluation harness. Single-purpose like every group above: metric
+# libraries + the statistical machinery, nothing else. rouge-score and
+# bert-score are the two "never hand-rolled" libraries RESEARCH.md §5 names by
+# name; scipy backs bootstrap resampling and ECE binning in eval/stats.py.
+# NOTE: bert-score pulls torch. It is NOT installed in this repo today and no
+# test has ever exercised bertscore_f1 -- eval/metrics.py imports it lazily and
+# tests/test_metrics.py skips with that reason stated (M6_ONBOARDING.md §18).
+eval = [
+  "rouge-score>=0.1.2",
+  "bert-score>=0.3.13",
+  "scipy>=1.11",
+]
 # CLI and UI are dev-facing skeleton entrypoints (M0) -- core/adapters/registry
 # code never imports these, so they stay out of core `dependencies`, matching
 # the single-purpose shape of every extras group above.

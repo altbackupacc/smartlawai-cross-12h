@@ -1,0 +1,2073 @@
+{
+  "error_analysis": {
+    "decisions": {
+      "ANSWER": 42
+    },
+    "verification_reasons": {
+      "ok:stub_pass": 42
+    }
+  },
+  "failures": [],
+  "gold_sets": {
+    "entailment": {
+      "ci_halfwidth_at_p50": 0.1549,
+      "duplication_rate_achieved": 0.0,
+      "duplication_rate_target": 1.0,
+      "label_counts": {
+        "entailed": 20,
+        "not_entailed": 20
+      },
+      "mean_agreement": null,
+      "n": 40,
+      "n_with_agreement": 0,
+      "n_with_duplicate_annotation": 0,
+      "name": "entailment",
+      "path": "C:\\Users\\Mahantesh\\Downloads\\smartlawai-1_version\\smartlawai-1\\eval\\gold\\entailment.jsonl",
+      "sha256": "32bbb82e6680cdce957712d6b47cd014d1fd2c906c20a9c0e402df49ab0c7e33",
+      "target_n": 350
+    },
+    "groundedness": {
+      "ci_halfwidth_at_p50": 0.1549,
+      "duplication_rate_achieved": 0.0,
+      "duplication_rate_target": 1.0,
+      "label_counts": {
+        "entailed": 20,
+        "not_entailed": 20
+      },
+      "mean_agreement": null,
+      "n": 40,
+      "n_with_agreement": 0,
+      "n_with_duplicate_annotation": 0,
+      "name": "groundedness",
+      "path": "C:\\Users\\Mahantesh\\Downloads\\smartlawai-1_version\\smartlawai-1\\eval\\gold\\groundedness.jsonl",
+      "sha256": "8ef7d5fa451885c655839cfb7e6cd6eb9c1d61528a2f29ff9eb0961df4c832c2",
+      "target_n": 350
+    },
+    "oos": {
+      "ci_halfwidth_at_p50": 0.1732,
+      "duplication_rate_achieved": 0.0,
+      "duplication_rate_target": 0.3,
+      "label_counts": {
+        "advice_seeking": 10,
+        "in_scope": 12,
+        "out_of_scope": 10
+      },
+      "mean_agreement": null,
+      "n": 32,
+      "n_with_agreement": 0,
+      "n_with_duplicate_annotation": 0,
+      "name": "oos",
+      "path": "C:\\Users\\Mahantesh\\Downloads\\smartlawai-1_version\\smartlawai-1\\eval\\gold\\oos.jsonl",
+      "sha256": "3a200d29e9ee67f07867d66f0f123bf854c23647e4b4b193e98e4e814d88a2d7",
+      "target_n": 350
+    },
+    "repealed": {
+      "ci_halfwidth_at_p50": 0.1681,
+      "duplication_rate_achieved": 0.0,
+      "duplication_rate_target": 0.0,
+      "label_counts": {
+        "in_force": 8,
+        "repealed": 26
+      },
+      "mean_agreement": null,
+      "n": 34,
+      "n_with_agreement": 0,
+      "n_with_duplicate_annotation": 0,
+      "name": "repealed",
+      "path": "C:\\Users\\Mahantesh\\Downloads\\smartlawai-1_version\\smartlawai-1\\eval\\gold\\repealed.jsonl",
+      "sha256": "79cfe80cfee9c2dff1408d6ced4170f1a923d2e6018157cbced0206b5daeca05",
+      "target_n": 350
+    },
+    "retrieval": {
+      "ci_halfwidth_at_p50": 0.3099,
+      "duplication_rate_achieved": 0.0,
+      "duplication_rate_target": 1.0,
+      "label_counts": {},
+      "mean_agreement": null,
+      "n": 10,
+      "n_with_agreement": 0,
+      "n_with_duplicate_annotation": 0,
+      "name": "retrieval",
+      "path": "C:\\Users\\Mahantesh\\Downloads\\smartlawai-1_version\\smartlawai-1\\eval\\gold\\retrieval.jsonl",
+      "sha256": "de6036aa3f00538d13d96ed7a7bbb0ceb2753080189d79a68753febade35ede9",
+      "target_n": 200
+    }
+  },
+  "items": [
+    {
+      "answer": "[stub] placeholder answer to: What deduction did the assessee claim and on what basis?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "retrieval-seed-0000",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What deduction did the assessee claim and on what basis?",
+      "stage_durations_ms": {
+        "decide": 0.01689998316578567,
+        "generate": 0.00869997893460095,
+        "rerank": 0.021700019715353847,
+        "retrieve": 1.5320999955292791,
+        "verify": 0.006499991286545992
+      },
+      "task": "retrieval",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-35724e9231",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What did the High Court hold before the appeal?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "retrieval-seed-0001",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What did the High Court hold before the appeal?",
+      "stage_durations_ms": {
+        "decide": 0.0048999791033566,
+        "generate": 0.007599999662488699,
+        "rerank": 0.01610000617802143,
+        "retrieve": 1.4624999894294888,
+        "verify": 0.005099980626255274
+      },
+      "task": "retrieval",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-ee6eb22bbb",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Which statutory provision was construed by the Court?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "retrieval-seed-0002",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Which statutory provision was construed by the Court?",
+      "stage_durations_ms": {
+        "decide": 0.0033999967854470015,
+        "generate": 0.00589998671784997,
+        "rerank": 0.011500000255182385,
+        "retrieve": 0.8594999962951988,
+        "verify": 0.008300004992634058
+      },
+      "task": "retrieval",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-09cd50bd56",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What is the meaning the Court gave to 'capital charge'?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "retrieval-seed-0003",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What is the meaning the Court gave to 'capital charge'?",
+      "stage_durations_ms": {
+        "decide": 0.0037999998312443495,
+        "generate": 0.005400012014433742,
+        "rerank": 0.010599993402138352,
+        "retrieve": 0.8393999887630343,
+        "verify": 0.0036999990697950125
+      },
+      "task": "retrieval",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-7d71ec044f",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: On what ground was the appeal allowed or dismissed?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "retrieval-seed-0004",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "On what ground was the appeal allowed or dismissed?",
+      "stage_durations_ms": {
+        "decide": 0.0042000028770416975,
+        "generate": 0.008500006515532732,
+        "rerank": 0.013500015484169126,
+        "retrieve": 0.7373999978881329,
+        "verify": 0.0048999791033566
+      },
+      "task": "retrieval",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-d7b3c26b23",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What were the facts giving rise to the dispute?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "retrieval-seed-0005",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What were the facts giving rise to the dispute?",
+      "stage_durations_ms": {
+        "decide": 0.0034999975468963385,
+        "generate": 0.005500012775883079,
+        "rerank": 0.014500023098662496,
+        "retrieve": 0.7211999909486622,
+        "verify": 0.0039000005926936865
+      },
+      "task": "retrieval",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-8b2b2f531b",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Which earlier decisions did the Court rely on?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "retrieval-seed-0006",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Which earlier decisions did the Court rely on?",
+      "stage_durations_ms": {
+        "decide": 0.019500002963468432,
+        "generate": 0.0048000074457377195,
+        "rerank": 0.009800016414374113,
+        "retrieve": 0.7811999821569771,
+        "verify": 0.0034999975468963385
+      },
+      "task": "retrieval",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-25388389c9",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What order as to costs did the Court make?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "retrieval-seed-0007",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What order as to costs did the Court make?",
+      "stage_durations_ms": {
+        "decide": 0.0040000013541430235,
+        "generate": 0.007200025720521808,
+        "rerank": 0.011800002539530396,
+        "retrieve": 0.824799994006753,
+        "verify": 0.0044000043999403715
+      },
+      "task": "retrieval",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-f7c36ce04c",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What was the question referred to the High Court?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "retrieval-seed-0008",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What was the question referred to the High Court?",
+      "stage_durations_ms": {
+        "decide": 0.0040000013541430235,
+        "generate": 0.005500012775883079,
+        "rerank": 0.012900010915473104,
+        "retrieve": 0.7865999941714108,
+        "verify": 0.0036999990697950125
+      },
+      "task": "retrieval",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-b6d4fbf46a",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: How did the Court distinguish the authorities cited by the appellant?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "retrieval-seed-0009",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "How did the Court distinguish the authorities cited by the appellant?",
+      "stage_durations_ms": {
+        "decide": 0.0033999967854470015,
+        "generate": 0.00790000194683671,
+        "rerank": 0.012500007869675756,
+        "retrieve": 0.819500011857599,
+        "verify": 0.003100023604929447
+      },
+      "task": "retrieval",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-3dbaff40d1",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What did the court hold about the deductibility of municipal property tax?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0000",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What did the court hold about the deductibility of municipal property tax?",
+      "stage_durations_ms": {
+        "decide": 0.0033999967854470015,
+        "generate": 0.005199981387704611,
+        "rerank": 0.012600008631125093,
+        "retrieve": 0.8262000046670437,
+        "verify": 0.0036999990697950125
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-841036acd7",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Which section of the Indian Income Tax Act was in issue in this appeal?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0001",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Which section of the Indian Income Tax Act was in issue in this appeal?",
+      "stage_durations_ms": {
+        "decide": 0.0030999945010989904,
+        "generate": 0.004499976057559252,
+        "rerank": 0.010299991117790341,
+        "retrieve": 0.7658999820705503,
+        "verify": 0.006499991286545992
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-429c578e37",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Summarise the facts as recorded in the judgment.",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0002",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Summarise the facts as recorded in the judgment.",
+      "stage_durations_ms": {
+        "decide": 0.0033999967854470015,
+        "generate": 0.0053000112529844046,
+        "rerank": 0.011000025551766157,
+        "retrieve": 0.7159000087995082,
+        "verify": 0.0032999960239976645
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-51c86f7ff8",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What was the ratio decidendi of this decision?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0003",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What was the ratio decidendi of this decision?",
+      "stage_durations_ms": {
+        "decide": 0.00300002284348011,
+        "generate": 0.0044000043999403715,
+        "rerank": 0.010500021744519472,
+        "retrieve": 0.6573999999091029,
+        "verify": 0.0030999945010989904
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-5aae923102",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: On what date was this appeal decided?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0004",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "On what date was this appeal decided?",
+      "stage_durations_ms": {
+        "decide": 0.006700021913275123,
+        "generate": 0.0047000066842883825,
+        "rerank": 0.00999998883344233,
+        "retrieve": 0.6397000106517226,
+        "verify": 0.0030999945010989904
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-ad09848663",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Who appeared as counsel for the appellant?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0005",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Who appeared as counsel for the appellant?",
+      "stage_durations_ms": {
+        "decide": 0.0035999983083456755,
+        "generate": 0.005400012014433742,
+        "rerank": 0.011600001016631722,
+        "retrieve": 0.6989999965298921,
+        "verify": 0.0038999714888632298
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-7a192c98a1",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What is the punishment prescribed for cheating under Indian law?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0006",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What is the punishment prescribed for cheating under Indian law?",
+      "stage_durations_ms": {
+        "decide": 0.0031999952625483274,
+        "generate": 0.005299982149153948,
+        "rerank": 0.01610000617802143,
+        "retrieve": 0.8651999814901501,
+        "verify": 0.0039000005926936865
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-955ce46490",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Does this contract contain an indemnity clause?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0007",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Does this contract contain an indemnity clause?",
+      "stage_durations_ms": {
+        "decide": 0.0044000043999403715,
+        "generate": 0.006699992809444666,
+        "rerank": 0.01409999094903469,
+        "retrieve": 0.9838000114541501,
+        "verify": 0.0047000066842883825
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-906bfe1610",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What is the limitation period stated in the document?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0008",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What is the limitation period stated in the document?",
+      "stage_durations_ms": {
+        "decide": 0.0035999983083456755,
+        "generate": 0.005700014298781753,
+        "rerank": 0.012300006346777081,
+        "retrieve": 0.9104000055231154,
+        "verify": 0.0040000013541430235
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-eb28e787ae",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Which High Court's order was under appeal here?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0009",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Which High Court's order was under appeal here?",
+      "stage_durations_ms": {
+        "decide": 0.0042000028770416975,
+        "generate": 0.01069999416358769,
+        "rerank": 0.012600008631125093,
+        "retrieve": 0.9025000035762787,
+        "verify": 0.0047000066842883825
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-cd17f2454a",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What does the judgment say about the burden of proof?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0010",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What does the judgment say about the burden of proof?",
+      "stage_durations_ms": {
+        "decide": 0.0042000028770416975,
+        "generate": 0.006400019628927112,
+        "rerank": 0.013899989426136017,
+        "retrieve": 1.1611999943852425,
+        "verify": 0.0046000059228390455
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-e76a3864b4",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Explain the difference between a lease and an agreement to lease as set out in this judgment.",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0011",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Explain the difference between a lease and an agreement to lease as set out in this judgment.",
+      "stage_durations_ms": {
+        "decide": 0.0031999952625483274,
+        "generate": 0.007299997378140688,
+        "rerank": 0.01170000177808106,
+        "retrieve": 0.9814999939408153,
+        "verify": 0.0031999952625483274
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-90a4bbff38",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What is the capital of France?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0012",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What is the capital of France?",
+      "stage_durations_ms": {
+        "decide": 0.0037999998312443495,
+        "generate": 0.006199989002197981,
+        "rerank": 0.015400000847876072,
+        "retrieve": 1.1519999825395644,
+        "verify": 0.0036999990697950125
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-c03dbe8f6a",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Write me a poem about the monsoon.",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0013",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Write me a poem about the monsoon.",
+      "stage_durations_ms": {
+        "decide": 0.0035999983083456755,
+        "generate": 0.005799985956400633,
+        "rerank": 0.01379998866468668,
+        "retrieve": 0.9947000071406364,
+        "verify": 0.0034999975468963385
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-5fc3021f03",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: How do I install Python on Windows?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0014",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "How do I install Python on Windows?",
+      "stage_durations_ms": {
+        "decide": 0.0033999967854470015,
+        "generate": 0.00589998671784997,
+        "rerank": 0.01309998333454132,
+        "retrieve": 0.8891000179573894,
+        "verify": 0.007399998139590025
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-c8aa3958df",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What is the current price of gold?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0015",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What is the current price of gold?",
+      "stage_durations_ms": {
+        "decide": 0.0032999960239976645,
+        "generate": 0.004799978341907263,
+        "rerank": 0.015500001609325409,
+        "retrieve": 0.7750999939162284,
+        "verify": 0.0031999952625483274
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-ecdb8453a6",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Under Delaware corporate law, what fiduciary duty does a director owe?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0016",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Under Delaware corporate law, what fiduciary duty does a director owe?",
+      "stage_durations_ms": {
+        "decide": 0.0032999960239976645,
+        "generate": 0.009100011084228754,
+        "rerank": 0.011900003300979733,
+        "retrieve": 0.7176999934017658,
+        "verify": 0.003400025889277458
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-e6fbaffb0b",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What does the UK Theft Act 1968 say about handling stolen goods?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0017",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What does the UK Theft Act 1968 say about handling stolen goods?",
+      "stage_durations_ms": {
+        "decide": 0.0028999929782003164,
+        "generate": 0.008500006515532732,
+        "rerank": 0.010299991117790341,
+        "retrieve": 0.7055999885778874,
+        "verify": 0.0028999929782003164
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-4fdc5bc6a9",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Can you book me a flight to Delhi?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0018",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Can you book me a flight to Delhi?",
+      "stage_durations_ms": {
+        "decide": 0.006500020390376449,
+        "generate": 0.005500012775883079,
+        "rerank": 0.012900010915473104,
+        "retrieve": 0.7514999888371676,
+        "verify": 0.0043000036384910345
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-e2dc07d12b",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What is the weather in Bengaluru tomorrow?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0019",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What is the weather in Bengaluru tomorrow?",
+      "stage_durations_ms": {
+        "decide": 0.0041000021155923605,
+        "generate": 0.005400012014433742,
+        "rerank": 0.012300006346777081,
+        "retrieve": 0.9304000122938305,
+        "verify": 0.007700000423938036
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-527c3e8dab",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Translate this judgment into French.",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0020",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Translate this judgment into French.",
+      "stage_durations_ms": {
+        "decide": 0.003200024366378784,
+        "generate": 0.0048000074457377195,
+        "rerank": 0.010299991117790341,
+        "retrieve": 0.8055999933276325,
+        "verify": 0.0030999945010989904
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-85e772939c",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Hello, are you there?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0021",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Hello, are you there?",
+      "stage_durations_ms": {
+        "decide": 0.0040000013541430235,
+        "generate": 0.005600013537332416,
+        "rerank": 0.01300001167692244,
+        "retrieve": 0.759899994591251,
+        "verify": 0.0039000005926936865
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-d3e0246e8b",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Should I file this appeal or accept the settlement?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0022",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Should I file this appeal or accept the settlement?",
+      "stage_durations_ms": {
+        "decide": 0.0041000021155923605,
+        "generate": 0.005700014298781753,
+        "rerank": 0.012600008631125093,
+        "retrieve": 1.0076000180561095,
+        "verify": 0.0041000021155923605
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-ce0412aed9",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Will I win my case if I rely on this judgment?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0023",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Will I win my case if I rely on this judgment?",
+      "stage_durations_ms": {
+        "decide": 0.0034999975468963385,
+        "generate": 0.0053000112529844046,
+        "rerank": 0.01170000177808106,
+        "retrieve": 0.6573999999091029,
+        "verify": 0.0033999967854470015
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-7c8f90713a",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Am I liable to pay this tax?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0024",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Am I liable to pay this tax?",
+      "stage_durations_ms": {
+        "decide": 0.0034999975468963385,
+        "generate": 0.0049000082071870565,
+        "rerank": 0.01069999416358769,
+        "retrieve": 0.6332999910227954,
+        "verify": 0.0035999983083456755
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-a2e5a6adf0",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: What should I do about my landlord withholding my deposit?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0025",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "What should I do about my landlord withholding my deposit?",
+      "stage_durations_ms": {
+        "decide": 0.003400025889277458,
+        "generate": 0.009000010322779417,
+        "rerank": 0.011299998732283711,
+        "retrieve": 0.6289000157266855,
+        "verify": 0.0034999975468963385
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-8bc34fb8a6",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Is my employer's termination of my contract legal?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0026",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Is my employer's termination of my contract legal?",
+      "stage_durations_ms": {
+        "decide": 0.0033999967854470015,
+        "generate": 0.005599984433501959,
+        "rerank": 0.021899992134422064,
+        "retrieve": 0.6307000003289431,
+        "verify": 0.0034999975468963385
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-c7c265dd4d",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: How much compensation can I claim for my injury?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0027",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "How much compensation can I claim for my injury?",
+      "stage_durations_ms": {
+        "decide": 0.0034999975468963385,
+        "generate": 0.004999979864805937,
+        "rerank": 0.010099989594891667,
+        "retrieve": 0.707699975464493,
+        "verify": 0.0032999960239976645
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-acedb915f2",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Should I plead guilty to this charge?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0028",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Should I plead guilty to this charge?",
+      "stage_durations_ms": {
+        "decide": 0.0036999990697950125,
+        "generate": 0.00899998121894896,
+        "rerank": 0.01279998105019331,
+        "retrieve": 0.7985999982338399,
+        "verify": 0.0041000021155923605
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-90c10ffdbd",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Do I need a lawyer for this matter, or can I appear myself?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0029",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Do I need a lawyer for this matter, or can I appear myself?",
+      "stage_durations_ms": {
+        "decide": 0.0039000005926936865,
+        "generate": 0.005499983672052622,
+        "rerank": 0.012399978004395962,
+        "retrieve": 1.0021000052802265,
+        "verify": 0.0037999998312443495
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-4f65c5cb31",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Which of my two contracts gives me the stronger position?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0030",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Which of my two contracts gives me the stronger position?",
+      "stage_durations_ms": {
+        "decide": 0.003200024366378784,
+        "generate": 0.0048000074457377195,
+        "rerank": 0.010899995686486363,
+        "retrieve": 0.7805000059306622,
+        "verify": 0.010599993402138352
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-2f77d81e7b",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "answer": "[stub] placeholder answer to: Can I be arrested for what I posted online yesterday?",
+      "cost": {
+        "estimated_usd": 0.0,
+        "generator_tokens": 0
+      },
+      "decision": "ANSWER",
+      "error": null,
+      "item_id": "oos-seed-0031",
+      "n_candidates": 6,
+      "n_claims": 1,
+      "question": "Can I be arrested for what I posted online yesterday?",
+      "stage_durations_ms": {
+        "decide": 0.0033999967854470015,
+        "generate": 0.00899998121894896,
+        "rerank": 0.012300006346777081,
+        "retrieve": 0.6893000099807978,
+        "verify": 0.0032999960239976645
+      },
+      "task": "oos",
+      "top_chunk_ids": [
+        "ch-e9483ac526",
+        "ch-cab24d2ac6",
+        "ch-3eb6dedd9d",
+        "ch-844d1683aa",
+        "ch-4569a90717"
+      ],
+      "trace_id": "tr-6fa72a012a",
+      "verification": [
+        {
+          "reason": "stub_pass",
+          "score": 1.0,
+          "status": "ok"
+        }
+      ]
+    }
+  ],
+  "manifest": {
+    "backend": "LocalBackend",
+    "corpus_documents": [
+      "sample_judgment.txt"
+    ],
+    "duration_s": 2.188,
+    "encoder": "StubEncoder",
+    "generated_at": "2026-09-05T17:17:49.241398+00:00",
+    "generator_model": "StubGenerator",
+    "git_commit": "9f29124",
+    "gold_set_checksums": {
+      "entailment": "32bbb82e6680cdce957712d6b47cd014d1fd2c906c20a9c0e402df49ab0c7e33",
+      "groundedness": "8ef7d5fa451885c655839cfb7e6cd6eb9c1d61528a2f29ff9eb0961df4c832c2",
+      "oos": "3a200d29e9ee67f07867d66f0f123bf854c23647e4b4b193e98e4e814d88a2d7",
+      "repealed": "79cfe80cfee9c2dff1408d6ced4170f1a923d2e6018157cbced0206b5daeca05",
+      "retrieval": "de6036aa3f00538d13d96ed7a7bbb0ceb2753080189d79a68753febade35ede9"
+    },
+    "harness_version": "1.0.0",
+    "n_corpus_documents": 1,
+    "n_items_run": 42,
+    "pipeline_is_stubbed": true,
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.0",
+    "reranker": "StubReranker",
+    "seed": 42,
+    "split": "dev",
+    "split_version": null,
+    "split_version_note": "data/splits/train.json does not exist yet (M1 not landed)",
+    "verifier": "StubVerifier"
+  },
+  "missing_gold_sets": {},
+  "reliability_diagram": [],
+  "sections": {
+    "answer": [
+      {
+        "detail": {
+          "n_total": 40,
+          "n_unavailable": 0
+        },
+        "n": 40,
+        "name": "groundedness.groundedness_rate",
+        "reason": "",
+        "status": "ok",
+        "value": 1.0
+      },
+      {
+        "detail": {
+          "n_total": 40,
+          "n_unavailable": 0
+        },
+        "n": 40,
+        "name": "groundedness.hallucination_rate",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "groundedness.judge_agreement_kappa",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "groundedness.judge_accuracy_vs_human",
+        "reason": "",
+        "status": "ok",
+        "value": 0.5
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "groundedness.extractiveness_4gram",
+        "reason": "",
+        "status": "ok",
+        "value": 0.3397
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "groundedness.rouge1_claim_vs_passage",
+        "reason": "",
+        "status": "ok",
+        "value": 0.3299
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "groundedness.rouge2_claim_vs_passage",
+        "reason": "",
+        "status": "ok",
+        "value": 0.2276
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "groundedness.rougeL_claim_vs_passage",
+        "reason": "",
+        "status": "ok",
+        "value": 0.2864
+      },
+      {
+        "detail": {
+          "n_total": 40,
+          "n_unavailable": 0
+        },
+        "n": 40,
+        "name": "entailment.groundedness_rate",
+        "reason": "",
+        "status": "ok",
+        "value": 1.0
+      },
+      {
+        "detail": {
+          "n_total": 40,
+          "n_unavailable": 0
+        },
+        "n": 40,
+        "name": "entailment.hallucination_rate",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "entailment.judge_agreement_kappa",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "entailment.judge_accuracy_vs_human",
+        "reason": "",
+        "status": "ok",
+        "value": 0.5
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "entailment.extractiveness_4gram",
+        "reason": "",
+        "status": "ok",
+        "value": 0.4843
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "entailment.rouge1_claim_vs_passage",
+        "reason": "",
+        "status": "ok",
+        "value": 0.4003
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "entailment.rouge2_claim_vs_passage",
+        "reason": "",
+        "status": "ok",
+        "value": 0.3197
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "entailment.rougeL_claim_vs_passage",
+        "reason": "",
+        "status": "ok",
+        "value": 0.3759
+      }
+    ],
+    "calibration": [
+      {
+        "detail": {},
+        "n": 42,
+        "name": "ece",
+        "reason": "no_gold_correctness_labels_for_generated_claims",
+        "status": "unavailable",
+        "value": null
+      }
+    ],
+    "citation": [
+      {
+        "detail": {},
+        "n": 34,
+        "name": "registry_coverage_rate",
+        "reason": "no_registry_available_M4_not_started",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 34,
+        "name": "citation_validity_rate",
+        "reason": "no_registry_available_M4_not_started",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 34,
+        "name": "repealed_citation_rate",
+        "reason": "no_registry_available_M4_not_started",
+        "status": "unavailable",
+        "value": null
+      }
+    ],
+    "cost": [
+      {
+        "detail": {},
+        "n": 42,
+        "name": "latency_p50_ms[decide]",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0035
+      },
+      {
+        "detail": {},
+        "n": 42,
+        "name": "latency_p95_ms[decide]",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0067
+      },
+      {
+        "detail": {},
+        "n": 42,
+        "name": "latency_p50_ms[generate]",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0056
+      },
+      {
+        "detail": {},
+        "n": 42,
+        "name": "latency_p95_ms[generate]",
+        "reason": "",
+        "status": "ok",
+        "value": 0.009
+      },
+      {
+        "detail": {},
+        "n": 42,
+        "name": "latency_p50_ms[rerank]",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0123
+      },
+      {
+        "detail": {},
+        "n": 42,
+        "name": "latency_p95_ms[rerank]",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0161
+      },
+      {
+        "detail": {},
+        "n": 42,
+        "name": "latency_p50_ms[retrieve]",
+        "reason": "",
+        "status": "ok",
+        "value": 0.7926
+      },
+      {
+        "detail": {},
+        "n": 42,
+        "name": "latency_p95_ms[retrieve]",
+        "reason": "",
+        "status": "ok",
+        "value": 1.1607
+      },
+      {
+        "detail": {},
+        "n": 42,
+        "name": "latency_p50_ms[verify]",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0037
+      },
+      {
+        "detail": {},
+        "n": 42,
+        "name": "latency_p95_ms[verify]",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0077
+      }
+    ],
+    "human": [
+      {
+        "detail": {},
+        "n": 40,
+        "name": "agreement[entailment]",
+        "reason": "no_item_carries_a_duplicate_annotation",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 40,
+        "name": "agreement[groundedness]",
+        "reason": "no_item_carries_a_duplicate_annotation",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 32,
+        "name": "agreement[oos]",
+        "reason": "no_item_carries_a_duplicate_annotation",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 0,
+        "name": "agreement[repealed]",
+        "reason": "0% duplication by design -- objective registry lookup (RESEARCH.md §7.1.3)",
+        "status": "not_applicable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 10,
+        "name": "agreement[retrieval]",
+        "reason": "no_item_carries_a_duplicate_annotation",
+        "status": "unavailable",
+        "value": null
+      }
+    ],
+    "retrieval": [
+      {
+        "detail": {},
+        "n": 10,
+        "name": "recall@5",
+        "reason": "no_relevance_judgments",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 10,
+        "name": "recall@10",
+        "reason": "no_relevance_judgments",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 10,
+        "name": "recall@20",
+        "reason": "no_relevance_judgments",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 10,
+        "name": "precision@5",
+        "reason": "no_relevance_judgments",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 10,
+        "name": "precision@10",
+        "reason": "no_relevance_judgments",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 10,
+        "name": "precision@20",
+        "reason": "no_relevance_judgments",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 10,
+        "name": "mrr",
+        "reason": "no_relevance_judgments",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "detail": {},
+        "n": 10,
+        "name": "ndcg@10",
+        "reason": "no_relevance_judgments",
+        "status": "unavailable",
+        "value": null
+      }
+    ],
+    "robustness": [
+      {
+        "detail": {
+          "fn": 20,
+          "fp": 0,
+          "tp": 0
+        },
+        "n": 32,
+        "name": "refusal_precision",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0
+      },
+      {
+        "detail": {},
+        "n": 32,
+        "name": "refusal_recall",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0
+      },
+      {
+        "detail": {},
+        "n": 32,
+        "name": "refusal_f1",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0
+      },
+      {
+        "detail": {},
+        "n": 12,
+        "name": "over_refusal_rate",
+        "reason": "",
+        "status": "ok",
+        "value": 0.0
+      },
+      {
+        "detail": {},
+        "n": 32,
+        "name": "refusal_accuracy",
+        "reason": "",
+        "status": "ok",
+        "value": 0.375
+      }
+    ]
+  },
+  "sizing_notes": [
+    "retrieval: n=10 (BELOW target, target 200) gives a 95% CI half-width of +/-31.0% on a proportion at p=0.5.",
+    "oos: n=32 (BELOW target, target 350) gives a 95% CI half-width of +/-17.3% on a proportion at p=0.5.",
+    "groundedness: n=40 (BELOW target, target 350) gives a 95% CI half-width of +/-15.5% on a proportion at p=0.5.",
+    "repealed: n=34 (BELOW target, target 350) gives a 95% CI half-width of +/-16.8% on a proportion at p=0.5.",
+    "entailment: n=40 (BELOW target, target 350) gives a 95% CI half-width of +/-15.5% on a proportion at p=0.5."
+  ],
+  "summary": {
+    "n_failures": 0,
+    "n_gold_sets_loaded": 5,
+    "n_gold_sets_missing": 0,
+    "n_items_run": 42,
+    "n_metrics_computed": 31,
+    "n_metrics_unavailable": 17
+  }
+}
