@@ -17,7 +17,10 @@ dist/
 
 # M1 data foundation -- large and/or fully regenerable from data/*.py + frozen splits
 data/raw/
-data/processed/
+# Exclude contents, not the directory itself -- git never looks inside a
+# wholesale-excluded directory, so a negation for one file inside it (below)
+# would otherwise silently have no effect.
+data/processed/*
 !data/processed/near_duplicate_pairs.json
 data/ocr_wer_gold/pages/
 
@@ -27,3 +30,11 @@ data/ocr_wer_gold/pages/
 # eval/results/*.json are deliberately NOT ignored (OPS.md §4: keep forever, in git).
 data/perturbations/perturbations.jsonl
 eval/annotations/
+
+# Raw downloaded source PDFs for the OCR-WER gold-set prep tooling --
+# regenerable via data/pilot/download_ocr_source_pdfs*.py, large binary data.
+data/pilot/ocr_raw_pdfs/
+data/pilot/ocr_raw_pdfs_hc/
+# Generated review pages -- regenerable via data/build_human_validation_reviewer.py
+# from the committed rater{N}_sample.csv files; ~1.2MB each, no need to track.
+data/human_validation/rater*_review.html
