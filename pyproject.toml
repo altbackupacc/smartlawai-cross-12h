@@ -44,6 +44,11 @@ gcloud = [
   "psycopg2-binary>=2.9",
   "alembic>=1.13",
 ]
+# M4 authority registry. duckdb and pypdf are already base dependencies;
+# pandas is the only addition, used by the MHA-table/coverage-report scripts.
+registry = [
+  "pandas>=2.0",
+]
 # M1 data-foundation pipeline. Kept separate from [train]: that group's pins
 # (peft/trl/bitsandbytes/accelerate) are tightly coupled to the GPU/QLoRA stack
 # and already documented there as fragile; this is lightweight and CPU-only.
