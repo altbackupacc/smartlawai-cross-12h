@@ -1,0 +1,55 @@
+name: M6 eval regression gate
+
+# Guards against the harness silently breaking, not against quality
+# regressions -- every model is still stubbed (M0), so there is no real
+# quality to regress yet. M6_ONBOARDING.md §11: "Keep the threshold generous
+# for now... Tighten it as real components land in later milestones."
+#
+# Runs run_eval.py on the dev split and diffs it against the last committed
+# eval/results/dev_*.json baseline. A metric that regresses past
+# eval/config.py's REGRESSION_TOLERANCE, or that the baseline measured and this
+# run does not, fails the job.
+
+on:
+  pull_request:
+    paths:
+      - "eval/**"
+      - "src/smartlawai/**"
+      - "sample_docs/**"
+      - "pyproject.toml"
+  workflow_dispatch: {}
+
+jobs:
+  eval-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install package with eval + dev extras
+        run: pip install -e ".[eval,dev]"
+
+      - name: Find the latest committed dev baseline
+        id: baseline
+        run: |
+          latest=$(ls -1 eval/results/dev_*.json 2>/dev/null | sort | tail -n 1 || true)
+          echo "path=$latest" >> "$GITHUB_OUTPUT"
+
+      - name: Run the harness against the untrained (stub) pipeline
+        run: |
+          if [ -n "${{ steps.baseline.outputs.path }}" ]; then
+            python -m eval.run_eval --split dev \
+              --baseline "${{ steps.baseline.outputs.path }}"
+          else
+            echo "no committed baseline yet -- this run establishes one"
+            python -m eval.run_eval --split dev
+          fi
+
+      - name: Upload this run's results
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: eval/results/dev_*.json

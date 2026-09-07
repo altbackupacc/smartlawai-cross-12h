@@ -47,7 +47,9 @@ def test_faiss_lifecycle():
 
 
 def test_metrics():
-    from smartlawai.eval.metrics import prf, rouge_l, token_f1
-    assert rouge_l("a b c", "a b c") == 1.0
+    # M6: metrics moved src/smartlawai/eval/metrics.py -> eval/metrics.py, and
+    # the hand-rolled rouge_l was replaced by rouge_scores (PLAN.md M6).
+    from eval.metrics import prf, rouge_scores, token_f1
+    assert rouge_scores("a b c", "a b c")["rougeL"] == 1.0
     assert token_f1("a b", "a b") == 1.0
     assert prf(5, 0, 0) == (1.0, 1.0, 1.0)

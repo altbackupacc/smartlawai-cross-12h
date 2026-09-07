@@ -20,3 +20,10 @@ data/raw/
 data/processed/
 !data/processed/near_duplicate_pairs.json
 data/ocr_wer_gold/pages/
+
+# M6 -- generated perturbation training data: large and fully regenerable from
+# data/perturbations/generate_perturbations.py + its fixed seed. The generator
+# and its README are committed; the output is not. eval/gold/*.jsonl and
+# eval/results/*.json are deliberately NOT ignored (OPS.md §4: keep forever, in git).
+data/perturbations/perturbations.jsonl
+eval/annotations/
