@@ -12,13 +12,22 @@ API_KEY = os.environ.get("MISTRAL_API_KEY", "not-needed")
 
 
 def complete(prompt: str, system: str = "", max_tokens: int = 512,
-             temperature: float = 0.2) -> str:
+             temperature: float = 0.2, *,
+             base_url: str | None = None, model: str | None = None,
+             api_key: str | None = None) -> str:
+    """base_url/model/api_key default to this module's env-driven constants
+    (the Mistral endpoint) but can be overridden to hit any other
+    OpenAI-compatible vLLM/TGI/Ollama deployment -- e.g. M7's SaulLM-7B
+    baseline, served the same way Mistral is, just a different model."""
+    base_url = base_url or BASE_URL
+    model = model or MODEL
+    api_key = api_key or API_KEY
     msgs = ([{"role": "system", "content": system}] if system else []) + \
            [{"role": "user", "content": prompt}]
     resp = requests.post(
-        f"{BASE_URL}/chat/completions",
-        headers={"Authorization": f"Bearer {API_KEY}"},
-        json={"model": MODEL, "messages": msgs,
+        f"{base_url}/chat/completions",
+        headers={"Authorization": f"Bearer {api_key}"},
+        json={"model": model, "messages": msgs,
               "max_tokens": max_tokens, "temperature": temperature},
         timeout=180,
     )
