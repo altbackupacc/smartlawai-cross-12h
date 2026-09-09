@@ -1,0 +1,1002 @@
+{
+  "236__facts": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.03704768791794777
+  },
+  "5756__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9617062360048294
+  },
+  "6045__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.647368386387825
+  },
+  "4752__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9649224579334259
+  },
+  "773__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9866361021995544
+  },
+  "5990__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9186923921108245
+  },
+  "3383__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9706792235374451
+  },
+  "250__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9468807727098465
+  },
+  "442__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.985803484916687
+  },
+  "6677__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.91366974512736
+  },
+  "2693__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.19718339666724205
+  },
+  "2459__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.026935715228319168
+  },
+  "1408__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9648777416774205
+  },
+  "1960__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9807273915835789
+  },
+  "1131__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.2,
+    "hhem_mean_score": 0.32511285990476607
+  },
+  "4180__argument": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.25,
+    "hhem_mean_score": 0.28752291202545166
+  },
+  "4620__argument": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.75,
+    "hhem_mean_score": 0.738656148314476
+  },
+  "2297__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.985799640417099
+  },
+  "4376__facts": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.3333333333333333,
+    "hhem_mean_score": 0.3503824321863552
+  },
+  "7111__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.3333333333333333,
+    "hhem_mean_score": 0.31954822937647503
+  },
+  "1825__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.958564019203186
+  },
+  "2325__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.45278768613934517
+  },
+  "4186__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.588319793343544
+  },
+  "6541__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.982072821685246
+  },
+  "897__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9741333425045013
+  },
+  "3338__argument": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.8242398301760355
+  },
+  "5462__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.043305013328790665
+  },
+  "6949__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.07971604913473129
+  },
+  "2772__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9528076648712158
+  },
+  "4694__facts": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.4787259455770254
+  },
+  "1384__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9668649489229376
+  },
+  "3244__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.3333333333333333,
+    "hhem_mean_score": 0.5102078914642334
+  },
+  "1939__analysis": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.75,
+    "hhem_mean_score": 0.8165292367339134
+  },
+  "5326__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.7997225821018219
+  },
+  "708__facts": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.75,
+    "hhem_mean_score": 0.842858076095581
+  },
+  "158__facts": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.4323153793811798
+  },
+  "5783__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.0642237588763237
+  },
+  "2887__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9561648567517599
+  },
+  "4359__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9319530874490738
+  },
+  "7132__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.75,
+    "hhem_mean_score": 0.7712520956993103
+  },
+  "3070__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9840865731239319
+  },
+  "5094__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9715449512004852
+  },
+  "5490__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9526590704917908
+  },
+  "3916__argument": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.25,
+    "hhem_mean_score": 0.3943107035011053
+  },
+  "3610__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9605291903018951
+  },
+  "716__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9550947546958923
+  },
+  "1642__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9491956233978271
+  },
+  "3992__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9802991449832916
+  },
+  "6609__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.75,
+    "hhem_mean_score": 0.7350950539112091
+  },
+  "5180__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9303541779518127
+  },
+  "1865__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.7772626578807831
+  },
+  "7119__analysis": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.7777777777777778,
+    "hhem_mean_score": 0.7184652156300015
+  },
+  "4643__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.977028407833793
+  },
+  "5250__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.17252252995967865
+  },
+  "624__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.33896589279174805
+  },
+  "5936__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.012865382246673107
+  },
+  "5887__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9390353163083395
+  },
+  "5467__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9728947457145242
+  },
+  "4936__argument": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.808787594238917
+  },
+  "2276__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9801279306411743
+  },
+  "4__argument": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6,
+    "hhem_mean_score": 0.6681320607662201
+  },
+  "6685__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.7741742432117462
+  },
+  "6240__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9194396138191223
+  },
+  "6406__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.8696664422750473
+  },
+  "382__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.3766201362013817
+  },
+  "63__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9801015853881836
+  },
+  "3378__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9554205536842346
+  },
+  "895__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9754134813944498
+  },
+  "2935__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9823404422828129
+  },
+  "1961__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9856933440480914
+  },
+  "6817__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.930528852072629
+  },
+  "1694__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9619995572350242
+  },
+  "1255__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.07800441235303879
+  },
+  "2939__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.23373733460903168
+  },
+  "3059__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.969050407409668
+  },
+  "573__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.5481970235705376
+  },
+  "1922__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9815874695777893
+  },
+  "850__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.886976318699973
+  },
+  "1__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.4750852584838867
+  },
+  "635__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9295879602432251
+  },
+  "2050__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 0.9090909090909091,
+    "hhem_mean_score": 0.8611429171128706
+  },
+  "4399__argument": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.75,
+    "hhem_mean_score": 0.8567060753703117
+  },
+  "2934__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6,
+    "hhem_mean_score": 0.549249267578125
+  },
+  "3361__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.982211709022522
+  },
+  "4863__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.951315313577652
+  },
+  "6837__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.4,
+    "hhem_mean_score": 0.5989487588405609
+  },
+  "817__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9635706543922424
+  },
+  "4298__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.947296254336834
+  },
+  "3783__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.061637576669454575
+  },
+  "3298__facts": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.3333333333333333,
+    "hhem_mean_score": 0.3391524103159706
+  },
+  "4551__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9769360082490104
+  },
+  "5532__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.13954895734786987
+  },
+  "3042__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.7142857142857143,
+    "hhem_mean_score": 0.7821351587772369
+  },
+  "5293__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9577289552524172
+  },
+  "7090__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 0.8421052631578947,
+    "hhem_mean_score": 0.8425907398525038
+  },
+  "6531__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.6990731110175451
+  },
+  "1851__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9224019249280294
+  },
+  "3241__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.4437501020729542
+  },
+  "1099__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9552205072508918
+  },
+  "5676__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9686569537435259
+  },
+  "1580__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.6398380895455679
+  },
+  "1886__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9650890529155731
+  },
+  "4060__facts": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.6648142064611117
+  },
+  "6231__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9521588881810507
+  },
+  "2958__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9701359055259011
+  },
+  "4062__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.662031685312589
+  },
+  "2415__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.973944365978241
+  },
+  "6441__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 0.9230769230769231,
+    "hhem_mean_score": 0.8966060876846313
+  },
+  "6645__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9749931693077087
+  },
+  "1222__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9537029266357422
+  },
+  "1012__facts": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.7050598673522472
+  },
+  "6698__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9699142873287201
+  },
+  "7083__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.07851281017065048
+  },
+  "588__analysis": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.7272727272727273,
+    "hhem_mean_score": 0.6631498282605951
+  },
+  "824__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.75,
+    "hhem_mean_score": 0.7248132228851318
+  },
+  "2298__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9357137680053711
+  },
+  "4554__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.05847100913524628
+  },
+  "2712__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.016231941059231758
+  },
+  "1088__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.6174547448754311
+  },
+  "4990__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9793184995651245
+  },
+  "884__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 0.9230769230769231,
+    "hhem_mean_score": 0.7100885327045734
+  },
+  "925__analysis": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6,
+    "hhem_mean_score": 0.5417478054761886
+  },
+  "6258__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9643522799015045
+  },
+  "5715__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.45112544298171997
+  },
+  "1401__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.6536209443584085
+  },
+  "3277__argument": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.75,
+    "hhem_mean_score": 0.6772320941090584
+  },
+  "1131__facts": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.2222222222222222,
+    "hhem_mean_score": 0.2157539255503151
+  },
+  "709__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9572050869464874
+  },
+  "1780__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.957813024520874
+  },
+  "5017__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9737987279891968
+  },
+  "2999__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.8873840500326717
+  },
+  "4631__analysis": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6428571428571429,
+    "hhem_mean_score": 0.7366018667817116
+  },
+  "4557__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.018755963072180748
+  },
+  "1782__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.18750785291194916
+  },
+  "6165__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.06704474985599518
+  },
+  "1428__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.1395067721605301
+  },
+  "1705__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.6299166232347488
+  },
+  "2863__analysis": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.625,
+    "hhem_mean_score": 0.639290704857558
+  },
+  "5445__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9612320164839426
+  },
+  "2459__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.025380179286003113
+  },
+  "4739__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.958832859992981
+  },
+  "5762__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9607192873954773
+  },
+  "2643__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.37026751041412354
+  },
+  "6866__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9862978458404541
+  },
+  "1626__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.09602867811918259
+  },
+  "568__analysis": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.711864406779661,
+    "hhem_mean_score": 0.709335385363991
+  },
+  "3973__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.4,
+    "hhem_mean_score": 0.462004304677248
+  },
+  "825__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9577355831861496
+  },
+  "6814__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.3333333333333333,
+    "hhem_mean_score": 0.3488918828467528
+  },
+  "3952__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.7272727272727273,
+    "hhem_mean_score": 0.6532524187456478
+  },
+  "5257__argument": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.06319662121435006
+  },
+  "1349__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9585846662521362
+  },
+  "6452__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.4722006022930145
+  },
+  "2300__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9770514567693075
+  },
+  "4969__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.6219254285097122
+  },
+  "1520__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.431745320558548
+  },
+  "517__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.43591275811195374
+  },
+  "2744__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9369460195302963
+  },
+  "4233__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9475841522216797
+  },
+  "5576__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9198742243978713
+  },
+  "6599__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9854588075117632
+  },
+  "2896__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.25804460048675537
+  },
+  "1215__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.375,
+    "hhem_mean_score": 0.33889288594946265
+  },
+  "4428__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9689859779257524
+  },
+  "4302__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.97800245651832
+  },
+  "2464__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.02416788600385189
+  },
+  "5976__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.36648693680763245
+  },
+  "2549__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.3333333333333333,
+    "hhem_mean_score": 0.4107804074883461
+  },
+  "3071__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9748389976365226
+  },
+  "467__analysis": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5555555555555556,
+    "hhem_mean_score": 0.6819494706061151
+  },
+  "124__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.03385712951421738
+  },
+  "2849__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.75,
+    "hhem_mean_score": 0.7114835632964969
+  },
+  "267__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9811459481716156
+  },
+  "5920__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9695872167746226
+  },
+  "1661__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.41964423656463623
+  },
+  "6377__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.579301580786705
+  },
+  "3654__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9866632223129272
+  },
+  "4906__facts": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.49837089516222477
+  },
+  "1141__analysis": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6428571428571429,
+    "hhem_mean_score": 0.6397803915398461
+  },
+  "43__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.7159769733746847
+  },
+  "3579__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9751024631892934
+  },
+  "1617__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.39410384371876717
+  },
+  "2914__argument": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9861009120941162
+  },
+  "3249__facts": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.75,
+    "hhem_mean_score": 0.7843241523951292
+  },
+  "3859__argument": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.5,
+    "hhem_mean_score": 0.4879871681332588
+  },
+  "4937__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9523681402206421
+  },
+  "424__statute": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9662037491798401
+  },
+  "1399__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.75,
+    "hhem_mean_score": 0.6850006580352783
+  },
+  "568__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.18112392723560333
+  },
+  "2387__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9708670973777771
+  },
+  "5727__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9146714385818032
+  },
+  "324__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9715335369110107
+  },
+  "2198__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9333145679571689
+  },
+  "4652__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9843202659061977
+  },
+  "2298__statute": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.6666666666666666,
+    "hhem_mean_score": 0.6181430121262869
+  },
+  "1271__argument": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.0992155373096466
+  },
+  "303__judgement": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9771648049354553
+  },
+  "967__analysis": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9650324086348215
+  },
+  "2802__facts": {
+    "hhem_accepted": true,
+    "hhem_pass_rate": 1.0,
+    "hhem_mean_score": 0.9580306735905734
+  },
+  "3705__judgement": {
+    "hhem_accepted": false,
+    "hhem_pass_rate": 0.0,
+    "hhem_mean_score": 0.12516626715660095
+  }
+}

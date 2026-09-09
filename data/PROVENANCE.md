@@ -138,32 +138,141 @@ rather than a favorable draw.
   M8b fine-tuning.** Rejected pairs are kept in the scored file (not
   deleted) for error analysis and for the human-validation check below.
 
-## 6. What has NOT yet happened (tracked here so it isn't silently skipped)
+## 6. Deduplication + document-level split (`data/dedup_split.py`)
+
+**Method**: MinHash near-duplicate detection over `summ`'s full judgment
+text (normalized: lowercased, non-alphanumerics stripped, boilerplate
+header/citation lines removed — case numbers, bench composition, counsel
+names, filing dates — since these generate spurious shingle overlap between
+otherwise-unrelated judgments). Word 5-gram shingles, `MinHash(num_perm=128)`,
+`MinHashLSH(threshold=0.9)` (the 0.9 threshold is `PLAN.md`'s literal spec).
+For each connected component of near-duplicates found, the longest text is
+kept (ties broken by lowest numeric doc_id); the rest are dropped.
+
+**Real result**: of 7,130 unique `summ` documents, **29 near-duplicate pairs**
+were found (all jaccard estimate 1.0 — exact-content duplicates after
+normalization, each its own separate pair, no larger clusters), so **29
+documents were dropped**. Full pairwise edges + per-component kept/dropped
+detail persisted to `data/processed/near_duplicate_pairs.json` (committed —
+this is what `tests/test_data_leakage.py` reads, so CI never recomputes
+MinHash).
+
+**Split**: document-level, 80/10/10 over the 7,101 surviving doc_ids, fixed
+seed 42 (`random.Random(42).shuffle` on the id list sorted numerically first
+for determinism) → **train=5,681, dev=710, test=710** documents. Written to
+`data/splits/{train,dev,test}.json` per the schema in `M1_ONBOARDING.md` §7.
+
+**Join**: `section_pairs_accepted.jsonl` (30,524 pairs) joined against the
+frozen split by `doc_id`; pairs whose source document was dropped as a
+near-duplicate are excluded. The pre-existing `split` field (IL-TUR's own
+original train/test split, unrelated to and not to be confused with our own
+frozen split) is preserved as `iltur_original_split` and overwritten with our
+own split assignment in the `split` field.
+
+**Real result** → `data/processed/section_pairs.jsonl`:
+
+| Split | Section pairs | Documents |
+|---|---|---|
+| train | 24,346 | 5,681 |
+| dev | 3,015 | 710 |
+| test | 3,044 | 710 |
+| dropped as duplicate | 119 | 29 |
+| **Total** | **30,524** | **7,130** |
+
+(24,346 + 3,015 + 3,044 + 119 = 30,524 — accounts for every previously
+accepted pair exactly.)
+
+**Performance note, not a data-quality issue**: the first implementation of
+`build_minhash()` called `MinHash.update()` once per shingle in a Python
+loop; across this corpus's ~28.5M total shingles (one document alone has
+117,512) that took 60+ minutes with no clear end. Switched to
+`MinHash.update_batch()` (vectorized) and the same computation finished in
+under two minutes. No GPU involved or needed — MinHash/LSH is pure
+hashing/set-operation work with no matrix math, so cloud GPU compute
+would not have helped here at all; this was a batching bug, not a
+compute-scale problem.
+
+## 7. What has NOT yet happened (tracked here so it isn't silently skipped)
 
 - **200-item human validation pass** (`RESEARCH.md` T4) — a human-driven
   sample checking whether the HHEM filter's accept/reject judgment agrees
   with a human reader's, stratified across accepted and rejected pairs.
-  Not automatable, not yet run. Until this exists, the 96.53% figure above
+  Not automatable, not yet run. Until this exists, the 96.53% figure in §5
   is the automated filter's self-reported rate, not an independently
   verified one — report it as such.
 - **`ACCEPT_THRESHOLD = 0.8` calibration** — currently a placeholder, to be
   checked against the human validation sample once it exists (per M5's
   threshold-calibration precedent).
-- **Deduplication and document-level split** (`dedup_split.py`) have not yet
-  run on `section_pairs_accepted.jsonl` — the 30,524-pair count above is
-  pre-dedup, pre-split. This file is **not yet frozen** in the I5 sense;
-  `data/splits/*.json` do not exist yet.
 - Two documents worth a manual read, flagged during pilot testing: `doc=5925`
   failed HHEM across most sections for weaker pilot models (likely a genuine
-  content-mismatch case, not scattered noise) — worth checking its status in
-  the final accepted/rejected split specifically.
+  content-mismatch case, not scattered noise) — worth checking its status
+  (and split assignment) in the final corpus specifically.
 
-## 7. Freeze statement
+## 8. Freeze statement
 
-**Not yet frozen.** This document records the real, measured Path-2
-generation and HHEM-filtering results as of 2026-09-06. The corpus becomes
-frozen (per I5) only once `dedup_split.py` has produced
-`data/splits/{train,dev,test}.json` and `tests/test_data_leakage.py` passes
-against them — at that point this file should be updated with dedup counts,
-split sizes, and a final freeze statement, and `section_pairs_accepted.jsonl`
-should not be regenerated.
+**Frozen as of 2026-09-06.** `data/splits/{train,dev,test}.json` were
+written by `data/dedup_split.py` on this date and are now frozen per I5:
+document-level splits, recorded, never regenerated. `tests/test_data_leakage.py`
+passes against them (`test_no_doc_id_in_two_splits`,
+`test_no_near_duplicate_spans_splits` both green; the eval-leakage test
+correctly skips until M6 adds `eval/gold/*.jsonl`).
+
+Any future regeneration of these splits requires both `--force` to
+`dedup_split.py` **and** a dated addendum to this section explaining why the
+freeze was broken — the script enforces the former, this document is
+responsible for the latter.
+
+## 9. OCR Word Error Rate (`RESEARCH.md` T5)
+
+**Gold set**: 50 scanned pages, genuine 1948–1958 Kerala High Court judgments
+sourced from the `vanga/indian-high-court-judgments` AWS Open Data bucket,
+filtered to pre-1970 real order dates and detected as scans via embedded-
+image coverage (`eval/prepare_ocr_gold.py`; text-length heuristics failed on
+this source because several PDFs already carry a low-quality embedded OCR
+layer). Manifest: `data/ocr_wer_gold/manifest.json`.
+
+**Human transcription**: 49/50 pages hand-transcribed. Page 21
+(`KLHC010000051950_1_1952-01-30_p002`) was deliberately left untranscribed
+and excluded from scoring — GLM-OCR degenerated into a nonsense token loop
+on this page ("...date of the date of the...") independent of the
+transcription question, so it was skipped rather than scored against.
+
+**Engine evaluated**: GLM-OCR (Z.ai/Zhipu AI, 1.1B params, OmniDocBench v1.5
+top scorer at the time of writing), served locally via Ollama. Tesseract
+(the pipeline's existing serving-time engine) was not run this session —
+out of scope for this pass by explicit decision, GLM-OCR only.
+
+**Two real bugs found and fixed in `data/pilot/glm_ocr_client.py` before a
+trustworthy number was obtainable**:
+1. The client never set `num_ctx`; Ollama's small default context window
+   truncated every page's generation to ~40 tokens regardless of page
+   length (confirmed via `done_reason: "length"` in the raw API response).
+   Fixed with `num_ctx=8192`.
+2. glm-ocr has no calibrated stop token for a page's true end-of-content. On
+   a page with genuinely little content it sometimes loops back and
+   re-transcribes from its own opening line verbatim. Detected and trimmed
+   via `_dedupe_trailing_loop()` (the response's own first 40 characters
+   reappearing later in the same response).
+
+**A third candidate fix was tried and reverted as unsafe**: on one page the
+model appended a paraphrased "recap" of the real content it had just
+transcribed, then duplicated that recap verbatim. A first attempt
+generalized the loop-detector to auto-truncate *any* long repeated block
+anywhere in a response — but verified against the human transcripts, this
+also cut into **genuine** repeated legal clauses on other pages (Indian
+legal drafting legitimately repeats long interest-recalculation and
+multi-party address clauses across paragraphs). Auto-editing on this signal
+is provably unsafe and was not applied to the corpus. Instead, every page
+flagged by the heuristic was cross-checked against its human transcript by
+hand: 8/9 flagged pages matched their transcript (real content, left
+untouched); one (`KLHC010824521955_1_1955-03-23_p001`) did not (a genuine
+hallucinated recap) and was trimmed manually, confirmed to then match the
+human transcript exactly. `detect_possible_hallucinated_tail()` remains in
+the client as a flag-only, non-mutating check for future runs — it must
+never be wired to auto-edit output.
+
+**Result**: mean WER **0.0216**, median **0.0000**, n=49 (page 21 excluded
+as above). Two pages score above 0.2 (`KLHC010000011955_1_1956-07-31_p002`
+at 0.3125, `KLHC010000051953_1_1955-07-12_p001` at 0.2414) with no evidence
+either is a scoring artifact — left as reported. Full per-page table:
+`eval/ocr_wer_glm-ocr.md`.

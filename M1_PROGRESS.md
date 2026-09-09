@@ -363,9 +363,303 @@ GCS bucket `smartlawai-1-m1-pilot`, this session's Vertex Custom Jobs
 
 ---
 
-## 8. Git / PR status
+## 8. Dedup, split, pretokenize, OCR-WER harness — COMPLETE (freeze point reached)
 
-Branch: `m1-data-foundation`. PR: [kramjiy/smartlawai#5](https://github.com/kramjiy/smartlawai/pull/5)
-(open, updated with the research-positioning upgrade + initial GCP/pilot
-commits — the production run and full-corpus filtering results are not yet
-committed as of this log entry).
+All CPU-only, local, no GCP/GPU involved. Full detail and final numbers are
+in `data/PROVENANCE.md` §6-8; summarized here.
+
+**`data/dedup_split.py`**: MinHash near-duplicate detection (word 5-grams,
+`num_perm=128`, LSH threshold 0.9) over `summ`'s full judgment text, header/
+citation-line noise stripped first. Found **29 near-duplicate pairs** (all
+exact-content duplicates, jaccard=1.0) across 7,130 documents; dropped 29.
+Split the surviving 7,101 docs 80/10/10 with seed 42 →
+**train=5,681 / dev=710 / test=710 documents**. Joined the HHEM-accepted
+pairs against this frozen split → `data/processed/section_pairs.jsonl`:
+**train=24,346 / dev=3,015 / test=3,044 section pairs** (30,405 total; 119
+pairs excluded because their source doc was a dropped duplicate — accounts
+for all 30,524 accepted pairs exactly). `data/splits/{train,dev,test}.json`
+are now frozen per I5.
+
+**Real bug hit and fixed**: the first version of `build_minhash()` called
+`MinHash.update()` once per shingle in a Python loop. Across this corpus's
+~28.5M total shingles (one judgment alone has 117,512), that ran for 60+
+minutes with no end in sight before being killed. Root cause diagnosed via
+targeted micro-benchmarks (isolated shingling, minhash-building, and
+LSH-insert/query timings on samples) — `.update()`'s fixed per-call overhead
+dominates at this scale; `MinHash.update_batch()` (vectorized) does the exact
+same computation in under two minutes. **Not a GPU-vs-CPU problem** —
+MinHash/LSH is pure hashing/set-membership work with no matrix math, so
+cloud GPU compute would not have helped here at all; this was purely an
+API-usage bug.
+
+**`tests/test_data_leakage.py`**: 3 tests per `M1_ONBOARDING.md` §9 —
+`test_no_doc_id_in_two_splits`, `test_no_near_duplicate_spans_splits` (both
+green against the real split/near-dup files), and
+`test_no_qa_eval_item_from_training_doc` (correctly skips: no
+`eval/gold/*.jsonl` yet, M6 not landed). Full suite: **63 passed, 1 skipped**.
+
+**`data/pretokenize.py`**: InLegalBERT tokenizer (`law-ai/InLegalBERT`,
+`max_len=512`), run over the frozen `section_pairs.jsonl` →
+`data/processed/section_pairs.arrow/` (30,405 rows, schema: `doc_id, split,
+section_id, source_text, target_text, provenance, source_input_ids,
+source_attention_mask, target_input_ids, target_attention_mask`). Verified
+round-trips via `load_from_disk`. Ran with only `transformers` installed (no
+`torch` in this venv) — tokenization alone doesn't need a model backend.
+
+**`eval/ocr_wer.py`**: harness built per `M1_ONBOARDING.md` §11 (reuses
+`core/ocr.py`'s `extract_text`, computes WER via `jiwer`). Correctly
+hard-fails since `data/ocr_wer_gold/` doesn't exist yet (0/50 gold pages) —
+by design, this is human-supplied work that can't be fabricated, and is not
+a blocker for the rest of M1. **Decision made this session**: once the 50
+hand-transcribed pages exist, the transcripts (small .txt files) will be
+**committed** to the repo for reproducibility of the WER number; the page
+images stay gitignored (already the case — `.gitignore` only excludes
+`data/ocr_wer_gold/pages/`, not `transcripts/`).
+
+`ruff check` clean on all new files.
+
+**M1's literal done-when list is now met**: ~30.4k section pairs exist
+(slightly under the ~35k target, explained in `PROVENANCE.md` by the 65
+generation errors + near-duplicate drops + HHEM rejections), splits are
+frozen and committed with provenance, leakage tests are green, and the
+segmentation decision (Path 2) is documented with its rationale. Remaining
+open items are explicitly non-blocking: the 200-item human validation pass,
+`ACCEPT_THRESHOLD` calibration against it, and the OCR-WER gold set.
+
+---
+
+## 9. OCR-WER gold set: sourced and produced (50/50 real scanned pages)
+
+Built the missing prep tooling and produced the actual 50-page gold set
+(pending only human transcription now). All CPU-only, local, no GCP/GPU —
+confirmed again this session that neither the download nor detection nor
+rendering steps have any compute-scale angle.
+
+**Source hunting hit two real dead ends before working**, each diagnosed
+rather than assumed:
+
+1. **Kaggle "SC Judgments India 1950-2024"** (`adarshsingh0903/...`):
+   organized as one directory per year, looked ideal. `kagglehub`'s
+   per-folder `path=` download 404'd — turned out this specific dataset is
+   stored as a single opaque 6.4GB archive blob (`1.archive`), not
+   individually-listable files; no per-year targeting is possible against
+   it via any tool. Downloaded the full archive instead (succeeded at
+   16MB/s after an earlier attempt hit a `ConnectionError` at 26MB — wrapped
+   in an auto-retry script, `data/pilot/run_ocr_download_supervised.sh`,
+   same pattern as the Path 2 production run's supervisor).
+   **Then found the deeper problem**: every 1950 document's text was
+   cleanly extractable (0/61 pages flagged as scanned). Inspected the
+   extracted text directly — clean structured fields (`Equivalent
+   citations:`, `Bench:`, `PETITIONER:`/`RESPONDENT:`) that no 1950s
+   typewriter+scan could produce. Root cause: this dataset is *"scraped
+   and compiled from Indian Kanoon"*, which hosts judgments as its own
+   clean re-transcribed text, not scans of the original filings. No year
+   in this dataset would ever contain a genuine scan — a property of the
+   source, not fixable by widening the year range.
+2. **`vanga/indian-high-court-judgments`** (AWS Open Data, public S3,
+   `--no-sign-request`): real per-court/per-year prefixes this time
+   (confirmed via direct unauthenticated HTTPS `ListObjectsV2` calls
+   against the bucket, no `aws` CLI needed) — `data/tar/year=1950/` etc.,
+   each court/bench a separate small tar (whole 1947-1965 range summed to
+   ~20MB, checked before downloading anything). **Found a real gotcha the
+   docs don't mention**: the S3 `year=` partition is the *case-filing*
+   year parsed from the case number, not the decision date — e.g.
+   `HCBM020000041950_1_2006-11-21.pdf` sits under `year=1950` but was
+   decided in 2006. Filtering by partition alone would have silently
+   pulled modern digital documents. Fixed by parsing the real order date
+   from each filename's trailing `_YYYY-MM-DD.pdf` and keeping only
+   `<= 1970` regardless of which year-partition a file came from
+   (`data/pilot/download_ocr_source_pdfs_hc.py`) — 45 genuinely
+   old-order-date PDFs kept out of 308 downloaded.
+   **Then found a second, subtler problem** in the detector itself: many
+   of these 45 PDFs already carry a low-quality OCR text layer embedded by
+   whoever digitized them, so `core/ocr.py`'s own `DIGITAL_TEXT_MIN_CHARS`
+   text-length heuristic (reused from the serving pipeline) wrongly
+   classified them as "digital" — only 2/135 pages flagged. Visually
+   confirmed one flagged-"digital" page was genuinely a scan (rendered it,
+   looked at it directly: visible scan noise, typewriter irregularities,
+   a handwritten margin tick) despite having "clean-looking" extracted
+   text. Root cause: the embedded OCR layer produces plausible-length text
+   even though the page is an image underneath. Fixed by switching
+   detection to check for an embedded raster image covering ≥50% of the
+   page area instead of text length (confirmed via `page.images`: the
+   genuine scan had a 612×1008 JPEG exactly matching its page's mediabox;
+   a genuinely digital "Proceeding Sheet" page had zero embedded images).
+   This raised the hit rate to 132/135 pages.
+
+**Result**: 50/50 real scanned pages in `data/ocr_wer_gold/pages/`, all
+genuine 1948-1958 Kerala High Court judgments (order dates confirmed via
+filename, several visually spot-checked), manifest recorded at
+`data/ocr_wer_gold/manifest.json` (doesn't conflict with `.gitignore`'s
+`data/ocr_wer_gold/pages/` rule — one directory up). `eval/prepare_ocr_gold.py`
+holds the final image-coverage-based detector; the two source download
+scripts (`data/pilot/download_ocr_source_pdfs.py` for the abandoned Kaggle
+path, `download_ocr_source_pdfs_hc.py` for the working AWS path) are both
+kept for the record.
+
+**What's left**: hand-transcribe each of the 50 pages into
+`data/ocr_wer_gold/transcripts/{page_id}.txt` (human-only work, per
+`RESEARCH.md` T5 — cannot be automated or approximated), then run
+`python -m eval.ocr_wer`, which is already built and tested end-to-end
+against the hard-fail path.
+
+---
+
+## 10. 200-item human validation pass: sampling + scoring tooling built
+
+Built the tooling for `RESEARCH.md` T4's other required human check —
+distinct from §9's OCR-WER work: this validates whether HHEM's automated
+accept/reject filter (§5-6) agrees with a human reader, not OCR quality.
+
+**`data/sample_human_validation.py`**: samples 200 items from
+`data/processed/section_pairs_scored.jsonl` (the pre-dedup, all-31,621-pairs
+file — the only one with both accepted *and* rejected pairs; the frozen
+`section_pairs.jsonl` only carries accepted ones). Deliberately **100
+accepted + 100 rejected**, not proportional to the corpus's real 96.5%/3.5%
+split — proportional sampling would yield only ~7 rejected items, far too
+few to say anything about the filter's false-reject behavior. Excludes any
+pair whose source document was dropped as a near-duplicate (cross-referenced
+against `data/processed/near_duplicate_pairs.json`), so the validation
+sample matches documents that actually survived into the real corpus.
+Writes blind rater CSVs (`data/human_validation/rater{N}_sample.csv` — no
+HHEM verdict shown, to avoid anchoring a rater's judgment) plus a
+`answer_key.json` kept separately for scoring. `--num-raters` controls how
+many independent copies to generate (2, matching `RESEARCH.md` §7.4's
+"silver validation... 2 raters", by default in this session's test run).
+
+**`data/score_human_validation.py`**: takes one or more filled-in rater
+CSVs, reports each rater's agreement rate + confusion matrix against HHEM's
+verdict (binarizing Accept vs. Revise/Reject — a section a human would
+still edit isn't one that should enter training data unedited), and with
+2+ raters, pairwise Cohen's κ on the original 3-way verdicts (not the
+binarized version, per `RESEARCH.md` §7.5's agreement-reporting mandate).
+
+Verified end-to-end with simulated verdicts (deliberately noisy, ~10-15%
+random disagreement, to exercise the agreement math and hard-fail paths —
+not real data): confusion matrix and agreement-rate arithmetic checked by
+hand, Cohen's κ computed correctly, and both hard-fails (blank verdict,
+invalid verdict string) trigger correctly with a clear message. Fresh
+**blank** CSVs (`rater1_sample.csv`, `rater2_sample.csv`, 200 rows each,
+same seed=42 sample) were regenerated after that test and are what's
+actually sitting in `data/human_validation/` now, ready for real raters.
+`ruff check` clean.
+
+**What's left**: the actual annotation (two people reading 200
+source/generated-text pairs each and marking Accept/Revise/Reject) is
+human-only work, not something this session can do. Once both
+`rater{N}_sample.csv` files are filled in, run `data/score_human_validation.py`
+and write the resulting numbers into `data/PROVENANCE.md` §7, per T4 —
+reported plainly regardless of what they turn out to be.
+
+**Follow-up this session**: the raw CSV proved unreadable in Excel (two long
+free-text columns overflow with no wrapping across 200 rows). Built
+`data/build_human_validation_reviewer.py`: takes a rater CSV, generates a
+single self-contained offline HTML page (`rater{N}_review.html`) — no
+server, no new Python dependency, no data leaves the machine. One item at a
+time, clearly labeled Source/Generated blocks, three big verdict buttons
+(also bound to keys A/S/D), autosaves every answer to the browser's
+`localStorage` (survives closing the tab/restarting the machine — resuming
+just means reopening the same file), and an Export-CSV button that writes
+back the **exact same column schema** `score_human_validation.py` already
+expects, so nothing downstream changes.
+
+Tested end-to-end via a temporary local HTTP server + this session's browser
+tool (real `file://` access isn't permitted by that tool, so the page was
+served over `localhost` instead — equivalent for testing, since the app
+itself is 100% static/offline either way): rendering, click-to-mark,
+auto-advance, and `localStorage` persistence across a full page reload all
+verified working. One misleading result during testing — simulated keyboard
+events (Right arrow, then 's') appeared to mark the wrong item — was
+isolated by calling the underlying JS functions (`go()`, `setVerdict()`)
+directly in the console, which behaved perfectly; concluded it was a
+synthetic-event timing artifact of the remote browser-automation tool
+itself, not a bug a real user's keypresses would hit. CSV-export escaping
+was verified byte-for-byte against what Python's `csv.QUOTE_ALL` would
+produce (every field quoted, internal quotes doubled) — safe to round-trip
+through `score_human_validation.py` unchanged. `ruff check` clean.
+
+---
+
+## 12. GLM-OCR comparison: tooling built, waiting on Ollama install
+
+User pushed on whether Tesseract (the pipeline's existing OCR engine) is
+actually the best available, leading to real research rather than assumed
+answers:
+
+- **Confirmed Tesseract is not state-of-the-art** for degraded/historical
+  documents specifically (2026 benchmarks: GPT-4o 97.3% char accuracy on
+  degraded scans vs Tesseract's general-purpose, speed-optimized design;
+  Calamari/ABBYY FineReader purpose-built for historical typewritten
+  archives). Kept Tesseract as the *first* measurement anyway (not
+  replaced pre-emptively) because: the WER harness is free to run (already
+  built), switching engines has a real cost (new dependency/GPU), and the
+  50-page hand transcription work is engine-agnostic — it becomes a
+  reusable gold standard for testing *any* OCR engine, not just the first.
+- **Corrected a real gap in my own research**: initially missed
+  **GLM-OCR** (Z.ai/Zhipu AI, Feb 2026) until the user asked directly why
+  it wasn't mentioned. It's the actual top scorer on OmniDocBench v1.5
+  (94.62, ahead of Gemini-3 Pro's 90.33 and Qwen3-VL-235B's 89.15) despite
+  being only 0.9B parameters — and open-weight, so self-hostable without
+  per-call API cost or sending documents to a third party. Confirmed it
+  runs locally via Ollama (`ollama pull glm-ocr`, ~3GB VRAM at FP16),
+  fitting the project's existing local-inference convention rather than
+  introducing a new one.
+- **Answered two scoping questions directly**: Hindi OCR accuracy is not
+  a compulsory requirement -- `RESEARCH.md`'s own V2 section defers
+  multilingual work, and the `summ` corpus this pipeline runs on is
+  essentially all-English; the existing `eng+hin` Tesseract call is a
+  defensive default, not a validated requirement. GLM-OCR can run on
+  ordinary laptop hardware given its ~3GB VRAM footprint.
+- **Dataset search for an immediate comparison hit real dead ends,
+  diagnosed rather than glossed over**: every public degraded-document
+  OCR dataset found had a specific blocker -- IMPACT (English, real
+  ground truth) needs registration; Reichsanzeiger-GT/Finnish NLF are
+  German/Finnish, not English; the Black Digital Archives Benchmark
+  explicitly lacks full manual transcription ground truth (its own paper
+  uses annotation-free proxy metrics instead); the ICDAR 2019 Post-OCR
+  Correction dataset (Zenodo, free, English) turned out to contain only
+  already-OCR'd text, no original scan images, so it can't test a fresh
+  OCR engine at all.
+- **User proposed the actual right approach**: skip external datasets
+  entirely and run GLM-OCR directly on the real 50 scanned pages already
+  in `data/ocr_wer_gold/pages/` (the genuine Kerala HC scans from §9) now,
+  ahead of the human transcriptions -- then score it against the same
+  transcripts Tesseract will be scored against, once they exist. Strictly
+  better than every alternative considered: real degradation, zero new
+  data, and a direct, apples-to-apples number against Tesseract on
+  identical pages.
+
+**Built**: `data/pilot/glm_ocr_client.py` (calls Ollama's native
+`/api/generate` endpoint -- confirmed via research that the
+OpenAI-compatible endpoint has known vision-request limitations on
+Ollama; `run_batch()` iterates all 50 gold-set pages, caches predictions
+to `data/ocr_wer_gold/glm_ocr_predictions.json`, resumable). Extended
+`eval/ocr_wer.py` with `--engine {tesseract,glm-ocr}` (default
+`tesseract`, so existing behavior/output path is unchanged) -- the
+`glm-ocr` path reads the cached predictions file, falling back to a live
+Ollama call for any page missing from it. Verified both engine paths
+still correctly hard-fail with 0/50 transcripts (regression-safe), full
+`pytest -q` still green (63 passed, 1 skipped), `ruff check` clean.
+
+**Blocked on**: Ollama is not installed on this machine. Asked the user to
+install it themselves (`ollama.com/download`) and run `ollama pull
+glm-ocr` -- a background service, not just a CLI tool, so this wasn't
+installed automatically the way Poppler was earlier. Once pulled,
+`python data/pilot/glm_ocr_client.py` can run immediately (doesn't need
+the human transcripts yet); `python -m eval.ocr_wer --engine glm-ocr` (and
+`--engine tesseract` for the existing engine) only produce real WER
+numbers once the transcripts land.
+
+---
+
+## 13. Git / PR status
+
+Branch: `m1-data-foundation`. The original PR
+[kramjiy/smartlawai#5](https://github.com/kramjiy/smartlawai/pull/5) was
+**merged into `main` on 2026-09-04** (before this session's production-run
+and filtering work existed) — pushing new commits to the same branch did
+**not** reopen it. A new PR,
+[kramjiy/smartlawai#6](https://github.com/kramjiy/smartlawai/pull/6), was
+opened for the commits made since that merge (production Path 2 generation +
+full-corpus HHEM filtering). The dedup/split/pretokenize/OCR-harness work in
+§8 above is not yet committed as of this log entry.
