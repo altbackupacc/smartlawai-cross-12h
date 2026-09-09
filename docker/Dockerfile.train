@@ -19,7 +19,8 @@ COPY src/ ./src/
 COPY train/ ./train/
 RUN pip install --no-cache-dir -e ".[ml,train]"
 # checkpointing.py's cloud sync isn't in any current extras group -- installed explicitly:
-RUN pip install --no-cache-dir huggingface_hub "google-cloud-storage>=2.16"
+# sentencepiece and protobuf needed for Mistral/Llama/Qwen tokenizers:
+RUN pip install --no-cache-dir huggingface_hub "google-cloud-storage>=2.16" sentencepiece protobuf
 
 # Placed after the pip install layer (not before, unlike src/) since nothing during
 # install reads it, and this way editing data/ doesn't invalidate the expensive

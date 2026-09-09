@@ -114,7 +114,10 @@ def main() -> int:
     try:
         from transformers import AutoModelForCausalLM, AutoTokenizer
 
-        tokenizer = AutoTokenizer.from_pretrained(args.model_id)
+        try:
+            tokenizer = AutoTokenizer.from_pretrained(args.model_id, use_fast=True)
+        except Exception:  # noqa: BLE001
+            tokenizer = AutoTokenizer.from_pretrained(args.model_id, use_fast=False)
         dtype = torch.bfloat16 if (device_str == "cuda" and torch.cuda.is_bf16_supported()) else torch.float16
         model = AutoModelForCausalLM.from_pretrained(
             args.model_id,
