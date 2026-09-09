@@ -111,9 +111,24 @@ class Pipeline:
 
         with trace.stage("generate") as rec:
             gen = self.generator.generate(question, top)
-            rec.detail = {"n_claims": len(gen.claims), "model": gen.model_id}
-        trace.generation = {"model": gen.model_id, "n_claims": len(gen.claims),
-                            "unanswerable_aspects": gen.unanswerable_aspects}
+            rec.detail = {
+                "n_claims": len(gen.claims),
+                "model": gen.model_id,
+                "n_unanswerable": len(gen.unanswerable_aspects),
+            }
+        trace.generation = {
+            "model": gen.model_id,
+            "n_claims": len(gen.claims),
+            "claims": [
+                {
+                    "text": c.text,
+                    "passage_ids": c.passage_ids,
+                    "citations": c.citations,
+                }
+                for c in gen.claims
+            ],
+            "unanswerable_aspects": gen.unanswerable_aspects,
+        }
 
         with trace.stage("verify") as rec:
             results = [self.verifier.verify(cl, top) for cl in gen.claims]
@@ -125,7 +140,14 @@ class Pipeline:
             outcome, reason = self._decide(results, gen.claims)
             rec.detail = {"outcome": outcome, "reason": reason}
         trace.decision = {"outcome": outcome, "reason": reason}
-        trace.cost = {"generator_tokens": 0, "estimated_usd": 0.0}
+
+        # Estimate token usage (~4 characters per token) and record cost
+        prompt_chars = len(question) + sum(len(rc.chunk.chunk_text) for rc in top)
+        gen_chars = sum(len(c.text) for c in gen.claims)
+        generator_tokens = (prompt_chars + gen_chars) // 4
+        # Mistral-7B L4 / vLLM cost model ~$0.0002 per 1k tokens
+        estimated_usd = round(generator_tokens * 0.0000002, 6)
+        trace.cost = {"generator_tokens": generator_tokens, "estimated_usd": estimated_usd}
 
         return AnswerResult(answer=self._render(gen, outcome), decision=outcome, trace=trace)
 
