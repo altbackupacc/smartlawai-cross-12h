@@ -20,3 +20,12 @@ STUB_GENERATOR_MODEL_ID: str = "stub-generator-v0"
 STUB_VERIFIER_MODEL_ID: str = "stub-verifier-v0"
 
 DEFAULT_OWNER_ID: str = "anon"
+
+# M2 — Retrieval configuration
+CHUNK_CHILD_CHARS: int = 400
+INLEGALBERT_MODEL_ID: str = "law-ai/InLegalBERT"
+INLEGALBERT_DIM: int = 768
+INLEGALBERT_MAX_LEN: int = 512
+RERANKER_MODEL_ID: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+RRF_K: int = 60
+
