@@ -17,7 +17,7 @@ submit a training job until the eval harness can measure it.
 - [x] **M0** Skeleton — end-to-end with stubs, no GPU
 - [ ] **M1** Data foundation — IN-Abs, section pairs, frozen splits
 - [x] **M2** Real retrieval (GCP L4)
-- [ ] **M3** Structured generation (GCP L4 endpoint)
+- [x] **M3** Structured generation (GCP L4 endpoint)
 - [ ] **M4** ★ Authority registry — the contribution
 - [ ] **M5** Verification stack + deterministic gate
 - [ ] **M6** Eval harness + gold sets
