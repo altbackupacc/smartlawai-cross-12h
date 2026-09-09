@@ -16,11 +16,18 @@ Expected input structure:
 
 Supports two OCR engines via --engine, scored against the exact same gold
 set for a direct comparison:
-    tesseract  (default) -- smartlawai.core.ocr.extract_text(), the engine
-               already used in the serving pipeline.
+    tesseract  (default) -- reads data/pilot/tesseract_ocr_client.py's cached
+               predictions (run that script first); falls back to a live
+               call for any page missing from the cache.
     glm-ocr    -- reads data/pilot/glm_ocr_client.py's cached predictions
                (run that script first); falls back to a live Ollama call
                for any page missing from the cache.
+
+Neither engine's actual OCR call happens inside this file -- eval/ modules
+are pure functions over data structures per OPS.md §8 (enforced by
+tests/test_eval_integration.py's layering check), so anything that needs
+smartlawai or a live model call lives in data/pilot/*_client.py instead, and
+only its cached JSON output crosses into eval/.
 
 Output: eval/ocr_wer.md for --engine tesseract (unchanged default path);
 eval/ocr_wer_glm-ocr.md for --engine glm-ocr.
@@ -36,7 +43,12 @@ import jiwer
 
 MIN_PAIRS = 49  # page 21's transcript deliberately skipped -- see data/PROVENANCE.md section 9
 PAGE_EXTENSIONS = (".png", ".jpg", ".jpeg", ".tiff", ".tif", ".pdf")
-GLM_OCR_PREDICTIONS_PATH = Path("data/ocr_wer_gold/glm_ocr_predictions.json")
+PREDICTIONS_PATHS = {
+    "tesseract": Path("data/ocr_wer_gold/tesseract_predictions.json"),
+    "glm-ocr": Path("data/ocr_wer_gold/glm_ocr_predictions.json"),
+}
+STATUS_OK = {"tesseract": "OCR_OK", "glm-ocr": "GLM_OCR_OK"}
+STATUS_FAIL = {"tesseract": "OCR_FAIL", "glm-ocr": "GLM_OCR_FAIL"}
 
 
 def compute_wer(reference: str, hypothesis: str) -> float:
@@ -61,31 +73,22 @@ def find_matched_pairs(gold_dir: Path) -> list[tuple[str, Path, Path]]:
     return pairs
 
 
-def _run_tesseract(page_path: Path) -> tuple[str | None, str, str | None]:
-    """Returns (text_or_None, status, error_or_None)."""
-    from smartlawai.core.ocr import extract_text  # heavy import (pulls in faiss via
-    # adapters/base.py) -- deferred so --engine glm-ocr never needs it installed.
-    result = extract_text(str(page_path))
-    if result.ocr_status == "OCR_FAIL":
-        return None, "OCR_FAIL", result.error
-    return result.text, result.ocr_status, None
-
-
-def _run_glm_ocr(page_id: str, page_path: Path,
-                  predictions: dict[str, str]) -> tuple[str | None, str, str | None]:
+def _run_engine(engine: str, page_id: str, page_path: Path,
+                 predictions: dict[str, str]) -> tuple[str | None, str, str | None]:
     """Returns (text_or_None, status, error_or_None). Prefers the cached
-    predictions file (data/pilot/glm_ocr_client.py); falls back to a live
-    Ollama call for a page missing from the cache."""
+    predictions file (data/pilot/{engine}_ocr_client.py, with '-' -> '_');
+    falls back to a live call for a page missing from the cache."""
     text = predictions.get(page_id)
     if text is None:
-        from data.pilot.glm_ocr_client import ocr_image
+        module = f"data.pilot.{engine.replace('-', '_')}_ocr_client"
+        ocr_image = __import__(module, fromlist=["ocr_image"]).ocr_image
         try:
             text = ocr_image(page_path)
         except Exception as e:  # noqa: BLE001 - report as a failure row, don't crash the run
-            return None, "GLM_OCR_FAIL", str(e)
+            return None, STATUS_FAIL[engine], str(e)
     if not text.strip():
-        return None, "GLM_OCR_FAIL", "empty prediction"
-    return text, "GLM_OCR_OK", None
+        return None, STATUS_FAIL[engine], "empty prediction"
+    return text, STATUS_OK[engine], None
 
 
 def run_ocr_wer_eval(gold_dir: Path = Path("data/ocr_wer_gold"),
@@ -108,18 +111,16 @@ def run_ocr_wer_eval(gold_dir: Path = Path("data/ocr_wer_gold"),
             f"rest of M1 -- run this script again once the gold set is complete."
         )
 
-    glm_predictions: dict[str, str] = {}
-    if engine == "glm-ocr" and GLM_OCR_PREDICTIONS_PATH.exists():
-        glm_predictions = json.loads(GLM_OCR_PREDICTIONS_PATH.read_text(encoding="utf-8"))
+    predictions_path = PREDICTIONS_PATHS[engine]
+    predictions: dict[str, str] = {}
+    if predictions_path.exists():
+        predictions = json.loads(predictions_path.read_text(encoding="utf-8"))
 
     print(f"Found {len(pairs)} matched pairs. Running {engine} OCR + computing WER per page...")
     rows = []
     for page_id, page_path, transcript_path in pairs:
         reference = transcript_path.read_text(encoding="utf-8", errors="ignore")
-        if engine == "tesseract":
-            text, status, error = _run_tesseract(page_path)
-        else:
-            text, status, error = _run_glm_ocr(page_id, page_path, glm_predictions)
+        text, status, error = _run_engine(engine, page_id, page_path, predictions)
         if text is None:
             rows.append({"page_id": page_id, "wer": None, "status": status, "error": error})
             continue
