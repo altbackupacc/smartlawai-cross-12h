@@ -25,6 +25,7 @@ RUN pip install --no-cache-dir huggingface_hub "google-cloud-storage>=2.16"
 # install reads it, and this way editing data/ doesn't invalidate the expensive
 # dependency-install cache.
 COPY data/ ./data/
+COPY scripts/ ./scripts/
 
 ENV PYTHONPATH=/app/src:/app
 

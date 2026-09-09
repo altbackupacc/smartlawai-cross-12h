@@ -38,6 +38,7 @@ def test_faiss_lifecycle():
         be = _backend(tmp)
         idx = be.new_flat_ip_index(4)
         v = np.random.rand(2, 4).astype("float32")
+        v = v / np.linalg.norm(v, axis=1, keepdims=True)
         idx.add_with_ids(v, np.array([10, 20], dtype="int64"))
         be.save_faiss_index(idx, "t1")
         assert be.faiss_index_exists("t1")
@@ -53,3 +54,32 @@ def test_metrics():
     assert rouge_scores("a b c", "a b c")["rougeL"] == 1.0
     assert token_f1("a b", "a b") == 1.0
     assert prf(5, 0, 0) == (1.0, 1.0, 1.0)
+
+
+def test_chunk_provenance_roundtrip():
+    """Verify that page_no, para_no, section_label are preserved across store and fetch."""
+    from smartlawai.adapters.base import Chunk
+    from smartlawai.scope import Scope
+
+    with tempfile.TemporaryDirectory() as tmp:
+        be = _backend(tmp)
+        c = Chunk(
+            chunk_id="ch-prov-1",
+            doc_id="doc-prov",
+            chunk_index=0,
+            chunk_text="Section 10 of Indian Contract Act",
+            char_start=0,
+            char_end=35,
+            parent_chunk_id=None,
+            owner_id="alice",
+            page_no=3,
+            para_no=2,
+            section_label="Section 10",
+        )
+        be.store_chunks([c])
+        fetched = be.fetch_chunks_scoped(Scope(doc_ids=("doc-prov",), owner_id="alice"))
+        assert len(fetched) == 1
+        assert fetched[0].page_no == 3
+        assert fetched[0].para_no == 2
+        assert fetched[0].section_label == "Section 10"
+

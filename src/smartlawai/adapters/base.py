@@ -44,6 +44,9 @@ class Chunk:
     embedding: Optional[list[float]] = None
     bm25_indexed: bool = False
     owner_id: str = ""
+    page_no: Optional[int] = None
+    para_no: Optional[int] = None
+    section_label: Optional[str] = None
 
 
 @dataclass

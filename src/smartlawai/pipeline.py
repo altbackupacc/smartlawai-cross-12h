@@ -81,13 +81,31 @@ class Pipeline:
 
         with trace.stage("retrieve") as rec:
             candidates = self.be.fetch_chunks_scoped(scope)
-            self.encoder.embed([question])  # proves the seam; unused for ranking in M0
-            rec.detail = {"n_candidates": len(candidates)}
+            searchable_candidates = [c for c in candidates if c.bm25_indexed] or candidates
+            self.encoder.embed([question])  # proves the seam; device-aware encoding in M2
+            rec.detail = {"n_candidates": len(candidates), "n_searchable": len(searchable_candidates)}
         trace.retrieval = {"n_candidates": len(candidates),
                            "candidate_chunk_ids": [c.chunk_id for c in candidates]}
 
         with trace.stage("rerank") as rec:
-            top = self.reranker.rerank(question, candidates, config.RERANK_TOP_K)
+            ranked = self.reranker.rerank(question, searchable_candidates, config.RETRIEVE_TOP_K)
+            # Small-to-big retrieval: resolve child chunks to full parent clauses,
+            # deduplicating parents to prevent near-duplicate crowding (PLAN.md M2)
+            by_id = {c.chunk_id: c for c in candidates}
+            seen_parents: set[str] = set()
+            top: list[RetrievedChunk] = []
+            for rc in ranked:
+                p_id = rc.chunk.parent_chunk_id or rc.chunk.chunk_id
+                if p_id in seen_parents:
+                    continue
+                seen_parents.add(p_id)
+                parent_chunk = by_id.get(p_id)
+                if not parent_chunk:
+                    fetched = self.be.fetch_chunks_by_ids([p_id])
+                    parent_chunk = fetched[0] if fetched else rc.chunk
+                top.append(RetrievedChunk(chunk=parent_chunk, score=rc.score))
+                if len(top) >= config.RERANK_TOP_K:
+                    break
             rec.detail = {"n_top": len(top)}
         trace.retrieval["top_chunk_ids"] = [rc.chunk.chunk_id for rc in top]
 
