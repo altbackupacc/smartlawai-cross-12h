@@ -221,3 +221,58 @@ Any future regeneration of these splits requires both `--force` to
 `dedup_split.py` **and** a dated addendum to this section explaining why the
 freeze was broken — the script enforces the former, this document is
 responsible for the latter.
+
+## 9. OCR Word Error Rate (`RESEARCH.md` T5)
+
+**Gold set**: 50 scanned pages, genuine 1948–1958 Kerala High Court judgments
+sourced from the `vanga/indian-high-court-judgments` AWS Open Data bucket,
+filtered to pre-1970 real order dates and detected as scans via embedded-
+image coverage (`eval/prepare_ocr_gold.py`; text-length heuristics failed on
+this source because several PDFs already carry a low-quality embedded OCR
+layer). Manifest: `data/ocr_wer_gold/manifest.json`.
+
+**Human transcription**: 49/50 pages hand-transcribed. Page 21
+(`KLHC010000051950_1_1952-01-30_p002`) was deliberately left untranscribed
+and excluded from scoring — GLM-OCR degenerated into a nonsense token loop
+on this page ("...date of the date of the...") independent of the
+transcription question, so it was skipped rather than scored against.
+
+**Engine evaluated**: GLM-OCR (Z.ai/Zhipu AI, 1.1B params, OmniDocBench v1.5
+top scorer at the time of writing), served locally via Ollama. Tesseract
+(the pipeline's existing serving-time engine) was not run this session —
+out of scope for this pass by explicit decision, GLM-OCR only.
+
+**Two real bugs found and fixed in `data/pilot/glm_ocr_client.py` before a
+trustworthy number was obtainable**:
+1. The client never set `num_ctx`; Ollama's small default context window
+   truncated every page's generation to ~40 tokens regardless of page
+   length (confirmed via `done_reason: "length"` in the raw API response).
+   Fixed with `num_ctx=8192`.
+2. glm-ocr has no calibrated stop token for a page's true end-of-content. On
+   a page with genuinely little content it sometimes loops back and
+   re-transcribes from its own opening line verbatim. Detected and trimmed
+   via `_dedupe_trailing_loop()` (the response's own first 40 characters
+   reappearing later in the same response).
+
+**A third candidate fix was tried and reverted as unsafe**: on one page the
+model appended a paraphrased "recap" of the real content it had just
+transcribed, then duplicated that recap verbatim. A first attempt
+generalized the loop-detector to auto-truncate *any* long repeated block
+anywhere in a response — but verified against the human transcripts, this
+also cut into **genuine** repeated legal clauses on other pages (Indian
+legal drafting legitimately repeats long interest-recalculation and
+multi-party address clauses across paragraphs). Auto-editing on this signal
+is provably unsafe and was not applied to the corpus. Instead, every page
+flagged by the heuristic was cross-checked against its human transcript by
+hand: 8/9 flagged pages matched their transcript (real content, left
+untouched); one (`KLHC010824521955_1_1955-03-23_p001`) did not (a genuine
+hallucinated recap) and was trimmed manually, confirmed to then match the
+human transcript exactly. `detect_possible_hallucinated_tail()` remains in
+the client as a flag-only, non-mutating check for future runs — it must
+never be wired to auto-edit output.
+
+**Result**: mean WER **0.0216**, median **0.0000**, n=49 (page 21 excluded
+as above). Two pages score above 0.2 (`KLHC010000011955_1_1956-07-31_p002`
+at 0.3125, `KLHC010000051953_1_1955-07-12_p001` at 0.2414) with no evidence
+either is a scoring artifact — left as reported. Full per-page table:
+`eval/ocr_wer_glm-ocr.md`.

@@ -34,9 +34,7 @@ from pathlib import Path
 
 import jiwer
 
-from smartlawai.core.ocr import extract_text
-
-MIN_PAIRS = 50
+MIN_PAIRS = 49  # page 21's transcript deliberately skipped -- see data/PROVENANCE.md section 9
 PAGE_EXTENSIONS = (".png", ".jpg", ".jpeg", ".tiff", ".tif", ".pdf")
 GLM_OCR_PREDICTIONS_PATH = Path("data/ocr_wer_gold/glm_ocr_predictions.json")
 
@@ -65,6 +63,8 @@ def find_matched_pairs(gold_dir: Path) -> list[tuple[str, Path, Path]]:
 
 def _run_tesseract(page_path: Path) -> tuple[str | None, str, str | None]:
     """Returns (text_or_None, status, error_or_None)."""
+    from smartlawai.core.ocr import extract_text  # heavy import (pulls in faiss via
+    # adapters/base.py) -- deferred so --engine glm-ocr never needs it installed.
     result = extract_text(str(page_path))
     if result.ocr_status == "OCR_FAIL":
         return None, "OCR_FAIL", result.error
