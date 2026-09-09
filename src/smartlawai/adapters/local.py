@@ -42,7 +42,14 @@ class LocalBackend(BackendInterface):
             chunk_id VARCHAR PRIMARY KEY, doc_id VARCHAR, parent_chunk_id VARCHAR,
             chunk_index INTEGER, chunk_text VARCHAR, char_start INTEGER,
             char_end INTEGER, embedding VARCHAR, bm25_indexed BOOLEAN,
-            owner_id VARCHAR)""")
+            owner_id VARCHAR, page_no INTEGER, para_no INTEGER,
+            section_label VARCHAR)""")
+        # Backward-compatible migrations for existing local databases
+        for col, col_type in [("page_no", "INTEGER"), ("para_no", "INTEGER"), ("section_label", "VARCHAR")]:
+            try:
+                self.db.execute(f"ALTER TABLE CHUNKS ADD COLUMN IF NOT EXISTS {col} {col_type}")
+            except Exception:
+                pass
         self.db.execute("""CREATE TABLE IF NOT EXISTS CLAUSES(
             clause_id VARCHAR PRIMARY KEY, doc_id VARCHAR, chunk_id VARCHAR,
             clause_type VARCHAR, clause_text VARCHAR, span_start INTEGER,
@@ -91,12 +98,13 @@ class LocalBackend(BackendInterface):
     def store_chunks(self, chunks: list[Chunk]) -> None:
         self.db.executemany(
             """INSERT INTO CHUNKS(chunk_id,doc_id,parent_chunk_id,chunk_index,
-               chunk_text,char_start,char_end,embedding,bm25_indexed,owner_id)
-               VALUES (?,?,?,?,?,?,?,?,?,?) ON CONFLICT DO NOTHING""",
+               chunk_text,char_start,char_end,embedding,bm25_indexed,owner_id,
+               page_no,para_no,section_label)
+               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT DO NOTHING""",
             [[c.chunk_id, c.doc_id, c.parent_chunk_id, c.chunk_index, c.chunk_text,
               c.char_start, c.char_end,
               json.dumps(c.embedding) if c.embedding else None, c.bm25_indexed,
-              c.owner_id]
+              c.owner_id, c.page_no, c.para_no, c.section_label]
              for c in chunks])
 
     def store_clauses(self, clauses: list[Clause]) -> None:
@@ -150,22 +158,27 @@ class LocalBackend(BackendInterface):
         return r[0] if r else ""
 
     def _row_to_chunk(self, r) -> Chunk:
-        return Chunk(chunk_id=r[0], doc_id=r[1], parent_chunk_id=r[2], chunk_index=r[3],
-                     chunk_text=r[4], char_start=r[5], char_end=r[6],
-                     embedding=json.loads(r[7]) if r[7] else None, bm25_indexed=r[8],
-                     owner_id=r[9] or "")
+        return Chunk(
+            chunk_id=r[0], doc_id=r[1], parent_chunk_id=r[2], chunk_index=r[3],
+            chunk_text=r[4], char_start=r[5], char_end=r[6],
+            embedding=json.loads(r[7]) if r[7] else None, bm25_indexed=r[8],
+            owner_id=r[9] or "",
+            page_no=r[10] if len(r) > 10 else None,
+            para_no=r[11] if len(r) > 11 else None,
+            section_label=r[12] if len(r) > 12 else None,
+        )
 
     def fetch_chunks(self, doc_id: str) -> list[Chunk]:
         rows = self.db.execute(
             "SELECT chunk_id,doc_id,parent_chunk_id,chunk_index,chunk_text,char_start,"
-            "char_end,embedding,bm25_indexed,owner_id FROM CHUNKS WHERE doc_id=? "
+            "char_end,embedding,bm25_indexed,owner_id,page_no,para_no,section_label FROM CHUNKS WHERE doc_id=? "
             "ORDER BY chunk_index", [doc_id]).fetchall()
         return [self._row_to_chunk(r) for r in rows]
 
     def fetch_all_chunks(self) -> list[Chunk]:
         rows = self.db.execute(
             "SELECT chunk_id,doc_id,parent_chunk_id,chunk_index,chunk_text,char_start,"
-            "char_end,embedding,bm25_indexed,owner_id FROM CHUNKS").fetchall()
+            "char_end,embedding,bm25_indexed,owner_id,page_no,para_no,section_label FROM CHUNKS").fetchall()
         return [self._row_to_chunk(r) for r in rows]
 
     def fetch_chunks_by_ids(self, chunk_ids: list[str]) -> list[Chunk]:
@@ -174,7 +187,7 @@ class LocalBackend(BackendInterface):
         ph = ",".join(["?"] * len(chunk_ids))
         rows = self.db.execute(
             f"SELECT chunk_id,doc_id,parent_chunk_id,chunk_index,chunk_text,char_start,"
-            f"char_end,embedding,bm25_indexed,owner_id FROM CHUNKS WHERE chunk_id IN ({ph})",
+            f"char_end,embedding,bm25_indexed,owner_id,page_no,para_no,section_label FROM CHUNKS WHERE chunk_id IN ({ph})",
             chunk_ids).fetchall()
         return [self._row_to_chunk(r) for r in rows]
 
@@ -183,7 +196,7 @@ class LocalBackend(BackendInterface):
         ph = ",".join(["?"] * len(scope.doc_ids))
         rows = self.db.execute(
             f"SELECT chunk_id,doc_id,parent_chunk_id,chunk_index,chunk_text,char_start,"
-            f"char_end,embedding,bm25_indexed,owner_id FROM CHUNKS "
+            f"char_end,embedding,bm25_indexed,owner_id,page_no,para_no,section_label FROM CHUNKS "
             f"WHERE doc_id IN ({ph}) AND owner_id=? ORDER BY doc_id, chunk_index",
             [*scope.doc_ids, scope.owner_id]).fetchall()
         return [self._row_to_chunk(r) for r in rows]
