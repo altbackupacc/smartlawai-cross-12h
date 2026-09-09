@@ -48,4 +48,5 @@
 - **2026-09-09**: Task 4 complete. Implemented 10 unit and integration tests in `tests/test_generate.py` (100% offline, zero network dependencies): empty passages fast path, valid JSON parsing with passage ID mapping, Invariant I4 untrusted context fencing, markdown fence handling, fuzzy passage IDs, malformed JSON fallback, network exception handling, NER citation enrichment, and end-to-end `Pipeline` integration.
 - **2026-09-09**: Task 5 complete. Created `scripts/smoke_test_m3.py` and `gcloud/smoke_test_m3.sh` supporting `--base-url`, `--model`, `--api-key`, and `--device` flags for testing live Cloud Run GPU, vLLM on GCP A100 / L4, or local Ollama endpoints.
 - **2026-09-09**: Task 6 complete. Ran verification test suite across M3, retrieval, and pipeline regressions (34/34 tests passed). Code quality verified with `ruff check` (100% clean).
+- **2026-09-09**: Created GCP A100 self-terminating benchmark execution script `gcloud/run_m3_generation.sh` and benchmark runner `scripts/run_generation_bench.py` for running real Mistral-7B fp16 generation on Vertex AI Custom Jobs (`a2-highgpu-1g` with 1x NVIDIA A100).
 
