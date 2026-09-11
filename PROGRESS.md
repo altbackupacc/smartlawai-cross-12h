@@ -25,10 +25,31 @@
 - **2026-09-09**: Task 7 complete. Implemented `tests/test_m2_integration.py` verifying full end-to-end small-to-big retrieval, provenance metadata preservation, and Invariant `I1` cross-document tenant isolation. All 31 retrieval and M2 tests passed (477 total passed across suite). M2 complete.
 - **2026-09-09**: Executed M2 retrieval benchmark on live GCP A100 GPU (`NVIDIA A100-SXM4-40GB`, Compute 8.0, Vertex AI Custom Job ID `841356888963547136`). Results: InLegalBERT + CrossEncoder initialized in 14.02s; end-to-end scoped retrieval latency = 352.86 ms; peak VRAM = 524.0 MB; small-to-big parent resolution validated (Rank 1: Section 27, Rank 2: Section 10, Rank 3: Section 74); Invariant I1 100% confirmed; job auto-terminated with zero idle billing.
 
+---
+
 ## Milestone 3 (M3) — Structured Generation
 
-### Session: 2026-09-10
-**Objective**: Unified structured generator (`StructuredMistralGenerator`) returning atomic claims, passage IDs, and NER-enriched citations, fenced in `<untrusted_document_content>`, into the main branch. Verified with live GCP A100 benchmark (Vertex AI Job ID: 3059590811676049408) and 10 unit/integration tests in `tests/test_generate.py`.
+### Session Started: 2026-09-09
+**Objective**: Transition from M0 stubbed generator to M3 production-grade structured generation returning atomic claims tied to cited passage IDs and statutory citations rather than amorphous prose, enforcing Invariant I2 (never fail open), Invariant I3 (deterministic refusal in Python), Invariant I4 (context fencing in user role), and full trace accounting.
+
+### Status Tracker
+- [x] Task 1: Update `config.py` with Module 3 generator parameters (model ID, max tokens, temperature, schema prompts)
+- [x] Task 2: Implement `StructuredMistralGenerator` in `src/smartlawai/core/generate.py` conforming to `Generator` protocol
+- [x] Task 3: Integrate `StructuredMistralGenerator` and structured claim trace recording into `src/smartlawai/pipeline.py`
+- [x] Task 4: Implement unit and integration tests in `tests/test_generate.py`
+- [x] Task 5: Create live endpoint smoke test script in `scripts/smoke_test_m3.py` and `gcloud/smoke_test_m3.sh`
+- [x] Task 6: Run verification suite, code quality checks, and update `PROGRESS.md`
+
+### Log
+- **2026-09-09**: Session initialized. Plan approved. Branch isolated via worktree `m3-structured-generation`.
+- **2026-09-09**: Task 1 complete. Added `MISTRAL_GENERATOR_MODEL_ID`, `GENERATOR_MAX_TOKENS = 1024`, `GENERATOR_TEMPERATURE = 0.1`, `GENERATOR_SYSTEM_PROMPT`, and `GENERATOR_USER_TEMPLATE` with `<untrusted_document_content>` fencing to `src/smartlawai/config.py`.
+- **2026-09-09**: Task 2 complete. Implemented `StructuredMistralGenerator` in `src/smartlawai/core/generate.py`. Includes `_build_passage_maps` fuzzy resolution, markdown code fence stripping, JSON extraction, NER citation enrichment via `core.ner.extract_entities`, and defensive parsing returning empty claims + unanswerable aspects on malformed input (Invariant I2).
+- **2026-09-09**: Task 3 complete. Integrated structured generation and structured claim logging into `src/smartlawai/pipeline.py::Pipeline.ask`. Detailed claims, passage IDs, citations, and unanswerable aspects recorded in `trace.generation`. Generator token consumption and estimated USD cost recorded in `trace.cost`.
+- **2026-09-09**: Task 4 complete. Implemented 10 unit and integration tests in `tests/test_generate.py` (100% offline, zero network dependencies): empty passages fast path, valid JSON parsing with passage ID mapping, Invariant I4 untrusted context fencing, markdown fence handling, fuzzy passage IDs, malformed JSON fallback, network exception handling, NER citation enrichment, and end-to-end `Pipeline` integration.
+- **2026-09-09**: Task 5 complete. Created `scripts/smoke_test_m3.py` and `gcloud/smoke_test_m3.sh` supporting `--base-url`, `--model`, `--api-key`, and `--device` flags for testing live Cloud Run GPU, vLLM on GCP A100 / L4, or local Ollama endpoints.
+- **2026-09-09**: Task 6 complete. Ran verification test suite across M3, retrieval, and pipeline regressions (34/34 tests passed). Code quality verified with `ruff check` (100% clean).
+- **2026-09-09**: Created GCP A100 self-terminating benchmark execution script `gcloud/run_m3_generation.sh` and benchmark runner `scripts/run_generation_bench.py` for running real Mistral-7B fp16 generation on Vertex AI Custom Jobs (`a2-highgpu-1g` with 1x NVIDIA A100).
+- **2026-09-09**: Executed live M3 structured generation benchmark on GCP A100 GPU (`NVIDIA A100-SXM4-40GB`, Vertex AI Custom Job ID `3059590811676049408`). Results: Mistral-7B-Instruct-v0.3 loaded in fp16/bf16 in 98.41s; peak VRAM allocated = 13.83 GB (within 39.5 GB total); atomic claim decomposition verified (Query 1: 2 claims cited to `chk-ica-s27` + Section 27 citation; Query 2: 1 claim cited to `chk-ica-s74` + Section 74 citation); Invariant I4 XML context fencing confirmed; Invariant I2/I3 out-of-scope refusal confirmed (Query 3: 0 claims, explicit unanswerable aspect recorded); self-terminated with zero idle billing.
 
 ## Milestone 4 (M4) — Authority Registry
 
@@ -94,5 +115,3 @@
 - **M7 real baseline numbers are still unproduced.** `MODEL_CUTOFF_DATES` in `baselines/config.py` is
   still empty and no `baselines/results/` exist — no frontier API key configured, no SaulLM endpoint
   deployed.
-
-
