@@ -111,9 +111,24 @@ class Pipeline:
 
         with trace.stage("generate") as rec:
             gen = self.generator.generate(question, top)
-            rec.detail = {"n_claims": len(gen.claims), "model": gen.model_id}
-        trace.generation = {"model": gen.model_id, "n_claims": len(gen.claims),
-                            "unanswerable_aspects": gen.unanswerable_aspects}
+            rec.detail = {
+                "n_claims": len(gen.claims),
+                "model": gen.model_id,
+                "n_unanswerable": len(gen.unanswerable_aspects),
+            }
+        trace.generation = {
+            "model": gen.model_id,
+            "n_claims": len(gen.claims),
+            "claims": [
+                {
+                    "text": c.text,
+                    "passage_ids": c.passage_ids,
+                    "citations": c.citations,
+                }
+                for c in gen.claims
+            ],
+            "unanswerable_aspects": gen.unanswerable_aspects,
+        }
 
         with trace.stage("verify") as rec:
             results = [self.verifier.verify(cl, top) for cl in gen.claims]
@@ -122,23 +137,65 @@ class Pipeline:
             {"status": r.status, "score": r.score, "reason": r.reason} for r in results]}
 
         with trace.stage("decide") as rec:
-            outcome, reason = self._decide(results, gen.claims)
+            outcome, reason = self._decide(results, gen.claims, passages=top)
             rec.detail = {"outcome": outcome, "reason": reason}
         trace.decision = {"outcome": outcome, "reason": reason}
-        trace.cost = {"generator_tokens": 0, "estimated_usd": 0.0}
+
+        # Estimate token usage (~4 characters per token) and record cost
+        prompt_chars = len(question) + sum(len(rc.chunk.chunk_text) for rc in top)
+        gen_chars = sum(len(c.text) for c in gen.claims)
+        generator_tokens = (prompt_chars + gen_chars) // 4
+        # Mistral-7B L4 / vLLM cost model ~$0.0002 per 1k tokens
+        estimated_usd = round(generator_tokens * 0.0000002, 6)
+        trace.cost = {"generator_tokens": generator_tokens, "estimated_usd": estimated_usd}
 
         return AnswerResult(answer=self._render(gen, outcome), decision=outcome, trace=trace)
 
-    def _decide(self, results: list[VerificationResult], claims: list[Claim]) -> tuple[str, str]:
-        """Deterministic application code (I3). Kept as a single small method so
-        M5's gate.py can replace just its body with the real structural AND
-        entailment AND registry conjunction -- stage sequence and call sites
-        don't change."""
+    def _decide(
+        self,
+        results: list[VerificationResult],
+        claims: list[Claim],
+        passages: list[RetrievedChunk] | None = None,
+    ) -> tuple[str, str]:
+        """Deterministic application code (I3) using M5 gate conjunction."""
         if not claims:
             return "REFUSE", "no_claims"
         if any(r.status == "unavailable" for r in results):
             return "REFUSE", "verifier_unavailable"
-        return "ANSWER", "ok"
+
+        from smartlawai.gate import GateOutcome, decide_gate
+        from smartlawai.verify.entailment import ClaimEntailmentResult, EntailmentScore
+        from smartlawai.verify.structural import verify_structural
+
+        struct_results = verify_structural(claims, passages or [])
+
+        # Build entailment results from verifier scores
+        entailment_results = []
+        for cl, vr in zip(claims, results):
+            is_ent = (
+                (vr.score is not None and vr.score >= config.FAITHFULNESS_THRESHOLD)
+                if vr.status == "ok"
+                else False
+            )
+            entailment_results.append(
+                ClaimEntailmentResult(
+                    claim_text=cl.text,
+                    passage_id=cl.passage_ids[0] if cl.passage_ids else "",
+                    hhem_score=EntailmentScore(name="verifier", value=vr.score, status=vr.status, reason=vr.reason),
+                    inlegalnli_score=EntailmentScore(name="inlegalnli", value=None, status="unavailable", reason="m8a_slot"),
+                    is_entailed=is_ent,
+                    status=vr.status,
+                    reason=vr.reason,
+                )
+            )
+
+        decision = decide_gate(claims, struct_results, entailment_results)
+        if decision.outcome == GateOutcome.ALLOW:
+            return "ANSWER", decision.reason
+        elif decision.outcome == GateOutcome.PARTIAL_ALLOW:
+            return "PARTIAL_ALLOW", decision.reason
+        else:
+            return "REFUSE", decision.reason
 
     def _render(self, gen: GenerationResult, outcome: str) -> str:
         if outcome == "REFUSE":

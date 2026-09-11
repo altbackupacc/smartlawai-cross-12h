@@ -1,0 +1,15 @@
+id,short_title,long_title,year,jurisdiction,in_force_from,repealed_on,repealed_by_statute_id,source_url,created_at
+ipc-1860,Indian Penal Code,"The Indian Penal Code, 1860 (Act 45 of 1860)",1860,IN,1862-01-01,2024-07-01,bns-2023,https://indiacode.gov.in/,2026-09-07 18:41:38.352378
+crpc-1973,Code of Criminal Procedure,"The Code of Criminal Procedure, 1973 (Act 2 of 1974)",1973,IN,1974-04-01,2024-07-01,bnss-2023,https://indiacode.gov.in/,2026-09-07 18:41:38.385929
+iea-1872,Indian Evidence Act,"The Indian Evidence Act, 1872 (Act 1 of 1872)",1872,IN,1872-09-01,2024-07-01,bsa-2023,https://indiacode.gov.in/,2026-09-07 18:41:38.399997
+bns-2023,Bharatiya Nyaya Sanhita,"The Bharatiya Nyaya Sanhita, 2023 (Act 45 of 2023)",2023,IN,2024-07-01,,,https://indiacode.gov.in/,2026-09-07 18:41:38.428445
+bnss-2023,Bharatiya Nagarik Suraksha Sanhita,"The Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023)",2023,IN,2024-07-01,,,https://indiacode.gov.in/,2026-09-07 18:41:38.44356
+bsa-2023,Bharatiya Sakshya Adhiniyam,"The Bharatiya Sakshya Adhiniyam, 2023 (Act 47 of 2023)",2023,IN,2024-07-01,,,https://indiacode.gov.in/,2026-09-07 18:41:38.458486
+contract-1872,Indian Contract Act,"The Indian Contract Act, 1872 (Act 9 of 1872)",1872,IN,1872-09-01,,,https://indiacode.gov.in/,2026-09-07 18:41:38.472555
+arbitration-1996,Arbitration and Conciliation Act,"The Arbitration and Conciliation Act, 1996 (Act 26 of 1996)",1996,IN,1996-08-22,,,https://indiacode.gov.in/,2026-09-07 18:41:38.488132
+consumer-2019,Consumer Protection Act,"The Consumer Protection Act, 2019 (Act 35 of 2019)",2019,IN,2020-07-20,,,https://indiacode.gov.in/,2026-09-07 18:41:38.503362
+cpc-1908,Code of Civil Procedure,"The Code of Civil Procedure, 1908 (Act 5 of 1908)",1908,IN,1909-01-01,,,https://indiacode.gov.in/,2026-09-07 18:41:38.518174
+ni-1881,Negotiable Instruments Act,"The Negotiable Instruments Act, 1881 (Act 26 of 1881)",1881,IN,1882-03-01,,,https://indiacode.gov.in/,2026-09-07 18:41:38.532426
+it-2000,Information Technology Act,"The Information Technology Act, 2000 (Act 21 of 2000)",2000,IN,2000-10-17,,,https://indiacode.gov.in/,2026-09-07 18:41:38.547198
+stamp-1899,Indian Stamp Act,"The Indian Stamp Act, 1899 (Act 2 of 1899)",1899,IN,1899-07-01,,,https://indiacode.gov.in/,2026-09-07 18:41:38.562365
+constitution-1950,Constitution of India,The Constitution of India,1950,IN,1950-01-26,,,https://indiacode.gov.in/,2026-09-07 18:41:38.577044

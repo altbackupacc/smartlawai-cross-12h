@@ -15,13 +15,13 @@ submit a training job until the eval harness can measure it.
 ## PROGRESS
 
 - [x] **M0** Skeleton — end-to-end with stubs, no GPU
-- [ ] **M1** Data foundation — IN-Abs, section pairs, frozen splits
+- [x] **M1** Data foundation — IN-Abs, section pairs, frozen splits
 - [x] **M2** Real retrieval (GCP L4)
-- [ ] **M3** Structured generation (GCP L4 endpoint)
-- [ ] **M4** ★ Authority registry — the contribution
-- [ ] **M5** Verification stack + deterministic gate
-- [ ] **M6** Eval harness + gold sets
-- [ ] **M7** Baselines (before any training)
+- [x] **M3** Structured generation (GCP L4 endpoint)
+- [x] **M4** ★ Authority registry — the contribution
+- [x] **M5** Verification stack + deterministic gate
+- [x] **M6** Eval harness + gold sets
+- [x] **M7** Baselines (before any training)
 - [ ] **M8** Training — encoders, then the QLoRA scale ladder
 - [ ] **M9** Analysis, human evaluation, paper
 

@@ -31,6 +31,7 @@ class InLegalBERTEncoder:
     ) -> None:
         import torch
         from transformers import AutoModel, AutoTokenizer
+
         from train.common.device import resolve_device
 
         self._torch = torch

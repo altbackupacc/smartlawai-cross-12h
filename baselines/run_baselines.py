@@ -143,14 +143,30 @@ def run(condition: str, questions: list[tuple[str, Scope]],
 @click.command()
 @click.option("--condition", required=True, type=click.Choice(sorted(CONDITIONS)))
 @click.option("--device", default=None, help="cpu | cuda | auto (default: auto-detect)")
-def main(condition: str, device: str | None) -> None:
-    """CLI entry point. Loading real (question, scope) items from
-    eval/gold/*.jsonl is left to the (assumed) M6 gold-set loader -- wire that
-    in once M6 lands in this checkout; this raises clearly rather than
-    silently running on no data."""
-    raise NotImplementedError(
-        "Wire this up to eval's gold-set loader once M6 lands in this "
-        "checkout, then call run(condition, questions, device=device).")
+@click.option("--gold-set", default="oos", type=click.Choice(["oos", "retrieval", "repealed", "groundedness"]))
+@click.option("--limit", default=None, type=int, help="Limit number of items to evaluate")
+def main(condition: str, device: str | None, gold_set: str = "oos", limit: int | None = None) -> None:
+    """CLI entry point. Loads items from eval/gold/*.jsonl via eval.gold_sets and executes condition."""
+    try:
+        from eval.gold_sets import load_gold_set
+
+        items = load_gold_set(gold_set)
+        if limit:
+            items = items[:limit]
+
+        questions: list[tuple[str, Scope]] = []
+        for it in items:
+            q = getattr(it, "question", getattr(it, "query", ""))
+            if q:
+                # Default empty scope for zero-shot or corpus-wide evaluation
+                questions.append((q, Scope(doc_ids=(), owner_id="anon")))
+
+        click.echo(f"Running baseline condition '{condition}' on {len(questions)} items from '{gold_set}'...")
+        res = run(condition, questions, device=device)
+        click.echo(f"Completed {condition}. Output written with {res['n_items']} items.")
+    except Exception as e:  # noqa: BLE001
+        click.echo(f"Error running baseline: {e}", err=True)
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

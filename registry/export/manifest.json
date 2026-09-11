@@ -1,0 +1,25 @@
+{
+  "artifact": "SmartLawAI Indian Law Authority Registry",
+  "version": "1.0.0",
+  "release_date": "2026-09-10",
+  "description": "Temporal authority registry for Indian law containing statute commencement, repeal dates, section-level supersession mappings (including 2024 IPC->BNS, CrPC->BNSS, IEA->BSA recodification), and normalized citation strings.",
+  "source_repository": "https://github.com/kramjiy/smartlawai-1",
+  "tables": {
+    "statutes": {
+      "rows": 14,
+      "description": "14 primary Indian statutes with in-force intervals and repeal links."
+    },
+    "sections": {
+      "rows": 3817,
+      "description": "Statute sections/articles with headings, official numbers, and text."
+    },
+    "supersession": {
+      "rows": 1289,
+      "description": "Section-level mappings across legal reforms (1:1, 1:N, N:1, repealed_no_successor)."
+    },
+    "citation_strings": {
+      "rows": 19784,
+      "description": "Empirical citation strings extracted from Supreme Court / High Court corpus with target mappings."
+    }
+  }
+}
