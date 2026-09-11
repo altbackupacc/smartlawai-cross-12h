@@ -11,7 +11,7 @@ import streamlit as st
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 from smartlawai.adapters.factory import get_backend
-from smartlawai.pipeline import Pipeline
+from smartlawai.pipeline import Pipeline, build_production_pipeline
 from smartlawai.scope import Scope
 
 st.set_page_config(page_title="SmartLawAI (M0 skeleton)")
@@ -22,7 +22,7 @@ owner_id = st.text_input("Owner ID", value="anon")
 
 @st.cache_resource
 def _pipeline() -> Pipeline:
-    return Pipeline(get_backend())
+    return build_production_pipeline(get_backend())
 
 
 pipeline = _pipeline()

@@ -92,26 +92,51 @@
   in this local dev environment, not a regression from this work (`sentence-transformers` is an ML-stack
   dependency intentionally not installed locally per `CLAUDE.md` §2 hardware routing).
 
-## Known gaps — not yet true end-to-end (found during 2026-09-11 verification pass)
+## Follow-up: closing the non-human-work gaps (2026-09-11)
 
-- **`Pipeline` still defaults to stubs in serving.** `api/main.py` and `ui/app.py` construct
-  `Pipeline(backend)` with no `generator=`/`verifier=` override, so `StubGenerator`/`StubVerifier`
-  (`pipeline.py`) are what actually run in the live app today. `core/generate.py` (M3) and the real
-  HHEM `DualEntailmentVerifier` (`verify/entailment.py`, M5) are built and unit-tested but not injected
-  into the pipeline the API/UI construct. `pipeline.py::_decide` does call the real `gate.py` conjunction
-  (including the real registry check), but it's fed entailment results built from the generic stub
-  verifier's score relabelled as `hhem_score`, not an actual HHEM call. Wiring `Pipeline`'s defaults to
-  the real generator/verifier is the remaining integration step.
-- **`scripts/calibrate_oos.py` does not calibrate on real data.** It fits Platt scaling on logits
-  synthesized from `len(question) % n` rather than actual cross-encoder reranker scores over the OOS
-  gold queries — `data/processed/oos_calibration.json` records a fitted scaler, but the fit is fake.
-  The new `OOS_CALIBRATED_THRESHOLD` constant in `config.py` is also not referenced anywhere in `src/`;
-  `core/rag.py` still gates on the original `RERANK_FLOOR = -10.0`. Needs a rewrite to score real
-  (query, passage) pairs through the actual reranker before this task is genuinely done.
-- **M4/M6 human verification is still unstarted.** `registry/out/verify_100.csv` (100 rows) and
-  `registry/out/audit_200.csv` (200 rows) have 0 filled `VERDICT` entries — `M4_YOUR_CHECK_PLAN.md` is
-  still waiting on a human pass. `eval/gold/*.jsonl` remain single-annotator seed sets (`n_annotations: 1`,
-  `agreement: null` per `eval/gold/PROVENANCE.md`); the multi-rater IAA study has not been run.
-- **M7 real baseline numbers are still unproduced.** `MODEL_CUTOFF_DATES` in `baselines/config.py` is
+Fixed everything from the gap list below that doesn't require a human pass or a billed/keyed
+external call. Full suite re-verified after these changes: 542 collected, 536 passed, 5 failed
+(same pre-existing local `sentence_transformers` gap), 1 skipped — 3 new tests, zero regressions.
+
+- **`Pipeline` now wires the real M3/M5 components at the composition root.** Added
+  `pipeline.py::build_production_pipeline(backend, device=None)`, used by `api/main.py` (both
+  `/upload` and `/ask`) and `ui/app.py` in place of bare `Pipeline(be)`. It always constructs the
+  real `StructuredMistralGenerator` and `DualEntailmentVerifier` (HHEM) — both are fail-closed at
+  *call* time (I2: an unreachable Mistral endpoint or unloadable HHEM model degrades to REFUSE, never
+  a crash or a fabricated answer), so there's no reason to gate them behind availability checks.
+  `InLegalBERTEncoder`/`Reranker` load model weights at *construction* time with no built-in
+  fallback, so each is attempted independently and falls back to `StubEncoder`/`StubReranker` on
+  failure (e.g. weights not cached and no network) rather than crashing the app on startup.
+  `Pipeline` gained a new optional `entailment_verifier: DualEntailmentVerifier | None` constructor
+  param; `_decide` now uses its real `ClaimEntailmentResult`s directly when present, only falling
+  back to bridging the legacy generic `verifier`'s score (the old behavior, unchanged) when absent —
+  fully backward compatible, so `Pipeline(be)` in the existing test suite is untouched and still
+  fast/stub/network-free. New tests in `tests/test_pipeline_composition.py` (3 tests, all mocked —
+  no real model construction) verify: the real generator/entailment verifier are always wired, the
+  encoder/reranker fallback triggers correctly on a construction failure, and — the case that
+  actually matters — a real (mocked) HHEM verdict changes the gate's decision versus what the old
+  always-passing stub verifier would have produced, proving the wiring isn't a no-op.
+- **`scripts/calibrate_oos.py` no longer fabricates logits.** Rewritten to run the real
+  `InLegalBERTEncoder`/`Reranker` retrieval+rerank path (I1-scoped) against each OOS item's own
+  document and fit `core.oos.fit_platt_scaling` on the resulting real (top reranker logit, label)
+  pairs — the `len(question) % n` logit generator is gone. Running it is still a human/GCP-L4 action
+  (CLAUDE.md #6: no model downloads in the agent loop; it's a measured/reported result per CLAUDE.md
+  #2's hardware table), so it was not executed in this session. Doing so surfaced a real blocker
+  honestly rather than papering over it: every current `eval/gold/oos.jsonl` seed row has an empty
+  `doc_ids`/`source_doc_id` (the same "no stable corpus with stable ids yet" gap `PROVENANCE.md`
+  already documents for `retrieval.jsonl`), so there is currently nothing to retrieve against. The
+  script now detects this, skips items it can't resolve, and — if fewer than 10 items resolve to a
+  real document, i.e. today — refuses to fit or publish a scaler at all, writing
+  `"calibration_status": "unavailable"` with a stated reason instead of a plausible-looking number
+  (matching `eval/gold_sets.py`'s existing "never let an empty result read like a measured 0.0"
+  discipline). Real OOS calibration is now correctly blocked on `eval/gold/oos.jsonl` items getting
+  real `doc_ids` once the corpus stabilizes, not on fixing this script — which is now fixed.
+- **M4/M6 human verification is still unstarted** (unchanged, not attempted — needs a human).
+  `registry/out/verify_100.csv` (100 rows) and `registry/out/audit_200.csv` (200 rows) have 0 filled
+  `VERDICT` entries — `M4_YOUR_CHECK_PLAN.md` is still waiting on a human pass. `eval/gold/*.jsonl`
+  remain single-annotator seed sets (`n_annotations: 1`, `agreement: null` per
+  `eval/gold/PROVENANCE.md`); the multi-rater IAA study has not been run.
+- **M7 real baseline numbers are still unproduced** (unchanged, not attempted — needs API
+  keys/billed GCP deploys a human must authorize). `MODEL_CUTOFF_DATES` in `baselines/config.py` is
   still empty and no `baselines/results/` exist — no frontier API key configured, no SaulLM endpoint
   deployed.
