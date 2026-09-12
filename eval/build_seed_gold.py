@@ -311,11 +311,30 @@ def build_retrieval() -> list[RetrievalItem]:
 
 def _claim_passage_pairs(n: int, seed: int, gen) -> list[tuple]:
     """Real IN-Abs test-data pairs: (doc_id, passage, positive_claim,
-    perturbed_claim, ptype, detail, overlap)."""
+    perturbed_claim, ptype, detail, overlap).
+
+    Per I5 and test_data_leakage.py, only documents in data/splits/test.json
+    (and never train.json) are used for evaluation gold sets.
+    """
+    import json
+    splits_test_path = _REPO_ROOT / "data" / "splits" / "test.json"
+    splits_train_path = _REPO_ROOT / "data" / "splits" / "train.json"
+
+    test_ids = None
+    if splits_test_path.exists():
+        test_ids = set(json.loads(splits_test_path.read_text(encoding="utf-8")).get("doc_ids", []))
+    train_ids = set()
+    if splits_train_path.exists():
+        train_ids = set(json.loads(splits_train_path.read_text(encoding="utf-8")).get("doc_ids", []))
+
     rng = random.Random(seed)
     out = []
     for doc_id, judgment, summary in gen.iter_documents(config.IN_ABS_DIR,
                                                         "test-data"):
+        if test_ids and doc_id not in test_ids:
+            continue
+        if doc_id in train_ids:
+            continue
         if len(out) >= n:
             break
         for pair in gen.extract_pairs(doc_id, judgment, summary,

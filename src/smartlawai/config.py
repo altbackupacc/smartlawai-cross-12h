@@ -64,3 +64,9 @@ GENERATOR_USER_TEMPLATE: str = (
     "</untrusted_document_content>"
 )
 
+# M5 — Verification configuration
+HHEM_MODEL_ID: str = "vectara/hallucination_evaluation_model"
+HHEM_HALLUCINATION_THRESHOLD: float = 0.5
+INLEGALNLI_MODEL_ID: str = "smartlawai/InLegalNLI"
+CLAIM_ENTAILMENT_THRESHOLD: float = 0.5
+OOS_CALIBRATED_THRESHOLD: float = 0.65

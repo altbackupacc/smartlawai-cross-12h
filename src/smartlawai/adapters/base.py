@@ -6,7 +6,6 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from functools import lru_cache
-from typing import Optional
 
 import faiss
 import numpy as np
@@ -28,7 +27,7 @@ class Document:
     num_pages: int = 0
     ocr_applied: bool = False
     raw_text: str = ""
-    session_id: Optional[str] = None
+    session_id: str | None = None
     owner_id: str = ""
 
 
@@ -40,27 +39,27 @@ class Chunk:
     chunk_text: str
     char_start: int
     char_end: int
-    parent_chunk_id: Optional[str] = None
-    embedding: Optional[list[float]] = None
+    parent_chunk_id: str | None = None
+    embedding: list[float] | None = None
     bm25_indexed: bool = False
     owner_id: str = ""
-    page_no: Optional[int] = None
-    para_no: Optional[int] = None
-    section_label: Optional[str] = None
+    page_no: int | None = None
+    para_no: int | None = None
+    section_label: str | None = None
 
 
 @dataclass
 class Clause:
     clause_id: str
     doc_id: str
-    chunk_id: Optional[str]
+    chunk_id: str | None
     clause_type: str
     clause_text: str
     span_start: int
     span_end: int
     risk_tier: str
     risk_score: float
-    statute_ref: Optional[str] = None
+    statute_ref: str | None = None
 
 
 @dataclass
@@ -71,7 +70,7 @@ class Summary:
     level: str  # SECTION | FINAL
     summary_text: str
     model: str
-    faithfulness_score: Optional[float] = None
+    faithfulness_score: float | None = None
 
 
 @dataclass
@@ -82,7 +81,7 @@ class AuditEvent:
     endpoint: str
     query_text: str = ""
     response_text: str = ""
-    faithfulness_score: Optional[float] = None
+    faithfulness_score: float | None = None
     pii_redacted: bool = False
 
 
@@ -95,7 +94,7 @@ class IngestionRecord:
     ocr_status: str
     lang_detected: str
     preprocess_status: str = "PENDING"
-    error_msg: Optional[str] = None
+    error_msg: str | None = None
 
 
 @dataclass

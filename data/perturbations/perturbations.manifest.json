@@ -1,0 +1,26 @@
+{
+  "generator_version": "1.0.0",
+  "generated_at": "2026-09-10T05:53:28.598859+00:00",
+  "seed": 42,
+  "requested_n": 500,
+  "n_rows": 500,
+  "n_positive": 250,
+  "n_perturbed": 250,
+  "n_source_documents": 84,
+  "corpus": "C:\\Users\\kasir\\OneDrive\\Documents\\smartlawai-1\\data\\raw\\in_ext_source\\dataset\\IN-Abs",
+  "corpus_split": "train-data",
+  "min_overlap": 0.35,
+  "type_counts": {
+    "section_number": 36,
+    "ipc_bns_swap": 5,
+    "negate_obligation": 6,
+    "swap_parties": 56,
+    "alter_date_amount": 44,
+    "change_court": 14,
+    "unsupported_holding": 89
+  },
+  "frozen_splits_available": true,
+  "train_split_filter_applied": true,
+  "skipped_documents_not_in_train_split": 39,
+  "out_path": "C:\\Users\\kasir\\OneDrive\\Documents\\smartlawai-1\\data\\perturbations\\perturbations.jsonl"
+}

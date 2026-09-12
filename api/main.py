@@ -26,7 +26,7 @@ from smartlawai.adapters.factory import get_backend
 from smartlawai.guardrails.disclaimer import BCI_DISCLAIMER
 from smartlawai.guardrails.disclaimer import attach as attach_disclaimer
 from smartlawai.guardrails.pii import redact
-from smartlawai.pipeline import Pipeline
+from smartlawai.pipeline import build_production_pipeline
 from smartlawai.scope import Scope
 
 log = logging.getLogger("smartlawai.api")
@@ -93,7 +93,7 @@ async def upload(file: UploadFile = File(...), doc_type: str = "JUDGMENT",
         with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
             tmp.write(await file.read())
             path = tmp.name
-        _pipeline = _pipeline or Pipeline(be)
+        _pipeline = _pipeline or build_production_pipeline(be)
         doc_id, trace = _pipeline.ingest(path, doc_type=doc_type, source="upload",
                                          owner_id=owner_id)
         ingest_stage = next((s for s in trace.stages if s.name == "ingest"), None)
@@ -212,7 +212,7 @@ def ask(body: AskBody):
     global _pipeline
     try:
         scope = Scope(doc_ids=tuple(body.scope.doc_ids), owner_id=body.scope.owner_id)
-        _pipeline = _pipeline or Pipeline(be)
+        _pipeline = _pipeline or build_production_pipeline(be)
         result = _pipeline.ask(body.question, scope)
         answer_text, n_pii = redact(result.answer)
         _audit(body.session_id, "ASK", "/ask", query_text=body.question,

@@ -5,6 +5,7 @@ Verifier implementations into Pipeline's constructor without touching the
 stage sequence below."""
 from __future__ import annotations
 
+import logging
 import uuid
 from dataclasses import dataclass
 
@@ -24,6 +25,9 @@ from smartlawai.protocols import (
 )
 from smartlawai.scope import Scope
 from smartlawai.trace import PipelineTrace
+from smartlawai.verify.entailment import ClaimEntailmentResult, DualEntailmentVerifier
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -41,12 +45,17 @@ class Pipeline:
         reranker: Reranker | None = None,
         generator: Generator | None = None,
         verifier: Verifier | None = None,
+        entailment_verifier: DualEntailmentVerifier | None = None,
     ) -> None:
         self.be = backend
         self.encoder = encoder or StubEncoder()
         self.reranker = reranker or StubReranker()
         self.generator = generator or StubGenerator()
         self.verifier = verifier or StubVerifier()
+        # M5 real dual-scorer entailment (HHEM-2.1 + InLegalNLI slot). Optional:
+        # when absent, _decide bridges the legacy `verifier` score into gate.py's
+        # shape instead (M0 stub default, unit tests) -- see _decide below.
+        self.entailment_verifier = entailment_verifier
 
     # ---- write path: no Scope (a doc_id doesn't exist until ingest completes) ----
     def ingest(self, path: str, doc_type: str, source: str,
@@ -132,12 +141,33 @@ class Pipeline:
 
         with trace.stage("verify") as rec:
             results = [self.verifier.verify(cl, top) for cl in gen.claims]
+            entailment_results: list[ClaimEntailmentResult] | None = None
+            if self.entailment_verifier is not None:
+                passages_by_id = {rc.chunk.chunk_id: rc for rc in top}
+                entailment_results = [
+                    self.entailment_verifier.verify_claim(cl, passages_by_id)
+                    for cl in gen.claims
+                ]
             rec.detail = {"n_verified": len(results)}
         trace.verification = {"results": [
             {"status": r.status, "score": r.score, "reason": r.reason} for r in results]}
+        if entailment_results is not None:
+            trace.verification["entailment"] = [
+                {
+                    "hhem_status": r.hhem_score.status,
+                    "hhem_value": r.hhem_score.value,
+                    "inlegalnli_status": r.inlegalnli_score.status,
+                    "is_entailed": r.is_entailed,
+                    "status": r.status,
+                    "reason": r.reason,
+                }
+                for r in entailment_results
+            ]
 
         with trace.stage("decide") as rec:
-            outcome, reason = self._decide(results, gen.claims)
+            outcome, reason = self._decide(
+                results, gen.claims, passages=top, entailment_results=entailment_results
+            )
             rec.detail = {"outcome": outcome, "reason": reason}
         trace.decision = {"outcome": outcome, "reason": reason}
 
@@ -151,21 +181,104 @@ class Pipeline:
 
         return AnswerResult(answer=self._render(gen, outcome), decision=outcome, trace=trace)
 
-    def _decide(self, results: list[VerificationResult], claims: list[Claim]) -> tuple[str, str]:
-        """Deterministic application code (I3). Kept as a single small method so
-        M5's gate.py can replace just its body with the real structural AND
-        entailment AND registry conjunction -- stage sequence and call sites
-        don't change."""
+    def _decide(
+        self,
+        results: list[VerificationResult],
+        claims: list[Claim],
+        passages: list[RetrievedChunk] | None = None,
+        entailment_results: list[ClaimEntailmentResult] | None = None,
+    ) -> tuple[str, str]:
+        """Deterministic application code (I3) using M5 gate conjunction."""
         if not claims:
             return "REFUSE", "no_claims"
         if any(r.status == "unavailable" for r in results):
             return "REFUSE", "verifier_unavailable"
-        return "ANSWER", "ok"
+
+        from smartlawai.gate import GateOutcome, decide_gate
+        from smartlawai.verify.structural import verify_structural
+
+        struct_results = verify_structural(claims, passages or [])
+
+        if entailment_results is None:
+            # No real DualEntailmentVerifier injected (M0 stub default / unit
+            # tests): bridge the generic verifier's score into gate.py's
+            # ClaimEntailmentResult shape so the gate conjunction still runs.
+            from smartlawai.verify.entailment import EntailmentScore
+
+            entailment_results = []
+            for cl, vr in zip(claims, results):
+                is_ent = (
+                    (vr.score is not None and vr.score >= config.FAITHFULNESS_THRESHOLD)
+                    if vr.status == "ok"
+                    else False
+                )
+                entailment_results.append(
+                    ClaimEntailmentResult(
+                        claim_text=cl.text,
+                        passage_id=cl.passage_ids[0] if cl.passage_ids else "",
+                        hhem_score=EntailmentScore(name="verifier", value=vr.score, status=vr.status, reason=vr.reason),
+                        inlegalnli_score=EntailmentScore(name="inlegalnli", value=None, status="unavailable", reason="m8a_slot"),
+                        is_entailed=is_ent,
+                        status=vr.status,
+                        reason=vr.reason,
+                    )
+                )
+
+        decision = decide_gate(claims, struct_results, entailment_results)
+        if decision.outcome == GateOutcome.ALLOW:
+            return "ANSWER", decision.reason
+        elif decision.outcome == GateOutcome.PARTIAL_ALLOW:
+            return "PARTIAL_ALLOW", decision.reason
+        else:
+            return "REFUSE", decision.reason
 
     def _render(self, gen: GenerationResult, outcome: str) -> str:
         if outcome == "REFUSE":
             return "I cannot verify an answer from the available document(s)."
         return " ".join(c.text for c in gen.claims)
+
+
+def build_production_pipeline(backend: BackendInterface, device: str | None = None) -> Pipeline:
+    """Composition root wiring the real M2/M3/M5 components into serving
+    (api/main.py, ui/app.py) instead of the M0 stub defaults.
+
+    `encoder`/`reranker` load model weights at construction time with no
+    built-in fallback, so each is attempted independently and, on failure
+    (weights not cached locally and no network -- exactly the "no model
+    downloads in the agent loop" situation CLAUDE.md #6 describes), this
+    falls back to that one stub rather than refusing to start the app. The
+    generator and entailment verifier are safe to always construct: both are
+    fail-closed at call time (I2) rather than at construction -- an
+    unreachable Mistral endpoint or unloadable HHEM model degrades to REFUSE,
+    it never crashes serving or fabricates an answer.
+    """
+    encoder: Encoder | None = None
+    reranker: Reranker | None = None
+
+    try:
+        from smartlawai.core.inlegalbert import InLegalBERTEncoder
+
+        encoder = InLegalBERTEncoder(device=device)
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("build_production_pipeline: falling back to StubEncoder: %s", exc)
+
+    try:
+        from smartlawai.core.rerank import Reranker as RealReranker
+
+        reranker = RealReranker(device=device)
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("build_production_pipeline: falling back to StubReranker: %s", exc)
+
+    from smartlawai.core.generate import StructuredMistralGenerator
+    from smartlawai.verify.entailment import HHEMScorer
+
+    return Pipeline(
+        backend,
+        encoder=encoder,
+        reranker=reranker,
+        generator=StructuredMistralGenerator(),
+        entailment_verifier=DualEntailmentVerifier(hhem_scorer=HHEMScorer(device=device)),
+    )
 
 
 class StubEncoder:

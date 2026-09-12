@@ -2,8 +2,6 @@
 Conforms to protocols.Reranker (PLAN.md M2) with device awareness (CLAUDE.md #2)."""
 from __future__ import annotations
 
-from typing import Union
-
 from smartlawai import config
 from smartlawai.adapters.base import Chunk, RetrievedChunk
 
@@ -17,6 +15,7 @@ class Reranker:
         model_id: str = config.RERANKER_MODEL_ID,
     ) -> None:
         from sentence_transformers import CrossEncoder
+
         from train.common.device import resolve_device
 
         self.device = str(resolve_device(device))
